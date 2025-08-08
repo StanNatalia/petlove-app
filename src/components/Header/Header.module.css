@@ -1,0 +1,27 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 64px;
+}
+
+.headerLogo {
+  margin-right: 313px;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--main-grey);
+  border-radius: 30px;
+  padding: 15px 20px;
+}
+
+.pageActive {
+  border: 1px solid var(--main-orange);
+}
+
+.headerNav {
+  display: flex;
+  gap: 10px;
+}
