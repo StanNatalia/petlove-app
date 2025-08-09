@@ -1,3 +1,4 @@
+import "./App.css";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Header from "./components/Header/Header";
@@ -15,18 +16,20 @@ function App() {
   return (
     <>
       <Header />
-      <Suspense>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/news" element={<NewsPage />} />
-          <Route path="findPet" />
-          <Route path="/notices" element={<NoticesPage />} />
-          <Route path="/friends" element={<OurFriendsPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="registration" element={<RegistrationPage />} />
-        </Routes>
-      </Suspense>
+      <div className="container">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/news" element={<NewsPage />} />
+            <Route path="/findPet" />
+            <Route path="/notices" element={<NoticesPage />} />
+            <Route path="/friends" element={<OurFriendsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="registration" element={<RegistrationPage />} />
+          </Routes>
+        </Suspense>
+      </div>
     </>
   );
 }
