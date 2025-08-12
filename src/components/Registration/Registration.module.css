@@ -1,12 +1,13 @@
 .registrationWrapper {
   display: flex;
   gap: 32px;
+  justify-content: center;
 }
 
 .petBlock {
   display: flex;
   border-radius: 60px;
-  width: 592px;
+  min-width: 592px;
   height: 654px;
   background-color: var(--main-orange);
   position: relative;

@@ -35,6 +35,17 @@ body {
   color: var(--main-black);
 }
 
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
 ul,
 ol {
   list-style: none;

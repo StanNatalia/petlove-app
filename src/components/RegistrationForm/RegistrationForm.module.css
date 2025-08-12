@@ -44,6 +44,22 @@
   color: rgba(38, 38, 38, 0.5);
 }
 
+.inputWithIcon {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+}
+
+.btnWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .btn {
   border-radius: 30px;
   padding: 16px 157px;
@@ -53,4 +69,28 @@
   font-weight: 700;
   text-transform: uppercase;
   color: var(--main-white);
+  font-family: var(--font-family);
+  margin-bottom: 16px;
+}
+
+.linkWrapper {
+  display: flex;
+  align-content: center;
+}
+
+.linkText {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.43;
+  color: rgba(38, 38, 38, 0.5);
+  margin-right: 3px;
+}
+
+.link {
+  display: block;
+  line-height: 1.43;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--main-orange);
 }
