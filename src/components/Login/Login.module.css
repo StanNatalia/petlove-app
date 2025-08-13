@@ -1,0 +1,90 @@
+.registrationWrapper {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.petBlock {
+  display: flex;
+  border-radius: 60px;
+  min-width: 592px;
+  height: 654px;
+  background-color: var(--main-orange);
+  position: relative;
+  overflow: hidden;
+}
+
+.shape {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+}
+
+.img {
+  position: absolute;
+  left: 36px;
+  z-index: 5;
+  top: 0;
+  object-fit: cover;
+}
+
+.infoWrapper {
+  position: absolute;
+  z-index: 10;
+  top: 436px;
+  left: 61px;
+  padding: 16px 16px 18px 16px;
+  border-radius: 20px;
+  width: 294px;
+  height: 121px;
+  background-color: var(--main-white);
+  display: flex;
+  gap: 8px;
+}
+
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  background-color: var(--main-light-orange);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nameWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-weight: 700;
+  color: var(--main-orange);
+}
+
+.birthday {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+}
+
+.span {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.about {
+  font-size: 12px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.8);
+}

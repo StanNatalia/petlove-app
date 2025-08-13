@@ -1,15 +1,11 @@
-import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import css from "./Registration.module.css";
+import LoginForm from "../LoginForm/LoginForm";
+import css from "./Login.module.css";
 
-const Registration = () => {
+const Login = () => {
   return (
     <div className={css.registrationWrapper}>
       <div className={css.petBlock}>
-        <img
-          src="/images/registration-desc.png"
-          alt="red cat"
-          className={css.img}
-        />
+        <img src="/images/login-desc.png" alt="dog" className={css.img} />
         <img src="/images/Shape.png" className={css.shape} />
         <div className={css.infoWrapper}>
           <div className={css.circle}>
@@ -17,21 +13,22 @@ const Registration = () => {
           </div>
           <div className={css.info}>
             <div className={css.nameWrapper}>
-              <p className={css.name}>Jack</p>
+              <p className={css.name}>Rich</p>
               <p className={css.birthday}>
-                <span className={css.span}>Birthday: </span> 18.10.2021
+                <span className={css.span}>Birthday: </span> 21.09.2020
               </p>
             </div>
             <p className={css.about}>
-              Jack is a gray Persian cat with green eyes. He loves to be
-              pampered and groomed, and enjoys playing with toys.
+              Rich would be the perfect addition to an active family that loves
+              to play and go on walks. I bet he would love having a doggy
+              playmate too!
             </p>
           </div>
         </div>
       </div>
-      <RegistrationForm />
+      <LoginForm />
     </div>
   );
 };
 
-export default Registration;
+export default Login;

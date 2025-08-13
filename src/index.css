@@ -5,6 +5,7 @@
   --main-white: #ffffff;
   --main-background: #f9f9f9;
   --main-grey: rgba(38, 38, 38, 0.15);
+  --main-error: #ef2447;
 }
 
 *,
@@ -44,6 +45,12 @@ select {
   font-weight: inherit;
   line-height: inherit;
   color: inherit;
+}
+
+input {
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 ul,

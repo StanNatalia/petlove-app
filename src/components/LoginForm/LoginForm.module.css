@@ -1,5 +1,5 @@
 .formWrapper {
-  padding: 69px 84px;
+  padding: 118px 84px;
   border-radius: 60px;
   width: 592px;
   height: 654px;
@@ -23,7 +23,7 @@
 .inputWrapper {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
 }
 
 .inputBlock {
