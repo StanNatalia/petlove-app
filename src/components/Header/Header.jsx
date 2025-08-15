@@ -1,6 +1,9 @@
 import { NavLink } from "react-router";
 import css from "./Header.module.css";
 import clsx from "clsx";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn, selectUser } from "../../redux/Auth/selectors";
+import { logoutThunk } from "../../redux/Auth/options";
 
 const buildLinkPage = ({ isActive }) => {
   return clsx(css.pageLink, isActive && css.pageActive);
@@ -11,6 +14,11 @@ const buildLinkUser = ({ isActive }) => {
 };
 
 const Header = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const user = useSelector(selectUser);
+
+  const dispatch = useDispatch();
+
   return (
     <header className={css.header}>
       <div className={css.headerWrapper}>
@@ -39,14 +47,33 @@ const Header = () => {
           </NavLink>
         </nav>
       </div>
-      <nav className={css.userNav}>
-        <NavLink to="/login" className={buildLinkUser}>
-          Log in
-        </NavLink>
-        <NavLink to="/registration" className={buildLinkUser}>
-          Registration
-        </NavLink>
-      </nav>
+
+      {!isLoggedIn && (
+        <nav className={css.guestView}>
+          <NavLink to="/login" className={buildLinkUser}>
+            Log in
+          </NavLink>
+          <NavLink to="/registration" className={buildLinkUser}>
+            Registration
+          </NavLink>
+        </nav>
+      )}
+      {isLoggedIn && (
+        <div className={css.userView}>
+          <button
+            onClick={() => dispatch(logoutThunk())}
+            className={css.logout}
+          >
+            Log out
+          </button>
+          <div className={css.circle}>
+            <svg height="24" width="24">
+              <use href="/public/sprite.svg#icon-user" />
+            </svg>
+          </div>
+          {user?.name && <h3 className={css.name}>{user.name}</h3>}
+        </div>
+      )}
     </header>
   );
 };

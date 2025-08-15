@@ -39,6 +39,10 @@
   border: 1px solid var(--main-orange);
 }
 
+.pageLink:hover {
+  border: 1px solid var(--main-orange);
+}
+
 .userLink {
   border-radius: 30px;
   padding: 15px 20px;
@@ -59,7 +63,43 @@
   gap: 10px;
 }
 
-.userNav {
+.guestView {
   display: flex;
   gap: 8px;
+}
+
+.userView {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  background-color: var(--main-light-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logout {
+  border-radius: 30px;
+  padding: 15px 35px;
+  background-color: var(--main-orange);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--main-white);
+}
+
+.logout:hover,
+.logout:focus {
+  background-color: #f9b020;
 }

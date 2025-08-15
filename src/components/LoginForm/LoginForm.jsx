@@ -22,11 +22,10 @@ const LoginForm = ({ onClose }) => {
 
   const onSubmit = async ({ email, password }) => {
     try {
-      await dispatch(loginThunk({ email, password }))
-        .unwrap()
-        .then(() => navigate("/"));
-      toast.success("Login successful");
+      const res = await dispatch(loginThunk({ email, password })).unwrap();
+      toast.success(`Hello, ${res?.name || "User"}! Login successful`);
       reset();
+      navigate("/", { replace: true });
     } catch {
       toast.error("Invalid email or password");
     }
@@ -179,7 +178,7 @@ const LoginForm = ({ onClose }) => {
           </button>
           <div className={css.linkWrapper}>
             <p className={css.linkText}>Don’t have an account?</p>
-            <NavLink to="/login" className={css.link}>
+            <NavLink to="/registration" className={css.link}>
               Register
             </NavLink>
           </div>

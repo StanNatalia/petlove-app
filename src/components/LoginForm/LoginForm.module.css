@@ -112,6 +112,11 @@
   margin-bottom: 16px;
 }
 
+.btn:hover,
+.btn:focus {
+  background-color: var(--main-button-hover);
+}
+
 .linkWrapper {
   display: flex;
   align-content: center;
