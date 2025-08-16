@@ -1,5 +1,11 @@
+import Friends from "../components/Friends/Friends";
+
 const OurFriendsPage = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Friends />
+    </div>
+  );
 };
 
 export default OurFriendsPage;

@@ -2,7 +2,9 @@ import "./App.css";
 import { Route, Routes } from "react-router";
 import "./App.css";
 import Header from "./components/Header/Header";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { refreshUser } from "./redux/Auth/options";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
@@ -13,6 +15,12 @@ const LoginPage = lazy(() => import("./pages/LoginPage"));
 const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
   return (
     <>
       <Header />
