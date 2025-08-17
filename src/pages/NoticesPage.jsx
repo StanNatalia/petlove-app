@@ -1,7 +1,11 @@
-import React from "react";
+import Notices from "../components/Notices/Notices";
 
 const NoticesPage = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Notices />
+    </div>
+  );
 };
 
 export default NoticesPage;

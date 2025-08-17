@@ -38,7 +38,7 @@ const Header = () => {
             {" "}
             News
           </NavLink>
-          <NavLink to="/findPet" className={buildLinkPage}>
+          <NavLink to="/notices" className={buildLinkPage}>
             Find pet
           </NavLink>
           <NavLink to="/friends" className={buildLinkPage}>
