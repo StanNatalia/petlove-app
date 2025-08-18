@@ -1,0 +1,36 @@
+.pagination {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pageBtn {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s;
+}
+
+.pageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageBtn:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.active {
+  background: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.dots {
+  padding: 6px 10px;
+  color: #777;
+}

@@ -3,15 +3,20 @@ import css from "./News.module.css";
 import { selectNews } from "../../redux/News/selectors";
 import { useEffect, useState } from "react";
 import { fetchNews } from "../../redux/News/options";
+import Pagination from "../Pagination/Pagination";
 
 const News = () => {
   const dispatch = useDispatch();
-  const { items, page, totalPage, isLoading, error } = useSelector(selectNews);
+  const { items, page, totalPages, isLoading, error } = useSelector(selectNews);
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    dispatch(fetchNews());
+    dispatch(fetchNews({ page: 1, limit: 6 }));
   }, [dispatch]);
+
+  const handlePageChange = (newPage) => {
+    dispatch(fetchNews({ page: newPage, limit: 6 }));
+  };
 
   const filteredItems = items.filter(
     (item) =>
@@ -76,6 +81,11 @@ const News = () => {
           </li>
         ))}
       </ul>
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
