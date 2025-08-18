@@ -12,7 +12,6 @@ const Notices = () => {
     dispatch(fetchNotices());
   }, [dispatch]);
 
-  console.log(items);
   return (
     <div className={css.wrapper}>
       <h2>Pets</h2>
@@ -21,10 +20,7 @@ const Notices = () => {
       <ul>
         {items.map((item) => (
           <li key={item._id}>
-            <img
-              src={item.imgURL || "/fallback.jpg"}
-              alt={item.species || "pet"}
-            />
+            <img src={item.imgURL} alt={item.species} />
             <p>{item.name}</p>
             <p>{item.birthday}</p>
           </li>
