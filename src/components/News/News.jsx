@@ -13,7 +13,7 @@ const News = () => {
   }, [dispatch]);
 
   return (
-    <div className={css.newsWrapper}>
+    <div className={css.wrapper}>
       <div>
         <h2 className={css.title}>News</h2>
       </div>
@@ -22,14 +22,25 @@ const News = () => {
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {items.map((item) => (
-          <li key={item._id} className={css.newsItem}>
-            <img src={item.imgUrl} alt={item.title} className={css.newsImg} />
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-            <span>{new Date(item.date).toLocaleDateString()}</span>
-            <a href={item.url} target="_blank" rel="noreferrer">
-              Read more
-            </a>
+          <li key={item._id} className={css.item}>
+            <img src={item.imgUrl} alt={item.title} className={css.img} />
+            <h3 className={css.name}>{item.title}</h3>
+            <div className={css.titleWrapper}>
+              <p className={css.text}>{item.text}</p>
+              <div className={css.readMoreWrapper}>
+                <span className={css.date}>
+                  {new Date(item.date).toLocaleDateString()}
+                </span>
+                <a
+                  href={item.url}
+                  className={css.readMore}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Read more
+                </a>
+              </div>
+            </div>
           </li>
         ))}
       </ul>
