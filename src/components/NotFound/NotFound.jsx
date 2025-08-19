@@ -7,7 +7,7 @@ const NotFound = () => {
       <div className={css.catWrapper}>
         <p className={css.title}>4</p>
         <div className={css.circle}>
-          <img src="/public/images/NotFound.png" alt="" />
+          <img src="/images/NotFound.png" alt="" />
         </div>
         <p className={css.title}>4</p>
       </div>

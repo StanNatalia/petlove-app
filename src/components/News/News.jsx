@@ -38,7 +38,7 @@ const News = () => {
             className={css.searchInput}
           />
           <svg width="18" height="18" className={css.iconSearch}>
-            <use href="/public/sprite.svg#icon-search" />
+            <use href="/sprite.svg#icon-search" />
           </svg>
 
           {search && (
@@ -49,7 +49,7 @@ const News = () => {
               onClick={() => setSearch("")}
               style={{ cursor: "pointer" }}
             >
-              <use href="/public/sprite.svg#icon-cross-red" />
+              <use href="//sprite.svg#icon-cross-red" />
             </svg>
           )}
         </div>

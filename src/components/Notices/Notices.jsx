@@ -28,7 +28,7 @@ const Notices = () => {
                 <p className={css.title}>{item.title}</p>
                 <div className={css.popularityWrapper}>
                   <svg width="16" height="16">
-                    <use href="/public/sprite.svg#icon-star" />
+                    <use href="/sprite.svg#icon-star" />
                   </svg>
                   <p className={css.popularity}>{item.popularity}</p>
                 </div>
@@ -65,7 +65,7 @@ const Notices = () => {
                 </NavLink>
                 <div className={css.circle}>
                   <svg width="18" height="18">
-                    <use href="/public/sprite.svg#icon-heart" />
+                    <use href="/sprite.svg#icon-heart" />
                   </svg>
                 </div>
               </div>

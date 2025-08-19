@@ -66,7 +66,7 @@ const Header = () => {
           </button>
           <div className={css.circle}>
             <svg height="24" width="24">
-              <use href="/public/sprite.svg#icon-user" />
+              <use href="/sprite.svg#icon-user" />
             </svg>
           </div>
           {user?.name && <h3 className={css.name}>{user.name}</h3>}
