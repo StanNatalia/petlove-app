@@ -35,14 +35,12 @@ const Header = () => {
         </NavLink>
         <nav className={css.pageNav}>
           <NavLink to="/news" className={buildLinkPage}>
-            {" "}
             News
           </NavLink>
           <NavLink to="/notices" className={buildLinkPage}>
             Find pet
           </NavLink>
           <NavLink to="/friends" className={buildLinkPage}>
-            {" "}
             Our friends
           </NavLink>
         </nav>
