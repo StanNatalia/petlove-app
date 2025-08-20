@@ -3,13 +3,16 @@ import css from "./Notices.module.css";
 import { selectNotices } from "../../redux/Notices/selectors";
 import { useEffect, useState } from "react";
 import { fetchNotices } from "../../redux/Notices/options";
-import { Link, NavLink } from "react-router";
+import { NavLink } from "react-router";
 import { formatDate } from "../../utils/utils";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import ModalAttention from "../ModalAttention/ModalAttention";
+import ModalNotices from "../ModalNotices/ModalNotices";
 
 const Notices = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
+  const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const dispatch = useDispatch();
   const { items, isLoading, error } = useSelector(selectNotices);
 
@@ -19,11 +22,20 @@ const Notices = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const handleAction = (e) => {
+  const handleLearnMoreClick = (item, e) => {
+    e.preventDefault();
+    if (!isLoggedIn) {
+      setIsModalAttentionOpen(true);
+      return;
+    }
+    setSelectedItem(item);
+    setIsModalNoticeOpen(true);
+  };
+
+  const handleHeartClick = (e) => {
     if (!isLoggedIn) {
       e.preventDefault();
-      setIsModalOpen(true);
-      return;
+      setIsModalAttentionOpen(true);
     }
   };
 
@@ -76,10 +88,14 @@ const Notices = () => {
                 {item.price ? `$${item.price}` : "Free"}
               </p>
               <div className={css.btnWrapper}>
-                <NavLink to="/" onClick={handleAction} className={css.btn}>
+                <NavLink
+                  to="/"
+                  onClick={(e) => handleLearnMoreClick(item, e)}
+                  className={css.btn}
+                >
                   Learn more
                 </NavLink>
-                <div className={css.circle} onClick={handleAction}>
+                <div className={css.circle} onClick={handleHeartClick}>
                   <svg width="18" height="18">
                     <use href="/sprite.svg#icon-heart" />
                   </svg>
@@ -89,7 +105,16 @@ const Notices = () => {
           </li>
         ))}
       </ul>
-      {isModalOpen && <ModalAttention onClose={() => setIsModalOpen(false)} />}
+
+      {isModalAttentionOpen && (
+        <ModalAttention onClose={() => setIsModalAttentionOpen(false)} />
+      )}
+      {isModalNoticeOpen && (
+        <ModalNotices
+          item={selectedItem}
+          onClose={() => setIsModalNoticeOpen(false)}
+        />
+      )}
     </div>
   );
 };

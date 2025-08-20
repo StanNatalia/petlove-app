@@ -1,0 +1,86 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background-color: var(--main-white);
+  padding: 60px;
+  border-radius: 30px;
+  width: 473px;
+  height: 510px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+.closeIcon {
+  stroke: black;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background-color: var(--main-light-orange);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.img {
+  width: 44px;
+  height: auto;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.17;
+  color: var(--main-orange);
+  margin-bottom: 20px;
+}
+
+.info {
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.link {
+  border-radius: 30px;
+  width: 140px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--main-light-orange);
+  background-color: var(--main-orange);
+}
+
+.link:hover,
+.link:focus {
+  background: var(--main-light-orange);
+  color: var(--main-orange);
+}
