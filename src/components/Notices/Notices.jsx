@@ -1,17 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./Notices.module.css";
 import { selectNotices } from "../../redux/Notices/selectors";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchNotices } from "../../redux/Notices/options";
 import { Link, NavLink } from "react-router";
+import { formatDate } from "../../utils/utils";
+import { selectIsLoggedIn } from "../../redux/Auth/selectors";
+import ModalAttention from "../ModalAttention/ModalAttention";
 
 const Notices = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const { items, isLoading, error } = useSelector(selectNotices);
 
   useEffect(() => {
     dispatch(fetchNotices());
   }, [dispatch]);
+
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const handleAction = (e) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+      setIsModalOpen(true);
+      return;
+    }
+  };
 
   return (
     <div className={css.wrapper}>
@@ -40,7 +54,7 @@ const Notices = () => {
                 </div>
                 <div className={css.infoThumb}>
                   <p className={css.infoTitle}>Birthday</p>
-                  <p className={css.info}>{item.birthday}</p>
+                  <p className={css.info}>{formatDate(item.birthday)}</p>
                 </div>
                 <div className={css.infoThumb}>
                   <p className={css.infoTitle}>Sex</p>
@@ -58,12 +72,14 @@ const Notices = () => {
               <p className={css.comment}>{item.comment}</p>
             </div>
             <div>
-              <p className={css.price}>{item.price}</p>
+              <p className={css.price}>
+                {item.price ? `$${item.price}` : "Free"}
+              </p>
               <div className={css.btnWrapper}>
-                <NavLink to="/" className={css.btn}>
+                <NavLink to="/" onClick={handleAction} className={css.btn}>
                   Learn more
                 </NavLink>
-                <div className={css.circle}>
+                <div className={css.circle} onClick={handleAction}>
                   <svg width="18" height="18">
                     <use href="/sprite.svg#icon-heart" />
                   </svg>
@@ -73,6 +89,7 @@ const Notices = () => {
           </li>
         ))}
       </ul>
+      {isModalOpen && <ModalAttention onClose={() => setIsModalOpen(false)} />}
     </div>
   );
 };
