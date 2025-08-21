@@ -15,13 +15,16 @@
   padding: 60px;
   border-radius: 30px;
   width: 473px;
-  height: 510px;
+  gap: 32px;
+  min-height: 510px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
   position: relative;
 }
+
 .closeIcon {
   stroke: black;
   position: absolute;
@@ -30,50 +33,105 @@
   cursor: pointer;
 }
 
-.circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
-  background-color: var(--main-light-orange);
+.mainWrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+}
+
+.imgWrapper {
+  position: relative;
+}
+
+.category {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--main-light-orange);
+  color: var(--main-orange);
+  width: 52px;
+  height: 34px;
+  font-size: 14px;
+  letter-spacing: -0.02em;
 }
 
 .img {
-  width: 44px;
-  height: auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  margin-bottom: 16px;
+}
+.name {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33;
+  margin-bottom: 10px;
 }
 
-.title {
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 1.17;
-  color: var(--main-orange);
+.popularityWrapper {
+  display: flex;
   margin-bottom: 20px;
+}
+.popularity {
+  font-size: 14px;
+  line-height: 1.43;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 27px;
+  margin-bottom: 16px;
+}
+
+.infoThumb {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.infoTitle {
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.5);
 }
 
 .info {
-  font-size: 14px;
-  line-height: 1.29;
+  font-size: 12px;
+  line-height: 1.17;
   letter-spacing: -0.02em;
-  margin-bottom: 28px;
+}
+
+.comment {
+  font-size: 14px;
+  letter-spacing: -0.02em;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33;
+  margin-bottom: 20px;
 }
 
 .btnWrapper {
   display: flex;
-  gap: 8px;
-  align-items: center;
+  gap: 10px;
 }
 
 .link {
   border-radius: 30px;
-  width: 140px;
+  width: 160px;
   height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  line-height: 1.25;
   font-weight: 700;
   color: var(--main-light-orange);
   background-color: var(--main-orange);
@@ -83,4 +141,8 @@
 .link:focus {
   background: var(--main-light-orange);
   color: var(--main-orange);
+}
+
+.heartIcon {
+  --color1: var(--main-white);
 }
