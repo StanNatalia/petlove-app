@@ -4,6 +4,8 @@ import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/Auth/selectors";
 import { logoutThunk } from "../../redux/Auth/options";
+import { useEffect, useState } from "react";
+import ModalLogout from "../ModalLogout/ModalLogout";
 
 const buildLinkPage = ({ isActive }) => {
   return clsx(css.pageLink, isActive && css.pageActive);
@@ -14,6 +16,8 @@ const buildLinkUser = ({ isActive }) => {
 };
 
 const Header = () => {
+  const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -59,7 +63,7 @@ const Header = () => {
       {isLoggedIn && (
         <div className={css.userView}>
           <button
-            onClick={() => dispatch(logoutThunk())}
+            onClick={() => setIsOpenModalLogout(true)}
             className={css.logout}
           >
             Log out
@@ -71,6 +75,15 @@ const Header = () => {
           </div>
           {user?.name && <h3 className={css.name}>{user.name}</h3>}
         </div>
+      )}
+      {isOpenModalLogout && (
+        <ModalLogout
+          onClose={() => setIsOpenModalLogout(false)}
+          onConfirm={() => {
+            dispatch(logoutThunk());
+            setIsOpenModalLogout(false);
+          }}
+        />
       )}
     </header>
   );

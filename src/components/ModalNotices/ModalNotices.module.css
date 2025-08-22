@@ -26,7 +26,7 @@
 }
 
 .closeIcon {
-  stroke: black;
+  stroke: var(--main-black);
   position: absolute;
   top: 20px;
   right: 20px;
@@ -144,5 +144,10 @@
 }
 
 .heartIcon {
-  --color1: var(--main-white);
+  --color1: var(--main-light-orange);
+}
+
+.link:hover .heartIcon,
+.link:focus .heartIcon {
+  --color1: var(--main-orange);
 }

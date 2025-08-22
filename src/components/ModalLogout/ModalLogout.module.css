@@ -1,0 +1,73 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  background-color: var(--main-white);
+  padding: 80px;
+  border-radius: 30px;
+  width: 448px;
+  min-height: 364px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.closeIcon {
+  background: none;
+  stroke: black;
+  position: absolute;
+  top: 26px;
+  right: 26px;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  background-color: var(--main-light-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.17;
+  margin-bottom: 28px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 14px 57px;
+  width: 140px;
+  height: 48px;
+  background-color: var(--main-orange);
+  color: var(--main-white);
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: rgba(38, 38, 38, 0.05);
+  color: var(--main-black);
+}

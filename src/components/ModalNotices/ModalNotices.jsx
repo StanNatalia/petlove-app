@@ -27,7 +27,7 @@ const ModalNotices = ({ item, onClose }) => {
         <div className={css.mainWrapper}>
           <button onClick={onClose}>
             <svg width="24" height="24" className={css.closeIcon}>
-              <use href="/public/sprite.svg#icon-cross-small" />
+              <use href="/sprite.svg#icon-cross-small" />
             </svg>
           </button>
           <div className={css.imgWrapper}>
@@ -38,19 +38,19 @@ const ModalNotices = ({ item, onClose }) => {
           <p className={css.name}>{item.name}</p>
           <div className={css.popularityWrapper}>
             <svg className={css.star} width="16" height="16">
-              <use href="/public/sprite.svg#icon-star" />
+              <use href="/sprite.svg#icon-star" />
             </svg>
             <svg className={css.star} width="16" height="16">
-              <use href="/public/sprite.svg#icon-star" />
+              <use href="/sprite.svg#icon-star" />
             </svg>
             <svg className={css.star} width="16" height="16">
-              <use href="/public/sprite.svg#icon-star" />
+              <use href="/sprite.svg#icon-star" />
             </svg>
             <svg className={css.star} width="16" height="16">
-              <use href="/public/sprite.svg#icon-star" />
+              <use href="/sprite.svg#icon-star" />
             </svg>
             <svg className={css.star} width="16" height="16">
-              <use href="/public/sprite.svg#icon-star" />
+              <use href="/sprite.svg#icon-star" />
             </svg>
             <p className={css.popularity}>{item.popularity}</p>
           </div>
@@ -81,7 +81,7 @@ const ModalNotices = ({ item, onClose }) => {
             <NavLink to="/" className={css.link}>
               <span>Add to</span>
               <svg width="18" height="18" className={css.heartIcon}>
-                <use href="/public/sprite.svg#icon-heart" />
+                <use href="/sprite.svg#icon-heart" />
               </svg>
             </NavLink>
 
