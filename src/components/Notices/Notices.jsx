@@ -8,11 +8,22 @@ import { formatDate } from "../../utils/utils";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotices from "../ModalNotices/ModalNotices";
+import Select from "react-select";
+import NoticesFilters from "../NoticesFilters/NoticesFilters";
+import { set } from "react-hook-form";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [filters, setFilters] = useState({
+    search: "",
+    category: "",
+    gender: "",
+    species: "",
+    location: "",
+  });
+
   const dispatch = useDispatch();
   const { items, isLoading, error } = useSelector(selectNotices);
 
@@ -39,14 +50,43 @@ const Notices = () => {
     }
   };
 
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const filteredItems = items.filter((item) => {
+    const matchSearch =
+      item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+      item.comment.toLowerCase().includes(filters.search.toLowerCase());
+    const matchCategory = filters.category
+      ? item.category === filters.category
+      : true;
+    const matchGender = filters.gender ? item.sex === filters.gender : true;
+    const matchSpecies = filters.species
+      ? item.species === filters.species
+      : true;
+    const matchLocation = filters.location
+      ? item.location?.includes(filters.location)
+      : true;
+
+    return (
+      matchSearch &&
+      matchCategory &&
+      matchGender &&
+      matchSpecies &&
+      matchLocation
+    );
+  });
+
   return (
     <div className={css.wrapper}>
       <h2 className={css.titlePage}>Find your favorite pet</h2>
-      <div className={css.filters}>Filters</div>
+      <NoticesFilters filters={filters} setFilters={setFilters} />
       {isLoading && <p>Loading</p>}
       {error && <p>{error}</p>}
       <ul className={css.list}>
-        {items.map((item) => (
+        {filteredItems.map((item) => (
           <li key={item._id} className={css.item}>
             <div>
               <img src={item.imgURL} alt={item.species} className={css.img} />

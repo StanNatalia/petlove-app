@@ -12,14 +12,6 @@
   margin-bottom: 40px;
 }
 
-.filters {
-  border-radius: 30px;
-  width: 100%;
-  height: 216px;
-  background-color: var(--main-light-orange);
-  margin-bottom: 40px;
-}
-
 .list {
   display: flex;
   flex-wrap: wrap;
