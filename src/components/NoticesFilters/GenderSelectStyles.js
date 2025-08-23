@@ -1,4 +1,4 @@
-export const CustomSelectStyles = {
+export const GenderSelectStyles = {
   control: (provided, state) => ({
     ...provided,
     padding: "0 14px",
@@ -7,7 +7,7 @@ export const CustomSelectStyles = {
     backgroundColor: "#ffffff",
     cursor: "pointer",
     height: "48px",
-    width: "200px",
+    width: "190px",
     boxShadow: "none",
     outline: "none",
     display: "flex",
@@ -27,7 +27,6 @@ export const CustomSelectStyles = {
     cursor: "pointer",
     textAlign: "left",
     fontSize: "16px",
-    marginBottom: "14px",
     lineHeight: 1.25,
     fontWeight: "500",
     fontFamily: "Inter, sans-serif",
@@ -41,7 +40,7 @@ export const CustomSelectStyles = {
     borderRadius: "15px",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
     overflow: "hidden",
-    width: "200px",
+    width: "190px",
     top: "100%",
     left: 0,
     right: "auto",
@@ -50,6 +49,9 @@ export const CustomSelectStyles = {
   }),
   menuList: (provided) => ({
     ...provided,
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
     padding: "14px",
     maxHeight: "200px",
     overflowY: "auto",

@@ -8,14 +8,13 @@ import { formatDate } from "../../utils/utils";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotices from "../ModalNotices/ModalNotices";
-import Select from "react-select";
 import NoticesFilters from "../NoticesFilters/NoticesFilters";
-import { set } from "react-hook-form";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [sortedItems, setSortedItems] = useState([]);
   const [filters, setFilters] = useState({
     search: "",
     category: "",
@@ -30,6 +29,10 @@ const Notices = () => {
   useEffect(() => {
     dispatch(fetchNotices());
   }, [dispatch]);
+
+  useEffect(() => {
+    setSortedItems(items);
+  }, [items]);
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -50,12 +53,7 @@ const Notices = () => {
     }
   };
 
-  const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const filteredItems = items.filter((item) => {
+  const filteredItems = sortedItems.filter((item) => {
     const matchSearch =
       item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
       item.comment.toLowerCase().includes(filters.search.toLowerCase());
@@ -82,7 +80,12 @@ const Notices = () => {
   return (
     <div className={css.wrapper}>
       <h2 className={css.titlePage}>Find your favorite pet</h2>
-      <NoticesFilters filters={filters} setFilters={setFilters} />
+      <NoticesFilters
+        filters={filters}
+        setFilters={setFilters}
+        items={items}
+        setSortedItems={setSortedItems}
+      />
       {isLoading && <p>Loading</p>}
       {error && <p>{error}</p>}
       <ul className={css.list}>

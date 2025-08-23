@@ -26,7 +26,7 @@ const ModalAttention = ({ onClose }) => {
       <div className={css.modal}>
         <button onClick={onClose}>
           <svg width="24" height="24" className={css.closeIcon}>
-            <use href="/public/sprite.svg#icon-cross-small" />
+            <use href="/sprite.svg#icon-cross-small" />
           </svg>
         </button>
         <div className={css.circle}>
