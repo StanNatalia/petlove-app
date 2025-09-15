@@ -7,11 +7,16 @@
 }
 
 .pageBtn {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  border: 1px solid var(--main-grey);
   background: white;
   cursor: pointer;
-  border-radius: 4px;
+
   transition: 0.2s;
 }
 
@@ -25,9 +30,9 @@
 }
 
 .active {
-  background: #007bff;
+  background: var(--main-orange);
   color: white;
-  border-color: #007bff;
+  border-color: var(--main-orange);
 }
 
 .dots {

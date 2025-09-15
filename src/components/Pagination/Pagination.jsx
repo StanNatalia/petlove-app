@@ -19,26 +19,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       }
     } else {
       if (currentPage <= 3) {
-        pages.push(1, 2, 3, 4, "...", totalPages);
+        pages.push(1, 2, 3, "...");
       } else if (currentPage >= totalPages - 2) {
-        pages.push(
-          1,
-          "...",
-          totalPages - 3,
-          totalPages - 2,
-          totalPages - 1,
-          totalPages
-        );
+        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
       } else {
-        pages.push(
-          1,
-          "...",
-          currentPage - 1,
-          currentPage,
-          currentPage + 1,
-          "...",
-          totalPages
-        );
+        pages.push(currentPage - 1, currentPage, currentPage + 1, "...");
       }
     }
     return pages;
@@ -51,7 +36,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === 1}
         className={css.pageBtn}
       >
-        {"<<"}
+        <svg width="24" height="24" style={{ display: "flex" }}>
+          <use href="/sprite.svg#icon-left_arrow" x="-4" />
+          <use href="/sprite.svg#icon-left_arrow" x="4" />
+        </svg>
       </button>
 
       <button
@@ -59,7 +47,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === 1}
         className={css.pageBtn}
       >
-        {"<"}
+        <svg width="24" height="24">
+          <use href="/sprite.svg#icon-left_arrow" />
+        </svg>
       </button>
 
       {renderPageNumbers().map((page, index) =>
@@ -85,7 +75,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === totalPages}
         className={css.pageBtn}
       >
-        {">"}
+        <svg width="24" height="24">
+          <use href="/sprite.svg#icon-right_arrow" />
+        </svg>
       </button>
 
       <button
@@ -93,7 +85,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         disabled={currentPage === totalPages}
         className={css.pageBtn}
       >
-        {">>"}
+        <svg width="24" height="24" style={{ display: "flex" }}>
+          <use href="/sprite.svg#icon-right_arrow" x="4" />
+          <use href="/sprite.svg#icon-right_arrow" x="-4" />
+        </svg>
       </button>
     </div>
   );
