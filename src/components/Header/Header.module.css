@@ -22,8 +22,15 @@
   background-color: var(--main-background);
 }
 
-.iconHeart {
-  fill: var(--main-orange);
+.homeHeaderLogo {
+  color: var(--main-white);
+  background-color: transparent;
+}
+
+.homeIconHeart {
+  stroke: var(--main-white);
+  fill: white;
+  color: white;
 }
 
 .pageLink {
@@ -37,6 +44,12 @@
 
 .pageActive {
   border: 1px solid var(--main-orange);
+}
+
+.homeColorButton {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--main-white);
 }
 
 .pageLink:hover {

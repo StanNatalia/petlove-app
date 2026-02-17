@@ -1,13 +1,11 @@
-/* .wrapper {
-  position: fixed;
-  top: 16px;
-  z-index: -1;
-} */
+.wrapper {
+  margin-top: -98px;
+  margin-bottom: 16px;
+}
 
 .heroWrapper {
   border-radius: 60px;
   width: 100%;
-  height: 384px;
   background-color: var(--main-orange);
   padding: 178px 64px 32px 64px;
   display: flex;
@@ -37,6 +35,7 @@
 }
 
 .heroImg {
+  flex: 1;
   object-fit: cover;
   width: 100%;
 }

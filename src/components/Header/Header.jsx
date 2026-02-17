@@ -1,15 +1,11 @@
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import css from "./Header.module.css";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/Auth/selectors";
 import { logoutThunk } from "../../redux/Auth/options";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalLogout from "../ModalLogout/ModalLogout";
-
-const buildLinkPage = ({ isActive }) => {
-  return clsx(css.pageLink, isActive && css.pageActive);
-};
 
 const buildLinkUser = ({ isActive }) => {
   return clsx(css.userLink, isActive && css.userActive);
@@ -18,19 +14,37 @@ const buildLinkUser = ({ isActive }) => {
 const Header = () => {
   const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
 
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
   const dispatch = useDispatch();
 
+  const buildLinkPage = ({ isActive }) => {
+    return clsx(
+      css.pageLink,
+      isActive && css.pageActive,
+      isHomePage && css.homeColorButton,
+    );
+  };
+
   return (
     <header className={css.header}>
       <div className={css.headerWrapper}>
         <NavLink to="/">
-          <button className={css.headerLogo}>
+          <button
+            className={clsx(css.headerLogo, isHomePage && css.homeHeaderLogo)}
+          >
             petl
             <span>
-              <svg width="23" height="23" className={css.iconHeart}>
+              <svg
+                width="23"
+                height="23"
+                className={clsx(css.iconHeart, isHomePage && css.homeIconHeart)}
+                fill={isHomePage ? css.homeIconHeart : css.iconHeart}
+              >
                 <use href="/sprite.svg#icon-heart-circle" />
               </svg>
             </span>
