@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refreshUser } from "./redux/Auth/options";
+import Loading from "./components/Loading/Loading";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
@@ -25,7 +26,7 @@ function App() {
     <>
       <Header />
       <div className="container">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/news" element={<NewsPage />} />

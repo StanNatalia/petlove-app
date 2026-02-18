@@ -9,6 +9,7 @@ import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotices from "../ModalNotices/ModalNotices";
 import NoticesFilters from "../NoticesFilters/NoticesFilters";
+import Loading from "../Loading/Loading";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -86,7 +87,7 @@ const Notices = () => {
         items={items}
         setSortedItems={setSortedItems}
       />
-      {isLoading && <p>Loading</p>}
+      {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {filteredItems.map((item) => (

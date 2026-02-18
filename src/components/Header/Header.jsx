@@ -39,13 +39,14 @@ const Header = () => {
           >
             petl
             <span>
-              <svg
-                width="23"
-                height="23"
-                className={clsx(css.iconHeart, isHomePage && css.homeIconHeart)}
-                fill={isHomePage ? css.homeIconHeart : css.iconHeart}
-              >
-                <use href="/sprite.svg#icon-heart-circle" />
+              <svg width="23" height="23">
+                <use
+                  href={
+                    isHomePage
+                      ? "/public/sprite.svg#icon-white-heart-circle"
+                      : "/public/sprite.svg#icon-heart-circle"
+                  }
+                />
               </svg>
             </span>
             ve

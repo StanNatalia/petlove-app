@@ -1,0 +1,38 @@
+.loadingWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/public/images/Loading.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: 1000;
+}
+
+.loadingWrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 1002;
+  color: var(--main-white);
+  background-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  font-size: 100px;
+}
+
+.logo svg {
+  transform: translateY(10px);
+}

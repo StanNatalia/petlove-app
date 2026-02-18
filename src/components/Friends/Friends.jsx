@@ -3,6 +3,7 @@ import css from "./Friends.module.css";
 import { useEffect } from "react";
 import { selectFriends } from "../../redux/Friends/selectors";
 import { fetchFriends } from "../../redux/Friends/options";
+import Loading from "../Loading/Loading";
 
 const Friends = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Friends = () => {
     if (digits.length === 12) {
       return `+${digits.slice(0, 2)} ${digits.slice(2, 5)} ${digits.slice(
         5,
-        8
+        8,
       )} ${digits.slice(8, 10)} ${digits.slice(10, 12)}`;
     }
 
@@ -31,7 +32,7 @@ const Friends = () => {
   return (
     <div className={css.wrapper}>
       <h2 className={css.title}>Our friends</h2>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {items.map((item) => (
@@ -42,7 +43,7 @@ const Friends = () => {
               ) : (
                 (() => {
                   const workingDay = item.workDays.find(
-                    (day) => day.isOpen && day.from && day.to
+                    (day) => day.isOpen && day.from && day.to,
                   );
                   return workingDay ? (
                     <p

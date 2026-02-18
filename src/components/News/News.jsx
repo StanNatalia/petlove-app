@@ -4,6 +4,7 @@ import { selectNews } from "../../redux/News/selectors";
 import { useEffect, useState } from "react";
 import { fetchNews } from "../../redux/News/options";
 import Pagination from "../Pagination/Pagination";
+import Loading from "../Loading/Loading";
 
 const News = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const News = () => {
   const filteredItems = items.filter(
     (item) =>
       item.title.toLowerCase().includes(search.toLocaleLowerCase()) ||
-      item.text.toLowerCase().includes(search.toLocaleLowerCase())
+      item.text.toLowerCase().includes(search.toLocaleLowerCase()),
   );
 
   return (
@@ -55,7 +56,7 @@ const News = () => {
         </div>
       </div>
 
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {filteredItems.map((item) => (
