@@ -3,38 +3,25 @@ import css from "./Pagination.module.css";
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   if (totalPages <= 1) return null;
 
-  const handlePageClick = (page) => {
-    if (page >= 1 && page <= totalPages && page !== currentPage) {
-      onPageChange(page);
-    }
-  };
+  let startPage = Math.max(1, currentPage - 1);
+  let endPage = Math.min(totalPages, startPage + 2);
 
-  const renderPageNumbers = () => {
-    const pages = [];
-    const maxVisible = 6;
+  if (endPage - startPage < 2) {
+    startPage = Math.max(1, endPage - 2);
+  }
 
-    if (totalPages <= maxVisible) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        pages.push(1, 2, 3, "...");
-      } else if (currentPage >= totalPages - 2) {
-        pages.push("...", totalPages - 2, totalPages - 1, totalPages);
-      } else {
-        pages.push(currentPage - 1, currentPage, currentPage + 1, "...");
-      }
-    }
-    return pages;
-  };
+  const pages = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
 
   return (
-    <div className={css.pagination}>
+    <div className={css.wrapper}>
+      {/* FIRST */}
       <button
-        onClick={() => handlePageClick(1)}
+        onClick={() => onPageChange(1)}
         disabled={currentPage === 1}
-        className={css.pageBtn}
+        className={css.navBtn}
       >
         <svg width="24" height="24" style={{ display: "flex" }}>
           <use href="/sprite.svg#icon-left_arrow" x="-4" />
@@ -42,48 +29,46 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         </svg>
       </button>
 
+      {/* PREV */}
       <button
-        onClick={() => handlePageClick(currentPage - 1)}
+        onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={css.pageBtn}
+        className={css.navBtn}
       >
         <svg width="24" height="24">
-          <use href="/sprite.svg#icon-left_arrow" />
+          <use href="/public/sprite.svg#icon-left_arrow" />
         </svg>
       </button>
 
-      {renderPageNumbers().map((page, index) =>
-        page === "..." ? (
-          <span key={index} className={css.dots}>
-            ...
-          </span>
-        ) : (
-          <button
-            key={page}
-            onClick={() => handlePageClick(page)}
-            className={`${css.pageBtn} ${
-              currentPage === page ? css.active : ""
-            }`}
-          >
-            {page}
-          </button>
-        )
-      )}
+      {/* NUMBERS */}
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={
+            page === currentPage ? `${css.pageBtn} ${css.active}` : css.pageBtn
+          }
+        >
+          {page}
+        </button>
+      ))}
 
+      {/* NEXT */}
       <button
-        onClick={() => handlePageClick(currentPage + 1)}
+        onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={css.pageBtn}
+        className={css.navBtn}
       >
         <svg width="24" height="24">
-          <use href="/sprite.svg#icon-right_arrow" />
+          <use href="/public/sprite.svg#icon-right_arrow" />
         </svg>
       </button>
 
+      {/* LAST */}
       <button
-        onClick={() => handlePageClick(totalPages)}
+        onClick={() => onPageChange(totalPages)}
         disabled={currentPage === totalPages}
-        className={css.pageBtn}
+        className={css.navBtn}
       >
         <svg width="24" height="24" style={{ display: "flex" }}>
           <use href="/sprite.svg#icon-right_arrow" x="4" />

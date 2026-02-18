@@ -11,7 +11,7 @@ export const registerThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const loginThunk = createAsyncThunk(
@@ -24,7 +24,7 @@ export const loginThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const logoutThunk = createAsyncThunk(
@@ -36,7 +36,7 @@ export const logoutThunk = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const refreshUser = createAsyncThunk(
@@ -45,7 +45,6 @@ export const refreshUser = createAsyncThunk(
     try {
       const state = thunkAPI.getState();
       const savedToken = state.auth.token;
-      console.log(savedToken);
       if (savedToken === null) {
         return thunkAPI.rejectWithValue("Token is not exist");
       }
@@ -56,5 +55,5 @@ export const refreshUser = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
