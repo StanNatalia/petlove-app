@@ -1,0 +1,28 @@
+.wrapper {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+.petBlock {
+  display: flex;
+  border-radius: 60px;
+  min-width: 592px;
+  height: 654px;
+  background-color: var(--main-orange);
+  position: relative;
+  overflow: hidden;
+}
+
+.img {
+  position: absolute;
+  top: 2%;
+  left: 36px;
+  z-index: 5;
+  object-fit: cover;
+}
+
+.shape {
+  position: absolute;
+  top: 9%;
+  left: 6%;
+}

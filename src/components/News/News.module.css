@@ -64,6 +64,7 @@
   border-radius: 15px;
   width: 361px;
   height: 226px;
+  object-fit: cover;
   margin-bottom: 28px;
   flex-shrink: 0;
 }

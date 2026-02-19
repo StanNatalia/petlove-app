@@ -88,6 +88,15 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
+  letter-spacing: -0.03em;
+}
+
+.homeName {
+  color: #262626;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
 }
 
 .circle {

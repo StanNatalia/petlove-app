@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refreshUser } from "./redux/Auth/options";
 import Loading from "./components/Loading/Loading";
+import AddPetPage from "./pages/AddPetPage";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
@@ -24,14 +25,15 @@ function App() {
 
   return (
     <>
-      <Header />
       <div className="container">
+        <Header />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/notices" element={<NoticesPage />} />
             <Route path="/friends" element={<OurFriendsPage />} />
+            <Route path="/add" element={<AddPetPage />} />
             <Route path="*" element={<NotFoundPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="registration" element={<RegistrationPage />} />

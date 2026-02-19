@@ -1,0 +1,15 @@
+.formWrapper {
+  padding: 69px 84px;
+  border-radius: 60px;
+  width: 592px;
+  height: 654px;
+  background-color: var(--main-white);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 54px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+}

@@ -88,7 +88,11 @@ const Header = () => {
               <use href="/sprite.svg#icon-user" />
             </svg>
           </div>
-          {user?.name && <h3 className={css.name}>{user.name}</h3>}
+          {user?.name && (
+            <h3 className={isHomePage ? css.name : css.homeName}>
+              {user.name}
+            </h3>
+          )}
         </div>
       )}
       {isOpenModalLogout && (
