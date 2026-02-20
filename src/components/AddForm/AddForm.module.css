@@ -1,15 +1,138 @@
-.formWrapper {
-  padding: 69px 84px;
+.wrapper {
+  padding: 60px 80px;
   border-radius: 60px;
-  width: 592px;
-  height: 654px;
   background-color: var(--main-white);
 }
 
 .title {
   font-weight: 700;
-  font-size: 54px;
-  line-height: 1;
-  letter-spacing: -0.04em;
-  margin-bottom: 16px;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: -0.03em;
+  color: var(--main-black);
+  margin-bottom: 40px;
+}
+.span {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: rgba(43, 43, 42, 0.4);
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 18px;
+}
+.sexWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.sexIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.photoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.iconFoot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 100px;
+  background-color: var(--main-light-orange);
+}
+
+.urlWrapper {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+}
+
+.fieldWrapper {
+  margin-top: -16px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.field {
+  border: 1px solid #f6b83d;
+  border-radius: 30px;
+  padding: 16px;
+  width: 100%;
+  height: 52px;
+}
+
+.fieldPhoto {
+  border: 1px solid #f6b83d;
+  border-radius: 30px;
+  padding: 12px 20px 12px 12px;
+  width: 100%;
+  height: 42px;
+}
+
+.buttonPhoto {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  border-radius: 30px;
+  padding: 12px 16px;
+  width: 146px;
+  height: 42px;
+  background: var(--main-light-orange);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.29;
+  letter-spacing: -0.02em;
+  color: var(--main-black);
+}
+
+.dataWrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: end;
+}
+
+.buttonBack {
+  border-radius: 30px;
+  padding: 14px 67px;
+  width: 170px;
+  height: 48px;
+  background: rgba(38, 38, 38, 0.05);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  color: var(--main-black);
+}
+
+.buttonSubmit {
+  border-radius: 30px;
+  padding: 14px 58px;
+  width: 170px;
+  height: 48px;
+  background: var(--main-orange);
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--main-white);
 }
