@@ -10,66 +10,96 @@ const options = [
   { value: "turtle", label: "Turtle" },
   { value: "fish", label: "Fish" },
   { value: "lizard", label: "Lizard" },
+  { value: "snake", label: "Snake" },
+  { value: "frog", label: "Frog" },
+  { value: "bees", label: "Bees" },
+  { value: "butterfly", label: "Butterfly" },
+  { value: "spider", label: "Spider" },
+  { value: "scorpion", label: "Scorpion" },
 ];
 
 const TypeSelect = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const customStyles = {
-    control: (base) => ({
+    control: (base, state) => ({
       ...base,
-      alignItems: "center",
-      background: "none",
-      border: isError
-        ? "1px solid var(--main-red)"
-        : "1px solid var(--main-black)",
-      height: "44px",
-      borderRadius: "8px",
-      cursor: "pointer",
+      border: state.isFocused
+        ? "1px solid #f6b83d"
+        : "1px solid rgba(38, 38, 38, 0.15)",
+      borderRadius: "30px",
+      padding: "0 16px",
+      width: "210px",
+      height: "52px",
+      minHeight: "52px",
       boxShadow: "none",
-      fontFamily: "var(--font-family)",
-      fontWeight: "500",
-      fontSize: "18px",
+      cursor: "pointer",
+      "&:hover": {
+        border: "1px solid #f6b83d",
+      },
     }),
+
     valueContainer: (base) => ({
       ...base,
-      color: isError ? "var(--main-red)" : "black",
+      padding: 0,
     }),
-    singleValue: (base) => ({
-      ...base,
-      color: isError ? "var(--main-red)" : "black",
-      fontWeight: 500,
-    }),
+
     placeholder: (base) => ({
       ...base,
-      color: isError ? "var(--main-red)" : "black",
+      fontWeight: 500,
+      fontSize: "16px",
+      fontFamily: '"Manrope", sans-serif',
+      lineHeight: "125%",
+      letterSpacing: "-0.03em",
+      color: "rgba(38, 38, 38, 0.6)",
     }),
-    input: (base) => ({
+
+    singleValue: (base) => ({
       ...base,
-      color: isError ? "var(--main-red)" : "black",
+      fontWeight: 500,
+      fontSize: "16px",
+      fontFamily: '"Manrope", sans-serif',
+      lineHeight: "125%",
+      letterSpacing: "-0.03em",
+      color: "rgba(38, 38, 38, 0.6)",
+    }),
+
+    indicatorSeparator: () => ({
+      display: "none",
+    }),
+
+    dropdownIndicator: (base) => ({
+      ...base,
+      padding: 0,
     }),
     menu: (base) => ({
       ...base,
-      borderRadius: "8px",
-      background: "linear-gradient(180deg, #294045 0%, #1e2f33 100%)",
-      margin: "0",
-      zIndex: 100,
+      width: "210px",
+      borderRadius: "20px",
     }),
+
     menuList: (base) => ({
       ...base,
-      maxHeight: "157px",
       overflowY: "auto",
+      maxHeight: "126px",
+      height: "126px",
+      marginRight: "7px",
+      paddingTop: "10px",
+      paddingLeft: "4px",
+      paddingBottom: "0px",
     }),
+
     option: (base, state) => ({
       ...base,
-      background: state.isFocused
-        ? "linear-gradient(180deg, #355359 0%, #3b5d63 100%)"
-        : "transparent",
-      color: "#fcfcfc",
+      fontWeight: 500,
+      fontSize: "16px",
+      padding: "4px 14px",
+      fontFamily: '"Manrope", sans-serif',
+      lineHeight: "125%",
+      letterSpacing: "-0.03em",
+      color: state.isFocused ? "#f9b020" : "rgba(38, 38, 38, 0.6)",
+      backgroundColor: "none",
       cursor: "pointer",
-    }),
-    indicatorSeparator: () => ({
-      display: "none",
     }),
   };
 
@@ -78,10 +108,13 @@ const TypeSelect = () => {
       <Select
         name="category"
         options={options}
-        style={customStyles}
+        classNamePrefix="type-select"
+        styles={customStyles}
         value={selectedOption}
         onChange={setSelectedOption}
         placeholder="Type of pet"
+        menuPortalTarget={document.body} // по умолчанию react-select так делает
+        menuPosition="fixed" // либо absolute
       />
     </div>
   );
