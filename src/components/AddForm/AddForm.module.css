@@ -45,22 +45,6 @@
   gap: 12px;
 }
 
-.iconFoot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 86px;
-  height: 86px;
-  border-radius: 100px;
-  background-color: var(--main-light-orange);
-}
-
-.urlWrapper {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-}
-
 .fieldWrapper {
   margin-top: -16px;
   display: flex;
@@ -77,12 +61,20 @@
   height: 52px;
 }
 
-.fieldPhoto {
+.field:focus {
   border: 1px solid #f6b83d;
+}
+
+.fieldPhoto {
+  border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
   padding: 12px 20px 12px 12px;
   width: 100%;
   height: 42px;
+}
+
+.fieldPhoto:focus {
+  border: 1px solid #f6b83d;
 }
 
 .buttonPhoto {

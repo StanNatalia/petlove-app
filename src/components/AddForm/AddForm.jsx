@@ -1,4 +1,5 @@
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import PhotoUploading from "../PhotoUploading/PhotoUploading";
 import TypeSelect from "../TypeSelect/TypeSelect";
 import css from "./AddForm.module.css";
 import * as yup from "yup";
@@ -66,27 +67,7 @@ const AddForm = () => {
           </div>
         </div>
         <div className={css.fieldWrapper}>
-          <div className={css.photoWrapper}>
-            <div className={css.iconFoot}>
-              <svg width="44" height="44">
-                <use href="/public/sprite.svg#icon-dog_foot" />
-              </svg>
-            </div>
-            <div className={css.urlWrapper}>
-              <input
-                className={css.fieldPhoto}
-                type="text"
-                name="imgUrl"
-                placeholder="Enter URL"
-              />
-              <button className={css.buttonPhoto}>
-                Upload photo{" "}
-                <svg width="18" height="18">
-                  <use href="/sprite.svg#icon-upload" />
-                </svg>
-              </button>
-            </div>
-          </div>
+          <PhotoUploading />
           <input
             type="text"
             name="title"

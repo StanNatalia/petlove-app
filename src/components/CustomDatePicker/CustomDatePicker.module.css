@@ -7,11 +7,26 @@
 }
 
 .datepickerInput {
-  border: 1px solid #f6b83d;
+  font-family: var(--font-family);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75em;
+  background: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
-  padding: 16px;
-  width: 100%;
   height: 52px;
+  font-weight: 500;
+  font-size: 18px;
+  color: var(--main-black);
+  width: 193px;
+  outline: none;
+}
+
+.datepickerInput:focus {
+  border: 1px solid #f6b83d;
 }
 
 .iconWrapper {
