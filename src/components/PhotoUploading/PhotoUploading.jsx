@@ -1,83 +1,51 @@
-import { useState, useRef, useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 import css from "./PhotoUploading.module.css";
 
 const PhotoUploading = () => {
-  const [preview, setPreview] = useState(null);
-  const inputRef = useRef(null);
+  const { register, watch, setValue } = useFormContext();
+  const imgUrl = watch("imgUrl") || ""; // источник правды
 
-  // Очищаем объект URL при размонтировании или смене фото
-  useEffect(() => {
-    return () => {
-      if (preview) {
-        URL.revokeObjectURL(preview);
-      }
-    };
-  }, [preview]);
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    if (preview) {
-      URL.revokeObjectURL(preview);
-    }
-
-    const imageUrl = URL.createObjectURL(file);
-    setPreview(imageUrl);
+  const handleChange = (e) => {
+    setValue("imgUrl", e.target.value, {
+      shouldValidate: true,
+      shouldDirty: true,
+    });
   };
 
-  const handleClickUpload = () => {
-    inputRef.current.click();
-  };
-
-  const handleRemovePhoto = () => {
-    if (preview) {
-      URL.revokeObjectURL(preview);
-      setPreview(null);
-      inputRef.current.value = null;
-    }
+  const handleClear = () => {
+    setValue("imgUrl", "", { shouldValidate: true, shouldDirty: true });
   };
 
   return (
     <div className={css.photoWrapper}>
       <div className={css.iconFoot}>
-        {preview ? (
+        {imgUrl ? (
           <>
-            <img src={preview} alt="preview" className={css.previewImage} />
+            <img src={imgUrl} alt="preview" className={css.previewImage} />
             <button
               type="button"
               className={css.removePhotoButton}
-              onClick={handleRemovePhoto}
+              onClick={handleClear}
             >
               ×
             </button>
           </>
         ) : (
           <svg width="44" height="44">
-            <use href="/public/sprite.svg#icon-dog_foot" />
+            <use href="/sprite.svg#icon-dog_foot" />
           </svg>
         )}
       </div>
 
       <div className={css.urlWrapper}>
         <input
-          ref={inputRef}
-          accept="image/*"
-          onChange={handleFileChange}
-          className={css.hiddenInput}
-          type="file"
-          name="imgUrl"
+          type="text"
+          placeholder="Enter image URL"
+          className={css.fieldPhoto}
+          value={imgUrl}
+          onChange={handleChange}
+          {...register("imgUrl", { required: "Photo URL is required" })}
         />
-        <button
-          type="button"
-          onClick={handleClickUpload}
-          className={css.buttonPhoto}
-        >
-          {preview ? "Change photo" : "Upload photo"}
-          <svg width="24" height="24">
-            <use href="/sprite.svg#icon-upload" />
-          </svg>
-        </button>
       </div>
     </div>
   );
