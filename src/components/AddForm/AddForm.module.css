@@ -63,6 +63,7 @@
 
 .field:focus {
   border: 1px solid #f6b83d;
+  background: transparent;
 }
 
 .fieldPhoto {
@@ -127,4 +128,9 @@
   line-height: 1.25;
   letter-spacing: -0.03em;
   color: var(--main-white);
+}
+
+.error {
+  color: red;
+  font-size: 14px;
 }

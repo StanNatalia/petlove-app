@@ -21,7 +21,7 @@
   font-weight: 500;
   font-size: 18px;
   color: var(--main-black);
-  width: 193px;
+  width: 210px;
   outline: none;
 }
 
@@ -39,4 +39,9 @@
   pointer-events: none;
   color: var(--main-black);
   font-size: 1.2em;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
 }

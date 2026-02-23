@@ -30,6 +30,10 @@ const AddForm = () => {
     },
   });
 
+  const {
+    formState: { errors },
+  } = methods;
+
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -41,27 +45,32 @@ const AddForm = () => {
           Add my pet /<span className={css.span}> Personal details</span>
         </h4>
 
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            methods.handleSubmit(onSubmit)(e);
-          }}
-        >
+        <form onSubmit={methods.handleSubmit(onSubmit)} autoComplete="off">
           <div className={css.fieldWrapper}>
             <SexForm />
             <PhotoUploading />
 
-            <input
-              {...methods.register("title")}
-              className={css.field}
-              placeholder="Title"
-            />
+            <div>
+              <input
+                {...methods.register("title")}
+                className={css.field}
+                placeholder="Title"
+              />
+              {errors.title && (
+                <p className={css.error}>{errors.title.message}</p>
+              )}
+            </div>
 
-            <input
-              {...methods.register("name")}
-              className={css.field}
-              placeholder="Pets name"
-            />
+            <div>
+              <input
+                {...methods.register("name")}
+                className={css.field}
+                placeholder="Pets name"
+              />
+              {errors.name && (
+                <p className={css.error}>{errors.name.message}</p>
+              )}
+            </div>
 
             <div className={css.dataWrapper}>
               <CustomDatePicker />

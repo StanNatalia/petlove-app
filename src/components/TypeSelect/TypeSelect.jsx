@@ -1,6 +1,6 @@
 import Select from "react-select";
-import { useState } from "react";
 import css from "./TypeSelect.module.css";
+import { useFormContext } from "react-hook-form";
 
 const options = [
   { value: "dog", label: "Dog" },
@@ -19,7 +19,13 @@ const options = [
 ];
 
 const TypeSelect = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const selectedValue = watch("type");
 
   const customStyles = {
     control: (base, state) => ({
@@ -110,12 +116,16 @@ const TypeSelect = () => {
         options={options}
         classNamePrefix="type-select"
         styles={customStyles}
-        value={selectedOption}
-        onChange={setSelectedOption}
+        value={options.find((opt) => opt.value === selectedValue) || null}
+        onChange={(option) =>
+          setValue("type", option.value, {
+            shouldValidate: true,
+            shouldDirty: true,
+          })
+        }
         placeholder="Type of pet"
-        menuPortalTarget={document.body} // по умолчанию react-select так делает
-        menuPosition="fixed" // либо absolute
       />
+      {errors.type && <p className={css.error}>{errors.type.message}</p>}
     </div>
   );
 };

@@ -19,3 +19,8 @@
   scrollbar-width: thin;
   scrollbar-color: #f6b83d transparent;
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+}
