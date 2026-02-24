@@ -5,14 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/Auth/selectors";
 import { logoutThunk } from "../../redux/Auth/options";
 import { useState } from "react";
-import ModalLogout from "../ModalLogout/ModalLogout";
+import ModalUserInfo from "../ModalUserInfo/ModalUserInfo"; // новое модальное окно с инфо юзера
 
-const buildLinkUser = ({ isActive }) => {
-  return clsx(css.userLink, isActive && css.userActive);
-};
+const buildLinkUser = ({ isActive }) =>
+  clsx(css.userLink, isActive && css.userActive);
 
 const Header = () => {
-  const [isOpenModalLogout, setIsOpenModalLogout] = useState(false);
+  const [isOpenModalUser, setIsOpenModalUser] = useState(false);
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -22,13 +21,12 @@ const Header = () => {
 
   const dispatch = useDispatch();
 
-  const buildLinkPage = ({ isActive }) => {
-    return clsx(
+  const buildLinkPage = ({ isActive }) =>
+    clsx(
       css.pageLink,
       isActive && css.pageActive,
       isHomePage && css.homeColorButton,
     );
-  };
 
   return (
     <header className={css.header}>
@@ -52,6 +50,7 @@ const Header = () => {
             ve
           </button>
         </NavLink>
+
         <nav className={css.pageNav}>
           <NavLink to="/news" className={buildLinkPage}>
             News
@@ -75,34 +74,36 @@ const Header = () => {
           </NavLink>
         </nav>
       )}
+
       {isLoggedIn && (
         <div className={css.userView}>
           <button
-            onClick={() => setIsOpenModalLogout(true)}
+            onClick={() => dispatch(logoutThunk())}
             className={css.logout}
           >
             Log out
           </button>
-          <div className={css.circle}>
-            <svg height="24" width="24">
-              <use href="/sprite.svg#icon-user" />
-            </svg>
+          <div
+            className={css.userInfoWrapper}
+            onClick={() => setIsOpenModalUser(true)}
+            style={{ cursor: "pointer" }}
+          >
+            <div className={css.circle}>
+              <svg height="24" width="24">
+                <use href="/sprite.svg#icon-user" />
+              </svg>
+            </div>
+            {user?.name && (
+              <h3 className={isHomePage ? css.name : css.homeName}>
+                {user.name}
+              </h3>
+            )}
           </div>
-          {user?.name && (
-            <h3 className={isHomePage ? css.name : css.homeName}>
-              {user.name}
-            </h3>
-          )}
         </div>
       )}
-      {isOpenModalLogout && (
-        <ModalLogout
-          onClose={() => setIsOpenModalLogout(false)}
-          onConfirm={() => {
-            dispatch(logoutThunk());
-            setIsOpenModalLogout(false);
-          }}
-        />
+
+      {isOpenModalUser && (
+        <ModalUserInfo user={user} onClose={() => setIsOpenModalUser(false)} />
       )}
     </header>
   );
