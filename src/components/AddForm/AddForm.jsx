@@ -10,7 +10,7 @@ import css from "./AddForm.module.css";
 
 const schema = yup.object({
   sex: yup.string().required("Sex is required"),
-  imgUrl: yup.string().required("Photo is required"),
+  avatar: yup.string().required("Photo is required"),
   title: yup.string().required("Title is required").min(2),
   name: yup.string().required("Name is required").min(2),
   birthday: yup.string().required("Birthday is required"),
@@ -22,7 +22,7 @@ const AddForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       sex: "",
-      imgUrl: "",
+      avatar: "",
       title: "",
       name: "",
       birthday: "",
@@ -48,6 +48,7 @@ const AddForm = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)} autoComplete="off">
           <div className={css.fieldWrapper}>
             <SexForm />
+            <input type="hidden" {...methods.register("avatar")} />
             <PhotoUploading />
 
             <div>

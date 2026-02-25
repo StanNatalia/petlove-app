@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/Auth/selectors";
 import { logoutThunk } from "../../redux/Auth/options";
 import { useState } from "react";
-import ModalUserInfo from "../ModalUserInfo/ModalUserInfo"; // новое модальное окно с инфо юзера
+import Profile from "../Profile/Profile";
+import ProfilePage from "../../pages/ProfilePage";
 
 const buildLinkUser = ({ isActive }) =>
   clsx(css.userLink, isActive && css.userActive);
 
 const Header = () => {
-  const [isOpenModalUser, setIsOpenModalUser] = useState(false);
+  const [isProfile, setIsProfile] = useState(false);
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -83,9 +84,10 @@ const Header = () => {
           >
             Log out
           </button>
-          <div
+          <NavLink
+            to="/profile"
             className={css.userInfoWrapper}
-            onClick={() => setIsOpenModalUser(true)}
+            onClick={() => setIsProfile(true)}
             style={{ cursor: "pointer" }}
           >
             <div className={css.circle}>
@@ -98,12 +100,8 @@ const Header = () => {
                 {user.name}
               </h3>
             )}
-          </div>
+          </NavLink>
         </div>
-      )}
-
-      {isOpenModalUser && (
-        <ModalUserInfo user={user} onClose={() => setIsOpenModalUser(false)} />
       )}
     </header>
   );

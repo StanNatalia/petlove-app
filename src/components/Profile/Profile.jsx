@@ -1,6 +1,31 @@
-import css from "./ModalUserInfo.module.css";
+import { useEffect, useState } from "react";
+import css from "./Profile.module.css";
+import ModalEditProfile from "../ModalEditProfile/ModalEditProfile";
+import { useForm } from "react-hook-form";
 
-const ModalUserInfo = ({ user, onClose }) => {
+const Profile = ({ user, onClose }) => {
+  const [isEditModal, setIsEditModal] = useState(false);
+
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      name: user?.name,
+      email: user?.email,
+    },
+  });
+
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.name || "",
+        email: user.email || "",
+      });
+    }
+  }, [user, reset]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
     <div className={css.wrapper} onClick={(e) => e.stopPropagation()}>
       <div className={css.content}>
@@ -11,7 +36,7 @@ const ModalUserInfo = ({ user, onClose }) => {
               <use href="/sprite.svg#icon-user-white" />
             </svg>
           </button>
-          <div className={css.editWrapper}>
+          <div className={css.editWrapper} onClick={() => setIsEditModal(true)}>
             <svg width="18" height="18" className={css.userIcon}>
               <use href="/sprite.svg#icon-edit" />
             </svg>
@@ -27,10 +52,25 @@ const ModalUserInfo = ({ user, onClose }) => {
         </div>
         <h3 className={css.text}>My information</h3>
 
-        <form className={css.form}>
-          <input type="text" className={css.field} />
-          <input type="email" className={css.field} />
-          <input type="number" className={css.field} />
+        <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
+          <input
+            type="text"
+            className={css.field}
+            {...register("name")}
+            disabled
+          />
+          <input
+            type="email"
+            className={css.field}
+            {...register("email")}
+            disabled
+          />
+          <input
+            type="number"
+            className={css.field}
+            disabled
+            placeholder="No  phone number yet "
+          />
         </form>
         <div className={css.petsWrapper}>
           <div className={css.userWrapper}>
@@ -60,8 +100,12 @@ const ModalUserInfo = ({ user, onClose }) => {
           your favorite pet" page and add them to your favorites.
         </p>
       </div>
+
+      {isEditModal && (
+        <ModalEditProfile user={user} onClose={() => setIsEditModal(false)} />
+      )}
     </div>
   );
 };
 
-export default ModalUserInfo;
+export default Profile;

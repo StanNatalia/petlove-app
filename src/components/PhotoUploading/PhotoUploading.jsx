@@ -15,12 +15,12 @@ const PhotoUploading = () => {
 
   const handleInputChange = (e) => {
     setInputUrl(e.target.value);
-    clearErrors("imgUrl");
+    clearErrors("avatar");
   };
 
   const handleUploadClick = () => {
     if (!inputUrl.trim()) {
-      setError("imgUrl", {
+      setError("avatar", {
         type: "required",
         message: "Photo URL is required",
       });
@@ -28,7 +28,7 @@ const PhotoUploading = () => {
     }
 
     setPreviewUrl(inputUrl);
-    setValue("imgUrl", inputUrl, {
+    setValue("avatar", inputUrl, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -37,7 +37,7 @@ const PhotoUploading = () => {
   const handleClear = () => {
     setInputUrl("");
     setPreviewUrl("");
-    setValue("imgUrl", "", {
+    setValue("avatar", "", {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -70,7 +70,7 @@ const PhotoUploading = () => {
           )}
         </div>
 
-        <div className={css.urlWrapper}>
+        <div className={css.avatarWrapper}>
           <input
             type="text"
             placeholder="Enter image URL"
@@ -87,7 +87,7 @@ const PhotoUploading = () => {
           </button>
         </div>
       </div>
-      {errors.imgUrl && <p className={css.error}>{errors.imgUrl.message}</p>}
+      {errors.avatar && <p className={css.error}>{errors.avatar.message}</p>}
     </div>
   );
 };

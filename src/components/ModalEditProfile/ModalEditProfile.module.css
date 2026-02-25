@@ -1,0 +1,76 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  background-color: var(--main-white);
+  padding: 60px;
+  border-radius: 30px;
+  width: 550px;
+  gap: 32px;
+  min-height: 510px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  position: relative;
+}
+
+.closeIcon {
+  stroke: var(--main-black);
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.text {
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 100%;
+  color: #2b2b2a;
+  align-self: flex-start;
+}
+
+.fieldWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+  margin-top: 10px;
+}
+
+.field {
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding: 16px;
+  width: 100%;
+  height: 52px;
+}
+
+.field:focus {
+  border: 1px solid var(--main-orange);
+  background: transparent;
+}
+
+.btn {
+  border-radius: 30px;
+  padding: 12px 108px;
+  width: 100%;
+  height: 52px;
+  background-color: var(--main-orange);
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.29;
+  letter-spacing: -0.03em;
+  color: var(--main-white);
+}

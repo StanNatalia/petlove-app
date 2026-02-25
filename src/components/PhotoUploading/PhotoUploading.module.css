@@ -34,7 +34,7 @@
   background-color: var(--main-light-orange);
 }
 
-.urlWrapper {
+.avatarWrapper {
   display: flex;
   width: 100%;
   gap: 8px;

@@ -57,3 +57,21 @@ export const refreshUser = createAsyncThunk(
     }
   },
 );
+
+export const editUser = createAsyncThunk(
+  "auth/edit",
+  async (body, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+      const token = state.auth.token;
+      if (!token) {
+        return thunkAPI.rejectWithValue("No token found");
+      }
+      setAuthHeader(token);
+      const { data } = await api.patch("/users/current/edit", body);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);

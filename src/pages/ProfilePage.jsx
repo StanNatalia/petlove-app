@@ -1,9 +1,12 @@
-import ModalUserInfo from "../components/ModalUserInfo/ModalUserInfo";
+import { useSelector } from "react-redux";
+import Profile from "../components/Profile/Profile";
+import { selectUser } from "../redux/Auth/selectors";
 
 const ProfilePage = () => {
+  const user = useSelector(selectUser);
   return (
     <div>
-      <ModalUserInfo />
+      <Profile user={user} />
     </div>
   );
 };
