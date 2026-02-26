@@ -11,6 +11,8 @@ const initialState = {
   user: {
     name: "",
     email: "",
+    avatar: "",
+    phone: "",
   },
   token: "",
   isLoggedIn: false,
@@ -22,6 +24,9 @@ const userSlice = createSlice({
   reducers: {
     removeUser() {
       return initialState;
+    },
+    setToken(state, action) {
+      state.token = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -48,7 +53,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutThunk.fulfilled, () => initialState)
       .addCase(editUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = { ...state.user, ...action.payload };
       });
   },
 });

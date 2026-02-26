@@ -20,6 +20,7 @@ export const loginThunk = createAsyncThunk(
     try {
       const { data } = await api.post("/users/signin", body);
       setAuthHeader(data.token);
+      localStorage.setItem("token", data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -69,6 +70,7 @@ export const editUser = createAsyncThunk(
       }
       setAuthHeader(token);
       const { data } = await api.patch("/users/current/edit", body);
+      console.log("SERVER RESPONSE:", data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

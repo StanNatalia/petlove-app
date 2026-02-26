@@ -31,11 +31,17 @@ const ModalEditProfile = ({ user, onClose }) => {
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
+    const cleanPhone = data.phone.replace(/\s+/g, "");
+
+    const formattedData = {
+      ...data,
+      phone: cleanPhone,
+    };
+
     try {
-      const resultAction = await dispatch(editUser(data));
+      const resultAction = await dispatch(editUser(formattedData));
       if (editUser.fulfilled.match(resultAction)) {
         onClose();
-        console.log(data);
       } else {
         console.error(resultAction.payload || "Edit failed");
       }

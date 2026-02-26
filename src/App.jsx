@@ -6,6 +6,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { refreshUser } from "./redux/Auth/options";
 import Loading from "./components/Loading/Loading";
+import { setAuthHeader } from "./services/api";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const NewsPage = lazy(() => import("./pages/NewsPage"));
@@ -21,7 +22,11 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(refreshUser());
+    const token = localStorage.getItem("token");
+    if (token) {
+      setAuthHeader(token);
+      dispatch(refreshUser());
+    }
   }, [dispatch]);
 
   return (

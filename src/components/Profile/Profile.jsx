@@ -1,30 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import css from "./Profile.module.css";
 import ModalEditProfile from "../ModalEditProfile/ModalEditProfile";
-import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
-const Profile = ({ user, onClose }) => {
+const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
 
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      name: user?.name,
-      email: user?.email,
-    },
-  });
-
-  useEffect(() => {
-    if (user) {
-      reset({
-        name: user.name || "",
-        email: user.email || "",
-      });
-    }
-  }, [user, reset]);
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <div className={css.wrapper} onClick={(e) => e.stopPropagation()}>
@@ -44,34 +26,39 @@ const Profile = ({ user, onClose }) => {
         </div>
         <div className={css.photoWrapper}>
           <div className={css.photoIcon}>
-            <svg width="40" height="40">
-              <use href="/sprite.svg#icon-user" />
-            </svg>
+            {user.avatar ? (
+              <img src={user.avatar} alt="avatar" className={css.avatarImg} />
+            ) : (
+              <svg width="40" height="40">
+                <use href="/sprite.svg#icon-user" />
+              </svg>
+            )}
           </div>
-          <button className={css.photoBtn}>Upload photo</button>
+          <button className={css.photoBtn} onClick={() => setIsEditModal(true)}>
+            Upload photo
+          </button>
         </div>
         <h3 className={css.text}>My information</h3>
 
-        <form onSubmit={handleSubmit(onSubmit)} className={css.form}>
-          <input
-            type="text"
-            className={css.field}
-            {...register("name")}
-            disabled
-          />
-          <input
-            type="email"
-            className={css.field}
-            {...register("email")}
-            disabled
-          />
-          <input
-            type="number"
-            className={css.field}
-            disabled
-            placeholder="No  phone number yet "
-          />
-        </form>
+        <div className={css.form}>
+          {user.name ? (
+            <p className={css.field}>{user.name}</p>
+          ) : (
+            <p className={css.field}>Name</p>
+          )}
+
+          {user.email ? (
+            <p className={css.field}>{user.email}</p>
+          ) : (
+            <p className={css.field}>name@gmail.com</p>
+          )}
+
+          {user.phone ? (
+            <p className={css.field}>{user.phone}</p>
+          ) : (
+            <p className={css.field}>+380</p>
+          )}
+        </div>
         <div className={css.petsWrapper}>
           <div className={css.userWrapper}>
             <h4 className={css.text}>My pets</h4>
