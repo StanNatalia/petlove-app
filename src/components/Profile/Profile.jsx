@@ -1,12 +1,24 @@
 import { useState } from "react";
 import css from "./Profile.module.css";
 import ModalEditProfile from "../ModalEditProfile/ModalEditProfile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutThunk } from "../../redux/Auth/options";
+import { NavLink, useNavigate } from "react-router";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
 
+  const dispatch = useDispatch();
+
   const user = useSelector((state) => state.auth.user);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await dispatch(logoutThunk());
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   return (
     <div className={css.wrapper} onClick={(e) => e.stopPropagation()}>
@@ -62,15 +74,19 @@ const Profile = ({ onClose }) => {
         <div className={css.petsWrapper}>
           <div className={css.userWrapper}>
             <h4 className={css.text}>My pets</h4>
-            <button className={css.btn}>
-              Add pet
-              <svg width="18" height="18">
-                <use href="/sprite.svg#icon-plus" />
-              </svg>
-            </button>
+            <NavLink to="/add-pet">
+              <button className={css.btn}>
+                Add pet
+                <svg width="18" height="18">
+                  <use href="/sprite.svg#icon-plus" />
+                </svg>
+              </button>
+            </NavLink>
           </div>
         </div>
-        <button className={css.logoutBtn}>LOG OUT</button>
+        <button onClick={handleLogout} className={css.logoutBtn}>
+          LOG OUT
+        </button>
       </div>
       <div className={`${css.content} ${css.secondaryContent}`}>
         <div className={css.btnWrapper}>

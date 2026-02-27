@@ -40,15 +40,13 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = {
-          name: action.payload.name,
-          email: action.payload.email,
-        };
+        state.user = action.payload;
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.token = localStorage.getItem("token");
         state.isLoggedIn = true;
       })
       .addCase(logoutThunk.fulfilled, () => initialState)

@@ -4,9 +4,35 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { editUser } from "../../redux/Auth/options";
 import { useEffect } from "react";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+
+  email: Yup.string()
+    .matches(
+      /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+      "Invalid email format",
+    )
+    .required("Email is required"),
+
+  avatar: Yup.string()
+    .matches(
+      /^https?:\/\/.*\.(?:png|jpg|jpeg|gif|bmp|webp)$/,
+      "Avatar must be a valid image URL",
+    )
+    .required("Photo is required"),
+
+  phone: Yup.string()
+    .matches(/^\+38\d{10}$/, "Phone must be in format +38XXXXXXXXXX")
+    .required("Phone is required"),
+});
 
 const ModalEditProfile = ({ user, onClose }) => {
   const methods = useForm({
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
     defaultValues: {
       name: user?.name || "",
       email: user?.email || "",
@@ -26,20 +52,17 @@ const ModalEditProfile = ({ user, onClose }) => {
     }
   }, [user, methods]);
 
-  const { register, handleSubmit } = methods;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
 
   const dispatch = useDispatch();
 
   const onSubmit = async (data) => {
-    const cleanPhone = data.phone.replace(/\s+/g, "");
-
-    const formattedData = {
-      ...data,
-      phone: cleanPhone,
-    };
-
     try {
-      const resultAction = await dispatch(editUser(formattedData));
+      const resultAction = await dispatch(editUser(data));
       if (editUser.fulfilled.match(resultAction)) {
         onClose();
       } else {
@@ -64,18 +87,39 @@ const ModalEditProfile = ({ user, onClose }) => {
             <input type="hidden" {...register("avatar")} />
             <PhotoUploading />
             <div className={css.fieldWrapper}>
-              <input className={css.field} type="text" {...register("name")} />
-              <input
-                className={css.field}
-                type="email"
-                {...register("email")}
-              />
-              <input
-                className={css.field}
-                type="text"
-                {...register("phone")}
-                placeholder="Enter your phone number"
-              />
+              <div>
+                <input
+                  className={css.field}
+                  type="text"
+                  {...register("name")}
+                />
+                {errors.name && (
+                  <p className={css.error}>{errors.name.message}</p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  className={css.field}
+                  type="email"
+                  {...register("email")}
+                />
+                {errors.email && (
+                  <p className={css.error}>{errors.email.message}</p>
+                )}
+              </div>
+
+              <div>
+                <input
+                  className={css.field}
+                  type="text"
+                  {...register("phone")}
+                  placeholder="Enter your phone number"
+                />
+                {errors.phone && (
+                  <p className={css.error}>{errors.phone.message}</p>
+                )}
+              </div>
             </div>
             <button type="submit" className={css.btn}>
               Go to profile

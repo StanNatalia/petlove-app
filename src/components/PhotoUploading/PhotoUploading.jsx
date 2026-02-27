@@ -1,26 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import css from "./PhotoUploading.module.css";
 
-const PhotoUploading = () => {
+const PhotoUploading = ({ name = "avatar" }) => {
   const {
     setValue,
     setError,
+    watch,
     clearErrors,
     formState: { errors },
   } = useFormContext();
 
+  const avatarFromForm = watch(name);
+
   const [inputUrl, setInputUrl] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
 
+  useEffect(() => {
+    if (avatarFromForm) {
+      setPreviewUrl(avatarFromForm);
+      setInputUrl(avatarFromForm);
+    } else {
+      setPreviewUrl("");
+      setInputUrl("");
+    }
+  }, [avatarFromForm]);
+
   const handleInputChange = (e) => {
     setInputUrl(e.target.value);
-    clearErrors("avatar");
+    clearErrors(name);
   };
 
   const handleUploadClick = () => {
     if (!inputUrl.trim()) {
-      setError("avatar", {
+      setError(name, {
         type: "required",
         message: "Photo URL is required",
       });
@@ -28,7 +41,7 @@ const PhotoUploading = () => {
     }
 
     setPreviewUrl(inputUrl);
-    setValue("avatar", inputUrl, {
+    setValue(name, inputUrl, {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -37,7 +50,7 @@ const PhotoUploading = () => {
   const handleClear = () => {
     setInputUrl("");
     setPreviewUrl("");
-    setValue("avatar", "", {
+    setValue(name, "", {
       shouldValidate: true,
       shouldDirty: true,
     });
@@ -87,7 +100,7 @@ const PhotoUploading = () => {
           </button>
         </div>
       </div>
-      {errors.avatar && <p className={css.error}>{errors.avatar.message}</p>}
+      {errors[name] && <p className={css.error}>{errors[name].message}</p>}
     </div>
   );
 };

@@ -21,7 +21,12 @@ export const loginThunk = createAsyncThunk(
       const { data } = await api.post("/users/signin", body);
       setAuthHeader(data.token);
       localStorage.setItem("token", data.token);
-      return data;
+      const userResponse = await api.get("/users/current/full");
+
+      return {
+        ...userResponse.data,
+        token: data.token,
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -45,13 +50,22 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const savedToken = state.auth.token;
+      let savedToken = state.auth.token;
+
+      if (!savedToken) {
+        savedToken = localStorage.getItem("token");
+      }
+
       if (savedToken === null) {
         return thunkAPI.rejectWithValue("Token is not exist");
       }
 
+      if (!savedToken) {
+        return thunkAPI.rejectWithValue("Token is not exist");
+      }
+
       setAuthHeader(savedToken);
-      const { data } = await api.get("/users/current");
+      const { data } = await api.get("/users/current/full");
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import css from "./Header.module.css";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,14 @@ const buildLinkUser = ({ isActive }) =>
 
 const Header = () => {
   const [isProfile, setIsProfile] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await dispatch(logoutThunk());
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -78,10 +86,7 @@ const Header = () => {
 
       {isLoggedIn && (
         <div className={css.userView}>
-          <button
-            onClick={() => dispatch(logoutThunk())}
-            className={css.logout}
-          >
+          <button onClick={handleLogout} className={css.logout}>
             Log out
           </button>
           <NavLink
@@ -91,9 +96,13 @@ const Header = () => {
             style={{ cursor: "pointer" }}
           >
             <div className={css.circle}>
-              <svg height="24" width="24">
-                <use href="/sprite.svg#icon-user" />
-              </svg>
+              {user.avatar ? (
+                <img src={user.avatar} />
+              ) : (
+                <svg height="24" width="24">
+                  <use href="/sprite.svg#icon-user" />
+                </svg>
+              )}
             </div>
             {user?.name && (
               <h3 className={isHomePage ? css.name : css.homeName}>

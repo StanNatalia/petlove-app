@@ -77,3 +77,9 @@
   letter-spacing: -0.03em;
   color: var(--main-white);
 }
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: left;
+}
