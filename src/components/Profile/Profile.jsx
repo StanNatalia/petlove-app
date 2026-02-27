@@ -12,6 +12,8 @@ const Profile = ({ onClose }) => {
 
   const user = useSelector((state) => state.auth.user);
 
+  const pets = user.pets || [];
+
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -84,6 +86,55 @@ const Profile = ({ onClose }) => {
             </NavLink>
           </div>
         </div>
+
+        <div className={css.petsList}>
+          {pets.length > 0 ? (
+            pets.map((pet) => (
+              <div key={pet._id} className={css.petCard}>
+                <div className={css.imgWrapper}>
+                  <img
+                    src={pet.imgURL}
+                    alt={pet.name}
+                    className={css.petImage}
+                  />
+                </div>
+
+                <div className={css.petInfo}>
+                  <h5 className={css.title}>{pet.title}</h5>
+                  <div className={css.description}>
+                    <div className={css.wrapper}>
+                      <p className={css.text}>Name</p>
+                      <p className={css.value}>{pet.name}</p>
+                    </div>
+
+                    <div className={css.wrapper}>
+                      <p className={css.text}>Birthday</p>
+                      <p className={css.value}>{pet.birthday}</p>
+                    </div>
+
+                    <div className={css.wrapper}>
+                      <p className={css.text}>Sex</p>
+                      <p className={css.value}>{pet.sex}</p>
+                    </div>
+
+                    <div className={css.wrapper}>
+                      <p className={css.text}>Species</p>
+                      <p className={css.value}>{pet.species}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className={css.deleteBtn}>
+                  <svg width="16" height="16">
+                    <use href="/public/sprite.svg#icon-trash" />
+                  </svg>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p className={css.noPets}>You don't have pets yet</p>
+          )}
+        </div>
+
         <button onClick={handleLogout} className={css.logoutBtn}>
           LOG OUT
         </button>

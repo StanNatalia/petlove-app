@@ -2,6 +2,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./CustomDatePicker.module.css";
 import { useFormContext } from "react-hook-form";
+import { format } from "date-fns";
 
 const CustomDatePicker = () => {
   const {
@@ -16,12 +17,7 @@ const CustomDatePicker = () => {
     <div className={css.datepickerWrapper}>
       <DatePicker
         selected={selectedDate ? new Date(selectedDate) : null}
-        onChange={(date) =>
-          setValue("birthday", date.toISOString(), {
-            shouldValidate: true,
-            shouldDirty: true,
-          })
-        }
+        onChange={(date) => setValue("birthday", format(date, "yyyy-MM-dd"))}
         dateFormat="dd.MM.yyyy"
         placeholderText="Select date"
         className={css.datepickerInput}

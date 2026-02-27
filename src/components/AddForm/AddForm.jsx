@@ -7,6 +7,8 @@ import PhotoUploading from "../PhotoUploading/PhotoUploading";
 import SexForm from "../SexForm/SexForm";
 import TypeSelect from "../TypeSelect/TypeSelect";
 import css from "./AddForm.module.css";
+import { useDispatch } from "react-redux";
+import { addPet } from "../../redux/Auth/options";
 
 const schema = yup.object({
   sex: yup.string().required("Sex is required"),
@@ -34,8 +36,18 @@ const AddForm = () => {
     formState: { errors },
   } = methods;
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data) => {
-    console.log(data);
+    const formattedData = {
+      name: data.name,
+      title: data.title,
+      species: data.type,
+      birthday: data.birthday,
+      imgURL: data.avatar,
+      sex: data.sex,
+    };
+    dispatch(addPet(formattedData));
   };
 
   return (

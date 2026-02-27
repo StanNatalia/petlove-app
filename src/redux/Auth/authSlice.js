@@ -5,6 +5,7 @@ import {
   refreshUser,
   registerThunk,
   editUser,
+  addPet,
 } from "./options";
 
 const initialState = {
@@ -14,6 +15,7 @@ const initialState = {
     avatar: "",
     phone: "",
   },
+  pets: [],
   token: "",
   isLoggedIn: false,
 };
@@ -52,6 +54,11 @@ const userSlice = createSlice({
       .addCase(logoutThunk.fulfilled, () => initialState)
       .addCase(editUser.fulfilled, (state, action) => {
         state.user = { ...state.user, ...action.payload };
+      })
+      .addCase(addPet.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
       });
   },
 });

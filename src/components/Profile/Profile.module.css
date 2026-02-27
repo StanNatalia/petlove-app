@@ -127,9 +127,87 @@
   margin-bottom: 40px;
 }
 
+.petCard {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  border: 1px solid rgba(38, 38, 38, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 100%;
+}
+
 .petsWrapper {
+  display: flex;
+  gap: 20px;
   width: 100%;
   margin-bottom: 20px;
+}
+
+.petsList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.description {
+  display: flex;
+  gap: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.value {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: #262626;
+}
+
+.imgWrapper {
+  width: 66px;
+  height: 66px;
+  border-radius: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.petInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1.29;
+  color: #2b2b2a;
+}
+
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  width: 36px;
+  height: 36px;
+  background-color: var(--main-light-orange);
 }
 
 .logoutBtn {

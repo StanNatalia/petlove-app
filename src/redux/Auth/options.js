@@ -84,10 +84,22 @@ export const editUser = createAsyncThunk(
       }
       setAuthHeader(token);
       const { data } = await api.patch("/users/current/edit", body);
-      console.log("SERVER RESPONSE:", data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const addPet = createAsyncThunk(
+  "auth/addpet",
+  async (body, thuncAPI) => {
+    try {
+      const { data } = await api.post("/users/current/pets/add", body);
+      console.log("SERVER RESPONSE:", data);
+      return data;
+    } catch (error) {
+      return thuncAPI.rejectWithValue(error.message);
     }
   },
 );
