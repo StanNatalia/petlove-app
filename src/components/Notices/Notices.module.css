@@ -126,3 +126,7 @@
   align-items: center;
   background-color: var(--main-light-orange);
 }
+
+.activeHeart {
+  background-color: #fbe7c1;
+}

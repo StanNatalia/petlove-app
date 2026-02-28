@@ -10,6 +10,10 @@ import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotices from "../ModalNotices/ModalNotices";
 import NoticesFilters from "../NoticesFilters/NoticesFilters";
 import Loading from "../Loading/Loading";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/Favorites/favoritesSlice";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -37,6 +41,12 @@ const Notices = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  const favorites = useSelector((state) => state.favorites.items);
+
+  const isFavorite = (id) => {
+    return favorites.some((item) => item._id === id);
+  };
+
   const handleLearnMoreClick = (item, e) => {
     e.preventDefault();
     if (!isLoggedIn) {
@@ -47,10 +57,16 @@ const Notices = () => {
     setIsModalNoticeOpen(true);
   };
 
-  const handleHeartClick = (e) => {
+  const handleHeartClick = (item, e) => {
     if (!isLoggedIn) {
       e.preventDefault();
       setIsModalAttentionOpen(true);
+      return;
+    }
+    if (isFavorite(item._id)) {
+      dispatch(removeFromFavorites(item._id));
+    } else {
+      dispatch(addToFavorites(item));
     }
   };
 
@@ -139,7 +155,10 @@ const Notices = () => {
                 >
                   Learn more
                 </NavLink>
-                <div className={css.circle} onClick={handleHeartClick}>
+                <div
+                  className={`${css.circle} ${isFavorite(item._id) ? css.activeHeart : ""}`}
+                  onClick={(e) => handleHeartClick(item, e)}
+                >
                   <svg width="18" height="18">
                     <use href="/sprite.svg#icon-heart" />
                   </svg>

@@ -39,6 +39,7 @@ export const logoutThunk = createAsyncThunk(
     try {
       await api.post("/users/signout");
       clearAuthHeader();
+      localStorage.removeItem("favorites");
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
