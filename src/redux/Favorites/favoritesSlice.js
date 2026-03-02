@@ -19,11 +19,14 @@ const favoritesSlice = createSlice({
 
       if (!exists) {
         state.items.push(action.payload);
+        localStorage.setItem("favorites", JSON.stringify(state.items));
       }
     },
 
     removeFromFavorites(state, action) {
       state.items = state.items.filter((item) => item._id !== action.payload);
+
+      localStorage.setItem("favorites", JSON.stringify(state.items));
     },
   },
   extraReducers: (builder) => {

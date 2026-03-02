@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+import { NavLink } from "react-router";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import PhotoUploading from "../PhotoUploading/PhotoUploading";
 import SexForm from "../SexForm/SexForm";
@@ -92,9 +92,12 @@ const AddForm = () => {
           </div>
 
           <div className={css.buttonWrapper}>
-            <button type="button" className={css.buttonBack}>
-              Back
-            </button>
+            <NavLink to="/profile">
+              <button type="button" className={css.buttonBack}>
+                Back
+              </button>
+            </NavLink>
+
             <button type="submit" className={css.buttonSubmit}>
               Submit
             </button>

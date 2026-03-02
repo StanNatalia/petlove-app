@@ -3,9 +3,8 @@ import css from "./Notices.module.css";
 import { selectNotices } from "../../redux/Notices/selectors";
 import { useEffect, useState } from "react";
 import { fetchNotices } from "../../redux/Notices/options";
-import { NavLink } from "react-router";
-import { formatDate } from "../../utils/utils";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
+import { addToViewed } from "../../redux/Viewed/viewedSlice";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import ModalNotices from "../ModalNotices/ModalNotices";
 import NoticesFilters from "../NoticesFilters/NoticesFilters";
@@ -14,6 +13,7 @@ import {
   addToFavorites,
   removeFromFavorites,
 } from "../../redux/Favorites/favoritesSlice";
+import PetCard from "../PetCard/PetCard";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -53,6 +53,8 @@ const Notices = () => {
       setIsModalAttentionOpen(true);
       return;
     }
+
+    dispatch(addToViewed(item));
     setSelectedItem(item);
     setIsModalNoticeOpen(true);
   };
@@ -107,65 +109,13 @@ const Notices = () => {
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {filteredItems.map((item) => (
-          <li key={item._id} className={css.item}>
-            <div>
-              <img src={item.imgURL} alt={item.species} className={css.img} />
-              <div className={css.titleWrapper}>
-                <p className={css.title}>{item.title}</p>
-                <div className={css.popularityWrapper}>
-                  <svg width="16" height="16">
-                    <use href="/sprite.svg#icon-star" />
-                  </svg>
-                  <p className={css.popularity}>{item.popularity}</p>
-                </div>
-              </div>
-              <div className={css.infoWrapper}>
-                <div className={css.infoThumb}>
-                  <p className={css.infoTitle}>Name</p>
-                  <p className={css.info}>{item.name}</p>
-                </div>
-                <div className={css.infoThumb}>
-                  <p className={css.infoTitle}>Birthday</p>
-                  <p className={css.info}>{formatDate(item.birthday)}</p>
-                </div>
-                <div className={css.infoThumb}>
-                  <p className={css.infoTitle}>Sex</p>
-                  <p className={css.info}>{item.sex}</p>
-                </div>
-                <div className={css.infoThumb}>
-                  <p className={css.infoTitle}>Species</p>
-                  <p className={css.info}>{item.species}</p>
-                </div>
-                <div className={css.infoThumb}>
-                  <p className={css.infoTitle}>Category</p>
-                  <p className={css.info}>{item.category}</p>
-                </div>
-              </div>
-              <p className={css.comment}>{item.comment}</p>
-            </div>
-            <div>
-              <p className={css.price}>
-                {item.price ? `$${item.price}` : "Free"}
-              </p>
-              <div className={css.btnWrapper}>
-                <NavLink
-                  to="/"
-                  onClick={(e) => handleLearnMoreClick(item, e)}
-                  className={css.btn}
-                >
-                  Learn more
-                </NavLink>
-                <div
-                  className={`${css.circle} ${isFavorite(item._id) ? css.activeHeart : ""}`}
-                  onClick={(e) => handleHeartClick(item, e)}
-                >
-                  <svg width="18" height="18">
-                    <use href="/sprite.svg#icon-heart" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </li>
+          <PetCard
+            key={item._id}
+            item={item}
+            isFavorite={isFavorite(item._id)}
+            handleLearnMoreClick={handleLearnMoreClick}
+            handleHeartClick={handleHeartClick}
+          />
         ))}
       </ul>
 

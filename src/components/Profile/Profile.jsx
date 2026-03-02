@@ -4,9 +4,12 @@ import ModalEditProfile from "../ModalEditProfile/ModalEditProfile";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutThunk } from "../../redux/Auth/options";
 import { NavLink, useNavigate } from "react-router";
+import PetCard from "../PetCard/PetCard";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
+  const viewed = useSelector((state) => state.viewed.items);
+  const [viewMode, setViewMode] = useState("favorites");
 
   const dispatch = useDispatch();
 
@@ -143,58 +146,45 @@ const Profile = ({ onClose }) => {
       </div>
       <div className={`${css.content} ${css.secondaryContent}`}>
         <div className={css.btnWrapper}>
-          <button className={css.btn}>My favorites pets</button>
-          <button className={`${css.btn} ${css.secondaryBtn}`}>Viewed</button>
+          <button
+            className={`${css.btn} ${viewMode === "favorites" ? css.active : ""}`}
+            onClick={() => setViewMode("favorites")}
+          >
+            My favorites pets
+          </button>
+          <button
+            className={`${css.btn} ${viewMode === "viewed" ? css.active : ""}`}
+            onClick={() => setViewMode("viewed")}
+          >
+            Viewed
+          </button>
         </div>
-        {favorites.length > 0 ? (
-          <div className={css.petsList}>
-            {favorites.map((item) => (
-              <div key={item._id} className={css.petCard}>
-                <div className={css.imgWrapper}>
-                  <img
-                    src={item.imgURL}
-                    alt={item.name}
-                    className={css.petImage}
-                  />
-                </div>
-
-                <div className={css.petInfo}>
-                  <h5 className={css.title}>{item.title}</h5>
-                  <div className={css.description}>
-                    <div className={css.wrapper}>
-                      <p className={css.text}>Name</p>
-                      <p className={css.value}>{item.name}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.text}>Birthday</p>
-                      <p className={css.value}>{item.birthday}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.text}>Sex</p>
-                      <p className={css.value}>{item.sex}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.text}>Species</p>
-                      <p className={css.value}>{item.species}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className={css.notification}>
-            Oops,
-            <span className={css.span}>
-              looks like there aren't any furries
-            </span>{" "}
-            on our adorable page yet. Do not worry! View your pets on the "find
-            your favorite pet" page and add them to your favorites.
-          </p>
-        )}
+        <div className={css.petsList}>
+          {viewMode === "favorites" && favorites.length > 0 ? (
+            favorites.map((item) => (
+              <PetCard key={item._id} item={item} showFavoritesButton={false} />
+            ))
+          ) : viewMode === "viewed" && viewed.length > 0 ? (
+            viewed.map((item) => (
+              <PetCard key={item._id} item={item} showFavoritesButton={false} />
+            ))
+          ) : (
+            <p className={css.notification}>
+              {viewMode === "favorites" ? (
+                <>
+                  Oops,
+                  <span className={css.span}>
+                    looks like there aren't any furries
+                  </span>{" "}
+                  on our adorable page yet. Do not worry! View your pets on the
+                  "find your favorite pet" page and add them to your favorites.
+                </>
+              ) : (
+                "You haven't viewed any pets yet."
+              )}
+            </p>
+          )}
+        </div>
       </div>
 
       {isEditModal && (
