@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutThunk } from "../../redux/Auth/options";
 import { NavLink, useNavigate } from "react-router";
 import PetCard from "../PetCard/PetCard";
+import ProfileForm from "../ProfileForm/ProfileForm";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
@@ -30,54 +31,7 @@ const Profile = ({ onClose }) => {
   return (
     <div className={css.wrapper} onClick={(e) => e.stopPropagation()}>
       <div className={css.content}>
-        <div className={css.userWrapper}>
-          <button className={css.btn}>
-            User
-            <svg width="18" height="18" className={css.userIcon}>
-              <use href="/sprite.svg#icon-user-white" />
-            </svg>
-          </button>
-          <div className={css.editWrapper} onClick={() => setIsEditModal(true)}>
-            <svg width="18" height="18" className={css.userIcon}>
-              <use href="/sprite.svg#icon-edit" />
-            </svg>
-          </div>
-        </div>
-        <div className={css.photoWrapper}>
-          <div className={css.photoIcon}>
-            {user.avatar ? (
-              <img src={user.avatar} alt="avatar" className={css.avatarImg} />
-            ) : (
-              <svg width="40" height="40">
-                <use href="/sprite.svg#icon-user" />
-              </svg>
-            )}
-          </div>
-          <button className={css.photoBtn} onClick={() => setIsEditModal(true)}>
-            Upload photo
-          </button>
-        </div>
-        <h3 className={css.text}>My information</h3>
-
-        <div className={css.form}>
-          {user.name ? (
-            <p className={css.field}>{user.name}</p>
-          ) : (
-            <p className={css.field}>Name</p>
-          )}
-
-          {user.email ? (
-            <p className={css.field}>{user.email}</p>
-          ) : (
-            <p className={css.field}>name@gmail.com</p>
-          )}
-
-          {user.phone ? (
-            <p className={css.field}>{user.phone}</p>
-          ) : (
-            <p className={css.field}>+380</p>
-          )}
-        </div>
+        <ProfileForm setIsEditModal={setIsEditModal} user={user} />
         <div className={css.petsWrapper}>
           <div className={css.userWrapper}>
             <h4 className={css.text}>My pets</h4>
@@ -108,22 +62,22 @@ const Profile = ({ onClose }) => {
                   <h5 className={css.title}>{pet.title}</h5>
                   <div className={css.description}>
                     <div className={css.wrapper}>
-                      <p className={css.text}>Name</p>
+                      <p className={css.info}>Name</p>
                       <p className={css.value}>{pet.name}</p>
                     </div>
 
                     <div className={css.wrapper}>
-                      <p className={css.text}>Birthday</p>
+                      <p className={css.info}>Birthday</p>
                       <p className={css.value}>{pet.birthday}</p>
                     </div>
 
                     <div className={css.wrapper}>
-                      <p className={css.text}>Sex</p>
+                      <p className={css.info}>Sex</p>
                       <p className={css.value}>{pet.sex}</p>
                     </div>
 
                     <div className={css.wrapper}>
-                      <p className={css.text}>Species</p>
+                      <p className={css.info}>Species</p>
                       <p className={css.value}>{pet.species}</p>
                     </div>
                   </div>
