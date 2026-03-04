@@ -1,0 +1,73 @@
+.petCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--main-white);
+  justify-content: space-between;
+  border: 1px solid rgba(38, 38, 38, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  width: 363px;
+  height: auto;
+}
+
+.description {
+  display: flex;
+  gap: 10px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.value {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.17;
+  letter-spacing: -0.02em;
+  color: #262626;
+}
+
+.imgWrapper {
+  width: 315px;
+  height: 178px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.petInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.deleteBtn {
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 30px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--main-light-orange);
+  transition: all 0.3s ease;
+}
+
+.deleteBtn:hover,
+.deleteBtn.focus {
+  background-color: #fbe7c1;
+}

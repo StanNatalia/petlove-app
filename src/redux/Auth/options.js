@@ -24,7 +24,7 @@ export const loginThunk = createAsyncThunk(
       const userResponse = await api.get("/users/current/full");
 
       return {
-        ...userResponse.data,
+        user: userResponse.data,
         token: data.token,
       };
     } catch (error) {
@@ -88,19 +88,6 @@ export const editUser = createAsyncThunk(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
-    }
-  },
-);
-
-export const addPet = createAsyncThunk(
-  "auth/addpet",
-  async (body, thuncAPI) => {
-    try {
-      const { data } = await api.post("/users/current/pets/add", body);
-      console.log("SERVER RESPONSE:", data);
-      return data;
-    } catch (error) {
-      return thuncAPI.rejectWithValue(error.message);
     }
   },
 );

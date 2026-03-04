@@ -1,41 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logoutThunk } from "../Auth/options";
-
-const getInitialFavorites = () => {
-  const saved = localStorage.getItem("favorites");
-  return saved ? JSON.parse(saved) : [];
-};
+import { addToFavorites, removeFromFavorites } from "./options";
+import { loginThunk, logoutThunk, refreshUser } from "../Auth/options";
 
 const favoritesSlice = createSlice({
   name: "favorites",
   initialState: {
-    items: getInitialFavorites(),
-  },
-  reducers: {
-    addToFavorites(state, action) {
-      const exists = state.items.find(
-        (item) => item._id === action.payload._id,
-      );
-
-      if (!exists) {
-        state.items.push(action.payload);
-        localStorage.setItem("favorites", JSON.stringify(state.items));
-      }
-    },
-
-    removeFromFavorites(state, action) {
-      state.items = state.items.filter((item) => item._id !== action.payload);
-
-      localStorage.setItem("favorites", JSON.stringify(state.items));
-    },
+    items: [],
   },
   extraReducers: (builder) => {
-    builder.addCase(logoutThunk.fulfilled, (state) => {
-      state.items = [];
-    });
+    builder
+      .addCase(loginThunk.fulfilled, (state, action) => {
+        state.items = action.payload.user.noticesFavorites;
+      })
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.items = action.payload.noticesFavorites;
+      })
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        if (!state.items.find((item) => item._id === action.payload._id)) {
+          state.items.push(action.payload);
+        }
+      })
+      .addCase(removeFromFavorites.fulfilled, (state, action) => {
+        state.items = state.items.filter((item) => item._id !== action.payload);
+      })
+      .addCase(logoutThunk.fulfilled, (state) => {
+        state.items = [];
+      });
   },
 });
-
-export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
 
 export default favoritesSlice.reducer;

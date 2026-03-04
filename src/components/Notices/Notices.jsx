@@ -12,7 +12,7 @@ import Loading from "../Loading/Loading";
 import {
   addToFavorites,
   removeFromFavorites,
-} from "../../redux/Favorites/favoritesSlice";
+} from "../../redux/Favorites/options";
 import PetCard from "../PetCard/PetCard";
 
 const Notices = () => {
@@ -41,11 +41,8 @@ const Notices = () => {
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
-  const favorites = useSelector((state) => state.favorites.items);
-
-  const isFavorite = (id) => {
-    return favorites.some((item) => item._id === id);
-  };
+  const favorites = useSelector((state) => state.favorites.items) || [];
+  const isFavorite = (id) => favorites.some((fav) => fav._id === id);
 
   const handleLearnMoreClick = (item, e) => {
     e.preventDefault();
@@ -65,10 +62,17 @@ const Notices = () => {
       setIsModalAttentionOpen(true);
       return;
     }
-    if (isFavorite(item._id)) {
+
+    const alreadyFavorite = favorites.some((fav) => fav._id === item._id);
+
+    if (alreadyFavorite) {
       dispatch(removeFromFavorites(item._id));
     } else {
-      dispatch(addToFavorites(item));
+      try {
+        dispatch(addToFavorites(item._id));
+      } catch (err) {
+        console.warn("Already in favorites, skipping request");
+      }
     }
   };
 

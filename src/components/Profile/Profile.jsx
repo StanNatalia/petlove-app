@@ -6,17 +6,20 @@ import { logoutThunk } from "../../redux/Auth/options";
 import { NavLink, useNavigate } from "react-router";
 import PetCard from "../PetCard/PetCard";
 import ProfileForm from "../ProfileForm/ProfileForm";
+import FavoriteCard from "../FavoriteCard/FavoriteCard";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
-  const viewed = useSelector((state) => state.viewed.items);
+  const viewed = useSelector((state) => state.viewed.items || []);
   const [viewMode, setViewMode] = useState("favorites");
 
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.auth.user);
 
-  const favorites = useSelector((state) => state.favorites.items);
+  const favorites = useSelector((state) => state.favorites.items || []);
+
+  console.log("Favorites", favorites);
 
   const pets = user.pets || [];
 
@@ -29,7 +32,7 @@ const Profile = ({ onClose }) => {
   };
 
   return (
-    <div className={css.wrapper} onClick={(e) => e.stopPropagation()}>
+    <div className={css.container} onClick={(e) => e.stopPropagation()}>
       <div className={css.content}>
         <ProfileForm setIsEditModal={setIsEditModal} user={user} />
         <div className={css.petsWrapper}>
@@ -48,47 +51,7 @@ const Profile = ({ onClose }) => {
 
         <div className={css.petsList}>
           {pets.length > 0 ? (
-            pets.map((pet) => (
-              <div key={pet._id} className={css.petCard}>
-                <div className={css.imgWrapper}>
-                  <img
-                    src={pet.imgURL}
-                    alt={pet.name}
-                    className={css.petImage}
-                  />
-                </div>
-
-                <div className={css.petInfo}>
-                  <h5 className={css.title}>{pet.title}</h5>
-                  <div className={css.description}>
-                    <div className={css.wrapper}>
-                      <p className={css.info}>Name</p>
-                      <p className={css.value}>{pet.name}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.info}>Birthday</p>
-                      <p className={css.value}>{pet.birthday}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.info}>Sex</p>
-                      <p className={css.value}>{pet.sex}</p>
-                    </div>
-
-                    <div className={css.wrapper}>
-                      <p className={css.info}>Species</p>
-                      <p className={css.value}>{pet.species}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className={css.deleteBtn}>
-                  <svg width="16" height="16">
-                    <use href="/public/sprite.svg#icon-trash" />
-                  </svg>
-                </div>
-              </div>
-            ))
+            pets.map((pet) => <FavoriteCard key={pet._id} pet={pet} />)
           ) : (
             <p className={css.noPets}>You don't have pets yet</p>
           )}
@@ -100,14 +63,11 @@ const Profile = ({ onClose }) => {
       </div>
       <div className={`${css.content} ${css.secondaryContent}`}>
         <div className={css.btnWrapper}>
-          <button
-            className={`${css.btn} ${viewMode === "favorites" ? css.active : ""}`}
-            onClick={() => setViewMode("favorites")}
-          >
+          <button className={css.btn} onClick={() => setViewMode("favorites")}>
             My favorites pets
           </button>
           <button
-            className={`${css.btn} ${viewMode === "viewed" ? css.active : ""}`}
+            className={css.btnViewed}
             onClick={() => setViewMode("viewed")}
           >
             Viewed
