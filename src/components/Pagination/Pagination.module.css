@@ -17,7 +17,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.2s;
+  transition: all 0.2s ease;
+}
+
+.pageBtn:hover,
+.pageBtn:focus {
+  scale: 1.05;
+  border: 1px solid var(--main-orange);
+}
+
+.navBtn:hover,
+.navBtn:focus {
+  scale: 1.05;
+  border: 1px solid var(--main-orange);
 }
 
 .navBtn {

@@ -26,12 +26,27 @@
   padding: 14px;
   width: 230px;
   height: 48px;
+  transition: all 0.3 ease;
 }
 
-.iconClear {
+.searchInput:hover,
+.searchInput:focus {
+  border: 1px solid var(--main-orange);
+}
+
+.iconSearch {
   position: absolute;
   top: 15px;
-  right: 40px;
+  right: 14px;
+  cursor: pointer;
+}
+
+.iconCross {
+  stroke: red;
+  position: absolute;
+  top: 15px;
+  right: 14px;
+  cursor: pointer;
 }
 
 .iconSearch {
@@ -105,4 +120,11 @@
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: var(--main-orange);
+  transition: all 0.3s ease;
+}
+
+.readMore:hover,
+.readMore:focus {
+  color: #f9b020;
+  scale: 1.05;
 }

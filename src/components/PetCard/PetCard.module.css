@@ -93,6 +93,16 @@
   height: 48px;
   background-color: var(--main-orange);
   color: var(--main-white);
+  transition: all 0.3s ease;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #f9b020;
+}
+
+.fullWidthBtn {
+  width: 100%;
 }
 
 .circle {
@@ -103,6 +113,12 @@
   justify-content: center;
   align-items: center;
   background-color: var(--main-light-orange);
+  transition: all 0.3s ease;
+}
+
+.circle:hover,
+.circle:focus {
+  scale: 1.1;
 }
 
 .activeHeart {

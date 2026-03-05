@@ -1,29 +1,46 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./News.module.css";
 import { selectNews } from "../../redux/News/selectors";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchNews } from "../../redux/News/options";
 import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading";
+import { current } from "@reduxjs/toolkit";
 
 const News = () => {
   const dispatch = useDispatch();
   const { items, page, totalPages, isLoading, error } = useSelector(selectNews);
   const [search, setSearch] = useState("");
+  const [searchPage, setSearchPage] = useState(1);
+  const perPage = 6;
 
   useEffect(() => {
-    dispatch(fetchNews({ page: 1, limit: 6 }));
-  }, [dispatch]);
+    const timer = setTimeout(() => {
+      dispatch(fetchNews({ page: 1, limit: search ? 2000 : 6, search: "" }));
+    }, 400);
+    return () => clearTimeout(timer);
+  }, [dispatch, search]);
+
+  const inputRef = useRef(null);
 
   const handlePageChange = (newPage) => {
-    dispatch(fetchNews({ page: newPage, limit: 6 }));
+    if (search) {
+      setSearchPage(newPage);
+    } else {
+      dispatch(fetchNews({ page: newPage, limit: 6 }));
+    }
   };
 
   const filteredItems = items.filter(
     (item) =>
-      item.title.toLowerCase().includes(search.toLocaleLowerCase()) ||
-      item.text.toLowerCase().includes(search.toLocaleLowerCase()),
+      item.title.toLowerCase().includes(search.toLowerCase()) ||
+      item.text.toLowerCase().includes(search.toLowerCase()),
   );
+
+  const totalSearchPage = Math.ceil(filteredItems.length / perPage);
+
+  const startIndex = (searchPage - 1) * perPage;
+  const paginatedItems = filteredItems.slice(startIndex, startIndex + perPage);
 
   return (
     <div className={css.wrapper}>
@@ -33,14 +50,36 @@ const News = () => {
           <input
             type="text"
             placeholder="Search"
+            ref={inputRef}
             value={search}
             maxLength={16}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              (setSearch(e.target.value), setSearchPage(1));
+            }}
             className={css.searchInput}
           />
-          <svg width="18" height="18" className={css.iconSearch}>
-            <use href="/sprite.svg#icon-search" />
-          </svg>
+          {search ? (
+            <svg
+              width="18"
+              height="18"
+              className={css.iconCross}
+              onClick={() => {
+                setSearch("");
+                setSearchPage(1);
+              }}
+            >
+              <use href="/sprite.svg#icon-cross-small" />
+            </svg>
+          ) : (
+            <svg
+              width="18"
+              height="18"
+              className={css.iconSearch}
+              onClick={() => inputRef.current.focus()}
+            >
+              <use href="/sprite.svg#icon-search" />
+            </svg>
+          )}
 
           {search && (
             <svg
@@ -59,7 +98,7 @@ const News = () => {
       {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
-        {filteredItems.map((item) => (
+        {(search ? paginatedItems : items).map((item) => (
           <li key={item._id} className={css.item}>
             <img src={item.imgUrl} alt={item.title} className={css.img} />
             <h3 className={css.name}>{item.title}</h3>
@@ -83,8 +122,8 @@ const News = () => {
         ))}
       </ul>
       <Pagination
-        currentPage={page}
-        totalPages={totalPages}
+        currentPage={search ? searchPage : page}
+        totalPages={search ? totalSearchPage : totalPages}
         onPageChange={handlePageChange}
       />
     </div>

@@ -91,3 +91,28 @@ export const editUser = createAsyncThunk(
     }
   },
 );
+
+export const addPet = createAsyncThunk(
+  "auth/addpet",
+  async (body, thuncAPI) => {
+    try {
+      const { data } = await api.post("/users/current/pets/add", body);
+      console.log("SERVER RESPONSE:", data);
+      return data;
+    } catch (error) {
+      return thuncAPI.rejectWithValue(error.message);
+    }
+  },
+);
+
+export const removePet = createAsyncThunk(
+  "auth/removepet",
+  async (id, thuncAPI) => {
+    try {
+      const { data } = await api.delete(`/users/current/pets/remove/${id}`);
+      return data;
+    } catch (error) {
+      return thuncAPI.rejectWithValue(error.message);
+    }
+  },
+);

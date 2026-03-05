@@ -52,7 +52,7 @@ const PetCard = ({
           <NavLink
             to="/"
             onClick={(e) => handleLearnMoreClick(item, e)}
-            className={css.btn}
+            className={`${css.btn} ${!showFavoritesButton ? css.fullWidthBtn : ""}`}
           >
             Learn more
           </NavLink>

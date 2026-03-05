@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import css from "./ModalNotices.module.css";
 import { NavLink } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 
 const ModalNotices = ({ item, onClose }) => {
   useEffect(() => {
@@ -15,6 +17,11 @@ const ModalNotices = ({ item, onClose }) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
+
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const favorites = useSelector((state) => state.favorites.items || []);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {

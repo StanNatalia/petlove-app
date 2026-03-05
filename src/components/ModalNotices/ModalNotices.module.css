@@ -31,6 +31,12 @@
   top: 20px;
   right: 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.closeIcon:hover,
+.closeIcon:focus {
+  scale: 1.1;
 }
 
 .mainWrapper {
@@ -135,6 +141,7 @@
   font-weight: 700;
   color: var(--main-light-orange);
   background-color: var(--main-orange);
+  transition: all 0.3s ease;
 }
 
 .link:hover,
