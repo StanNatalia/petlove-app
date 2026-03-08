@@ -6,9 +6,10 @@ import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import PhotoUploading from "../PhotoUploading/PhotoUploading";
 import SexForm from "../SexForm/SexForm";
 import TypeSelect from "../TypeSelect/TypeSelect";
-import addPet from "../../redux/Auth/options";
+
 import css from "./AddForm.module.css";
 import { useDispatch } from "react-redux";
+import { addPet } from "../../redux/Auth/options";
 
 const schema = yup.object({
   sex: yup.string().required("Sex is required"),

@@ -22,21 +22,19 @@ const SexForm = () => {
     <div className={css.wrapper}>
       <div className={css.sexWrapper}>
         <div
-          className={`${css.sexIcon} ${
+          className={`${css.sexIcon} ${css.female} ${
             selectedSex === "female" ? css.active : ""
           }`}
           onClick={() => handleSelect("female")}
-          style={{ background: "rgba(244, 63, 94, 0.1)" }}
         >
-          <svg width="24" height="24">
+          <svg width="24" height="24" className={css.iconFemale}>
             <use href="/sprite.svg#icon-female" />
           </svg>
         </div>
 
         <div
-          className={`${css.sexIcon} ${selectedSex === "male" ? css.active : ""}`}
+          className={`${css.sexIcon} ${css.male} ${selectedSex === "male" ? css.active : ""}`}
           onClick={() => handleSelect("male")}
-          style={{ background: "rgba(84, 173, 255, 0.1)" }}
         >
           <svg width="24" height="24">
             <use href="/sprite.svg#icon-male" />
@@ -44,11 +42,10 @@ const SexForm = () => {
         </div>
 
         <div
-          className={`${css.sexIcon} ${
+          className={`${css.sexIcon} ${css.multiple} ${
             selectedSex === "multiple" ? css.active : ""
           }`}
           onClick={() => handleSelect("multiple")}
-          style={{ background: "#fff4df" }}
         >
           <svg width="24" height="24">
             <use href="/sprite.svg#icon-male_female" />

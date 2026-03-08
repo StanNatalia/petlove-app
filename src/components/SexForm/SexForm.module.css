@@ -28,6 +28,44 @@
   border: 1px solid #f6b83d;
 }
 
+.female {
+  color: #f43f5e;
+  background-color: rgba(244, 63, 94, 0.1);
+}
+
+.female:hover,
+.female:focus {
+  background-color: #f43f5e;
+  color: var(--main-white);
+}
+
+.iconFemale {
+  fill: black;
+  stroke: black;
+}
+
+.male {
+  color: #54adff;
+  background-color: rgba(84, 173, 255, 0.1);
+}
+
+.male:hover,
+.male:focus {
+  background-color: #54adff;
+  color: var(--main-white);
+}
+
+.multiple {
+  background-color: #fff4df;
+  color: var(--main-orange);
+}
+
+.multiple:hover,
+.multiple:focus {
+  background-color: var(--main-orange);
+  color: var(--main-white);
+}
+
 .error {
   color: red;
   font-size: 14px;

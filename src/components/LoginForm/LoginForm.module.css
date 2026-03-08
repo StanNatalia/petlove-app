@@ -38,9 +38,22 @@
   padding: 16px;
   width: 100%;
   height: 52px;
+  transition: all 0.3s ease;
 }
 
-.field:placeholder {
+.field:-webkit-autofill,
+.field:-webkit-autofill:hover,
+.field:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px var(--main-white) inset;
+  -webkit-text-fill-color: #262626;
+}
+
+.field:hover,
+.field:focus {
+  border: 1px solid var(--main-orange);
+}
+
+.field::placeholder {
   color: rgba(38, 38, 38, 0.5);
 }
 

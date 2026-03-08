@@ -67,6 +67,11 @@
   transition: all 0.3s ease;
 }
 
+.field:hover,
+.field:focus {
+  border: 1px solid var(--main-orange);
+}
+
 .field:focus {
   border: 1px solid var(--main-orange);
   background: transparent;

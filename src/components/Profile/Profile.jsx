@@ -7,11 +7,13 @@ import { NavLink, useNavigate } from "react-router";
 import PetCard from "../PetCard/PetCard";
 import ProfileForm from "../ProfileForm/ProfileForm";
 import FavoriteCard from "../FavoriteCard/FavoriteCard";
+import ModalLogout from "../ModalLogout/ModalLogout";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
-  const viewed = useSelector((state) => state.viewed.items || []);
   const [viewMode, setViewMode] = useState("favorites");
+  const [isLogoutModal, setIsLogoutModal] = useState(false);
+  const viewed = useSelector((state) => state.viewed.items || []);
 
   const dispatch = useDispatch();
 
@@ -103,6 +105,13 @@ const Profile = ({ onClose }) => {
 
       {isEditModal && (
         <ModalEditProfile user={user} onClose={() => setIsEditModal(false)} />
+      )}
+
+      {isLogoutModal && (
+        <ModalLogout
+          onClose={() => setIsLogoutModal(false)}
+          handleLogout={handleLogout}
+        />
       )}
     </div>
   );

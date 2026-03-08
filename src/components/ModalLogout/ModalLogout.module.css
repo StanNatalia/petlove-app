@@ -29,6 +29,12 @@
   position: absolute;
   top: 26px;
   right: 26px;
+  transition: all 0.3s ease;
+}
+
+.closeIcon:hover,
+.closeIcon:focus {
+  scale: 1.1;
 }
 
 .circle {
@@ -64,10 +70,23 @@
   height: 48px;
   background-color: var(--main-orange);
   color: var(--main-white);
+  transition: all 0.3s ease;
+}
+
+.btnCancel {
+  background-color: rgba(38, 38, 38, 0.05);
+  color: var(--main-black);
 }
 
 .btn:hover,
 .btn:focus {
   background-color: rgba(38, 38, 38, 0.05);
   color: var(--main-black);
+  transition: all 0.3s ease;
+}
+
+.btnCancel:hover,
+.btnCancel:focus {
+  background-color: var(--main-orange);
+  color: var(--main-white);
 }

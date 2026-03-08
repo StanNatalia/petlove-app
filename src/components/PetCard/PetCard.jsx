@@ -1,4 +1,4 @@
-import { formatDate } from "../../utils/utils";
+import { formatDate } from "../../utils/formatDate";
 import css from "./PetCard.module.css";
 import { NavLink } from "react-router";
 

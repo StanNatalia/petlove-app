@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import css from "./ModalLogout.module.css";
 
-const ModalLogout = ({ onClose, onConfirm }) => {
+const ModalLogout = ({ onClose, handleLogout }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -14,6 +14,11 @@ const ModalLogout = ({ onClose, onConfirm }) => {
     };
   }, [onClose]);
 
+  const handleConfirm = () => {
+    handleLogout();
+    onClose();
+  };
+
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
@@ -23,7 +28,7 @@ const ModalLogout = ({ onClose, onConfirm }) => {
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
         <button className={css.closeIcon} onClick={onClose}>
-          <svg width="14" height="14">
+          <svg width="22" height="22">
             <use href="/sprite.svg#icon-cross-small" />
           </svg>
         </button>
@@ -32,10 +37,10 @@ const ModalLogout = ({ onClose, onConfirm }) => {
         </div>
         <p className={css.text}>Already leaving</p>
         <div className={css.btnWrapper}>
-          <button className={css.btn} onClick={onConfirm}>
+          <button className={css.btn} onClick={handleConfirm}>
             Yes
           </button>
-          <button className={css.btn} onClick={onClose}>
+          <button className={`${css.btn} ${css.btnCancel}`} onClick={onClose}>
             Cancel
           </button>
         </div>

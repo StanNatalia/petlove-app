@@ -7,12 +7,14 @@ import { logoutThunk } from "../../redux/Auth/options";
 import { useState } from "react";
 import Profile from "../Profile/Profile";
 import ProfilePage from "../../pages/ProfilePage";
+import ModalLogout from "../ModalLogout/ModalLogout";
 
 const buildLinkUser = ({ isActive }) =>
   clsx(css.userLink, isActive && css.userActive);
 
 const Header = () => {
   const [isProfile, setIsProfile] = useState(false);
+  const [logoutModal, setLogoutModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -86,7 +88,7 @@ const Header = () => {
 
       {isLoggedIn && (
         <div className={css.userView}>
-          <button onClick={handleLogout} className={css.logout}>
+          <button onClick={() => setLogoutModal(true)} className={css.logout}>
             Log out
           </button>
           <NavLink
@@ -111,6 +113,13 @@ const Header = () => {
             )}
           </NavLink>
         </div>
+      )}
+
+      {logoutModal && (
+        <ModalLogout
+          onClose={() => setLogoutModal(false)}
+          handleLogout={handleLogout}
+        />
       )}
     </header>
   );

@@ -3,41 +3,44 @@ import css from "./NoticesFilters.module.css";
 import { CategorySelectStyles } from "./CategorySelectStyles";
 import { GenderSelectStyles } from "./GenderSelectStyles";
 import { TypeSelectStyles } from "./TypeSelectStyles";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import {
+  fetchCategories,
+  fetchSex,
+  fetchSpecies,
+} from "../../redux/Notices/options";
 
 const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
-  const categoryOptions = [
-    { value: "", label: "Show all" },
-    { value: "sell", label: "Sell" },
-    { value: "free", label: "Free" },
-    { value: "lost", label: "Lost" },
-    { value: "found", label: "Found" },
-  ];
+  const categoriesList = useSelector((state) => state.notices.categories);
+  const sexList = useSelector((state) => state.notices.sex);
+  const speciesList = useSelector((state) => state.notices.species);
 
-  const genderOptions = [
-    { value: "", label: "Show all" },
-    { value: "male", label: "Male" },
-    { value: "female", label: "Female" },
-    { value: "lost", label: "Lost" },
-    { value: "unknown", label: "Unknown" },
-  ];
+  const dispatch = useDispatch();
 
-  const speciesOptions = [
-    { value: "", label: "Show all" },
-    { value: "dog", label: "Dog" },
-    { value: "cat", label: "Cat" },
-    { value: "fish", label: "Fish" },
-    { value: "monkey", label: "Monkey" },
-    { value: "bird", label: "Bird" },
-    { value: "snake", label: "Snake" },
-    { value: "turtle", label: "Turtle" },
-    { value: "lizard", label: "Lizard" },
-    { value: "frog", label: "Frog" },
-    { value: "ants", label: "Ants" },
-    { value: "bees", label: "Bees" },
-    { value: "butterfly", label: "Butterfly" },
-    { value: "spider", label: "Spider" },
-    { value: "scorpion", label: "Scorpion" },
-  ];
+  useEffect(() => {
+    dispatch(fetchCategories());
+    dispatch(fetchSex());
+    dispatch(fetchSpecies());
+  }, [dispatch]);
+
+  const categoriesOptions =
+    categoriesList?.map((category) => ({
+      value: category,
+      label: category,
+    })) || [];
+
+  const sexOptions =
+    sexList?.map((sex) => ({
+      value: sex,
+      label: sex,
+    })) || [];
+
+  const speciesOptions =
+    speciesList?.map((species) => ({
+      value: species,
+      label: species,
+    })) || [];
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -54,14 +57,16 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
         sorted.sort((a, b) => (a.price || 0) - (b.price || 0));
         break;
       case "popular":
-        sorted.sort((a, b) => (b.popular || 0) - (a.popular || 0));
+        sorted.sort((a, b) => (b.popularity || 0) - (a.popularity || 0));
         break;
       case "unpopular":
-        sorted.sort((a, b) => (a.popular || 0) - (b.popular || 0));
+        sorted.sort((a, b) => (a.popularity || 0) - (b.popularity || 0));
         break;
     }
     setSortedItems(sorted);
   };
+
+  console.log(items);
 
   return (
     <div className={css.filters}>
@@ -82,10 +87,11 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
 
         <Select
           styles={CategorySelectStyles}
-          options={categoryOptions}
+          options={categoriesOptions}
           placeholder="Category"
           menuPosition="fixed"
-          value={categoryOptions.find((e) => e.value === filters.category)}
+          isClearable
+          value={categoriesOptions.find((e) => e.value === filters.category)}
           onChange={(option) =>
             setFilters((prev) => ({ ...prev, category: option?.value || "" }))
           }
@@ -93,10 +99,10 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
 
         <Select
           styles={GenderSelectStyles}
-          options={genderOptions}
+          options={sexOptions}
           placeholder="By gender"
           menuPosition="fixed"
-          value={genderOptions.find((e) => e.value === filters.gender)}
+          value={sexOptions.find((e) => e.value === filters.gender)}
           onChange={(option) =>
             setFilters((prev) => ({ ...prev, gender: option?.value || "" }))
           }
