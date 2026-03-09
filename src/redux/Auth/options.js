@@ -97,7 +97,6 @@ export const addPet = createAsyncThunk(
   async (body, thuncAPI) => {
     try {
       const { data } = await api.post("/users/current/pets/add", body);
-      console.log("SERVER RESPONSE:", data);
       return data;
     } catch (error) {
       return thuncAPI.rejectWithValue(error.message);

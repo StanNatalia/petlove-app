@@ -21,7 +21,6 @@ const Profile = ({ onClose }) => {
 
   const favorites = useSelector((state) => state.favorites.items || []);
 
-  console.log("Favorites", favorites);
 
   const pets = user.pets || [];
 

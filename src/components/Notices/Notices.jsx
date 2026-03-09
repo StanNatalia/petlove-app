@@ -14,6 +14,7 @@ import {
   removeFromFavorites,
 } from "../../redux/Favorites/options";
 import PetCard from "../PetCard/PetCard";
+import Pagination from "../Pagination/Pagination";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -27,17 +28,57 @@ const Notices = () => {
     species: "",
     location: "",
   });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [allItems, setAllItems] = useState([]);
+  const perPage = 6;
+
+  const { items, isLoading, error, totalPages } = useSelector(selectNotices);
 
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(selectNotices);
 
   useEffect(() => {
-    dispatch(fetchNotices());
-  }, [dispatch]);
+    dispatch(fetchNotices({ page: currentPage, limit: perPage }));
+  }, [dispatch, currentPage]);
+
+  const hasFilters =
+    filters.search ||
+    filters.category ||
+    filters.gender ||
+    filters.species ||
+    filters.location;
 
   useEffect(() => {
-    setSortedItems(items);
-  }, [items]);
+    const hasFilters =
+      filters.search ||
+      filters.category ||
+      filters.gender ||
+      filters.species ||
+      filters.location;
+
+    if (hasFilters) {
+      dispatch(fetchNotices({ page: 1, limit: 2000 })).then((res) => {
+        if (res.payload && res.payload.results) {
+          setAllItems(res.payload.results);
+        } else {
+          setAllItems([]);
+        }
+      });
+    } else {
+      setAllItems([]);
+    }
+  }, [dispatch, filters]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setSortedItems([]);
+  }, [filters]);
+
+  const sourceItems =
+    sortedItems.length > 0
+      ? sortedItems
+      : allItems.length > 0
+        ? allItems
+        : items;
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -76,10 +117,10 @@ const Notices = () => {
     }
   };
 
-  const filteredItems = sortedItems.filter((item) => {
+  const filteredItems = sourceItems.filter((item) => {
     const matchSearch =
       item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-      item.comment.toLowerCase().includes(filters.search.toLowerCase());
+      (item.comment || "").toLowerCase().includes(filters.search.toLowerCase());
     const matchCategory = filters.category
       ? item.category === filters.category
       : true;
@@ -100,28 +141,40 @@ const Notices = () => {
     );
   });
 
+  const totalFilteredPages = Math.ceil(filteredItems.length / perPage);
+  const startIndex = (currentPage - 1) * perPage;
+  const paginatedItems = filteredItems.slice(startIndex, startIndex + perPage);
+
   return (
     <div className={css.wrapper}>
       <h2 className={css.titlePage}>Find your favorite pet</h2>
       <NoticesFilters
         filters={filters}
         setFilters={setFilters}
-        items={items}
+        items={sourceItems}
         setSortedItems={setSortedItems}
       />
       {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
-        {filteredItems.map((item) => (
-          <PetCard
-            key={item._id}
-            item={item}
-            isFavorite={isFavorite(item._id)}
-            handleLearnMoreClick={handleLearnMoreClick}
-            handleHeartClick={handleHeartClick}
-          />
-        ))}
+        {(hasFilters || sortedItems.length > 0 ? paginatedItems : items).map(
+          (item) => (
+            <PetCard
+              key={item._id}
+              item={item}
+              isFavorite={isFavorite(item._id)}
+              handleLearnMoreClick={handleLearnMoreClick}
+              handleHeartClick={handleHeartClick}
+            />
+          ),
+        )}
       </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={hasFilters ? Math.max(totalFilteredPages, 1) : totalPages}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
 
       {isModalAttentionOpen && (
         <ModalAttention onClose={() => setIsModalAttentionOpen(false)} />

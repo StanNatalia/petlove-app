@@ -66,13 +66,22 @@
   height: 48px;
 }
 
-.sortButtons {
+.sortBtn {
   display: flex;
   gap: 8px;
   margin-top: 12px;
 }
 
-.sortButtons button {
+.clearIcon {
+  stroke: white;
+  cursor: pointer;
+}
+
+.sortBtn button {
+  display: inline-flex;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
   padding: 6px 12px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -81,10 +90,10 @@
   transition: 0.3s;
 }
 
-.sortButtons button:hover {
-  background-color: #f6b83d;
-  color: #fff;
-  border-color: #f6b83d;
+.active {
+  background: orange;
+  color: white;
+  border: none;
 }
 
 .line {

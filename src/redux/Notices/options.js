@@ -3,9 +3,9 @@ import { api } from "../../services/api";
 
 export const fetchNotices = createAsyncThunk(
   "pets/fetchAll",
-  async (_, thunkAPI) => {
+  async ({ page = 1, limit = 6 }, thunkAPI) => {
     try {
-      const { data } = await api.get("/notices");
+      const { data } = await api.get(`/notices?page=${page}&limit=${limit}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
