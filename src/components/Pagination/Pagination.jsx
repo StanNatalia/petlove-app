@@ -36,7 +36,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={css.navBtn}
       >
         <svg width="24" height="24">
-          <use href="/public/sprite.svg#icon-left_arrow" />
+          <use href="/sprite.svg#icon-left_arrow" />
         </svg>
       </button>
 
@@ -60,7 +60,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         className={css.navBtn}
       >
         <svg width="24" height="24">
-          <use href="/public/sprite.svg#icon-right_arrow" />
+          <use href="/sprite.svg#icon-right_arrow" />
         </svg>
       </button>
 

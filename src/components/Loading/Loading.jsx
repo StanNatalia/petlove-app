@@ -7,7 +7,7 @@ const Loading = () => {
         petl
         <span>
           <svg width="82" height="82">
-            <use href={"/public/sprite.svg#icon-heart-circle"} />
+            <use href={"/sprite.svg#icon-heart-circle"} />
           </svg>
         </span>
         ve

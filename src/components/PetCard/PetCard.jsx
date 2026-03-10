@@ -1,3 +1,4 @@
+import React from "react";
 import { formatDate } from "../../utils/formatDate";
 import css from "./PetCard.module.css";
 import { NavLink } from "react-router";
@@ -72,4 +73,4 @@ const PetCard = ({
   );
 };
 
-export default PetCard;
+export default React.memo(PetCard);

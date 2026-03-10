@@ -39,7 +39,7 @@ const FavoriteCard = ({ pet }) => {
         onClick={() => dispatch(removeFromFavorites(pet._id))}
       >
         <svg width="16" height="16">
-          <use href="/public/sprite.svg#icon-trash" />
+          <use href="/sprite.svg#icon-trash" />
         </svg>
       </div>
     </div>

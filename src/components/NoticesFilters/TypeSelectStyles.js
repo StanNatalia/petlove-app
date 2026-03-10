@@ -3,7 +3,7 @@ export const TypeSelectStyles = {
     ...provided,
     padding: "0 14px",
     borderRadius: "30px",
-    border: "none",
+    border: "1px solid transparent",
     backgroundColor: "#ffffff",
     cursor: "pointer",
     height: "48px",
@@ -12,6 +12,15 @@ export const TypeSelectStyles = {
     outline: "none",
     display: "flex",
     alignItems: "center",
+
+    "&:hover": {
+      border: "1px solid #f6b83d",
+    },
+
+    ...(state.isFocused && {
+      border: "1px solid #f6b83d",
+      boxShadow: "none",
+    }),
   }),
   singleValue: (provided, state) => ({
     ...provided,

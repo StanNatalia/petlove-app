@@ -52,8 +52,8 @@ const Header = () => {
                 <use
                   href={
                     isHomePage
-                      ? "/public/sprite.svg#icon-white-heart-circle"
-                      : "/public/sprite.svg#icon-heart-circle"
+                      ? "/sprite.svg#icon-white-heart-circle"
+                      : "/sprite.svg#icon-heart-circle"
                   }
                 />
               </svg>

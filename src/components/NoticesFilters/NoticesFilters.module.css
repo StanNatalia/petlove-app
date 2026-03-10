@@ -27,6 +27,7 @@
   position: absolute;
   top: 15px;
   right: 14px;
+  cursor: pointer;
 }
 
 .searchInput {
@@ -34,7 +35,15 @@
   padding-left: 14px;
   width: 265px;
   height: 48px;
+  border: 1px solid transparent;
+  outline: none;
   background-color: var(--main-white);
+  transition: all 0.3s ease;
+}
+
+.searchInput:hover,
+.searchInput:focus {
+  border: 1px solid var(--main-orange);
 }
 
 .categorySelect {
@@ -64,16 +73,26 @@
   padding-left: 14px;
   width: 227px;
   height: 48px;
+  border: 1px solid transparent;
+  outline: none;
+  transition: all 0.3s ease;
 }
 
-.sortBtn {
-  display: flex;
-  gap: 8px;
-  margin-top: 12px;
+.locationInput:hover,
+.locationInput:focus {
+  border: 1px solid var(--main-orange);
 }
 
 .clearIcon {
   stroke: white;
+  cursor: pointer;
+}
+
+.clearInputIcon {
+  position: absolute;
+  top: 15px;
+  right: 36px;
+  stroke: var(--main-black);
   cursor: pointer;
 }
 

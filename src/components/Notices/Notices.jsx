@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import css from "./Notices.module.css";
 import { selectNotices } from "../../redux/Notices/selectors";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { fetchNotices } from "../../redux/Notices/options";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import { addToViewed } from "../../redux/Viewed/viewedSlice";
@@ -15,6 +15,7 @@ import {
 } from "../../redux/Favorites/options";
 import PetCard from "../PetCard/PetCard";
 import Pagination from "../Pagination/Pagination";
+import debounce from "lodash.debounce";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -47,6 +48,30 @@ const Notices = () => {
     filters.species ||
     filters.location;
 
+  const debouncedFetch = useMemo(
+    () =>
+      debounce((filters) => {
+        dispatch(
+          fetchNotices({
+            page: 1,
+            limit: 2000,
+            search: filters.search,
+            category: filters.category,
+            gender: filters.gender,
+            species: filters.species,
+            location: filters.location,
+          }),
+        ).then((res) => {
+          if (res.payload?.results) {
+            setAllItems(res.payload.results);
+          } else {
+            setAllItems([]);
+          }
+        });
+      }, 500),
+    [dispatch],
+  );
+
   useEffect(() => {
     const hasFilters =
       filters.search ||
@@ -56,22 +81,22 @@ const Notices = () => {
       filters.location;
 
     if (hasFilters) {
-      dispatch(fetchNotices({ page: 1, limit: 2000 })).then((res) => {
-        if (res.payload && res.payload.results) {
-          setAllItems(res.payload.results);
-        } else {
-          setAllItems([]);
-        }
-      });
+      debouncedFetch(filters);
     } else {
       setAllItems([]);
     }
-  }, [dispatch, filters]);
+  }, [filters, debouncedFetch]);
 
   useEffect(() => {
     setCurrentPage(1);
     setSortedItems([]);
   }, [filters]);
+
+  useEffect(() => {
+    return () => {
+      debouncedFetch.cancel();
+    };
+  }, [debouncedFetch]);
 
   const sourceItems =
     sortedItems.length > 0
@@ -85,61 +110,77 @@ const Notices = () => {
   const favorites = useSelector((state) => state.favorites.items) || [];
   const isFavorite = (id) => favorites.some((fav) => fav._id === id);
 
-  const handleLearnMoreClick = (item, e) => {
-    e.preventDefault();
-    if (!isLoggedIn) {
-      setIsModalAttentionOpen(true);
-      return;
-    }
-
-    dispatch(addToViewed(item));
-    setSelectedItem(item);
-    setIsModalNoticeOpen(true);
-  };
-
-  const handleHeartClick = (item, e) => {
-    if (!isLoggedIn) {
+  const handleLearnMoreClick = useCallback(
+    (item, e) => {
       e.preventDefault();
-      setIsModalAttentionOpen(true);
-      return;
-    }
-
-    const alreadyFavorite = favorites.some((fav) => fav._id === item._id);
-
-    if (alreadyFavorite) {
-      dispatch(removeFromFavorites(item._id));
-    } else {
-      try {
-        dispatch(addToFavorites(item._id));
-      } catch (err) {
-        console.warn("Already in favorites, skipping request");
+      if (!isLoggedIn) {
+        setIsModalAttentionOpen(true);
+        return;
       }
-    }
-  };
 
-  const filteredItems = sourceItems.filter((item) => {
-    const matchSearch =
-      item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
-      (item.comment || "").toLowerCase().includes(filters.search.toLowerCase());
-    const matchCategory = filters.category
-      ? item.category === filters.category
-      : true;
-    const matchGender = filters.gender ? item.sex === filters.gender : true;
-    const matchSpecies = filters.species
-      ? item.species === filters.species
-      : true;
-    const matchLocation = filters.location
-      ? item.location?.includes(filters.location)
-      : true;
+      dispatch(addToViewed(item));
+      setSelectedItem(item);
+      setIsModalNoticeOpen(true);
+    },
+    [isLoggedIn, dispatch],
+  );
 
-    return (
-      matchSearch &&
-      matchCategory &&
-      matchGender &&
-      matchSpecies &&
-      matchLocation
-    );
-  });
+  const handleHeartClick = useCallback(
+    (item, e) => {
+      if (!isLoggedIn) {
+        e.preventDefault();
+        setIsModalAttentionOpen(true);
+        return;
+      }
+
+      const alreadyFavorite = favorites.some((fav) => fav._id === item._id);
+
+      if (alreadyFavorite) {
+        dispatch(removeFromFavorites(item._id));
+      } else {
+        try {
+          dispatch(addToFavorites(item._id));
+        } catch (err) {
+          console.warn("Already in favorites, skipping request");
+        }
+      }
+    },
+    isLoggedIn,
+    favorites,
+    dispatch,
+  );
+
+  const filteredItems = useMemo(() => {
+    return sourceItems.filter((item) => {
+      const matchSearch =
+        item.title.toLowerCase().includes(filters.search.toLowerCase()) ||
+        (item.comment || "")
+          .toLowerCase()
+          .includes(filters.search.toLowerCase());
+
+      const matchCategory = filters.category
+        ? item.category === filters.category
+        : true;
+
+      const matchGender = filters.gender ? item.sex === filters.gender : true;
+
+      const matchSpecies = filters.species
+        ? item.species === filters.species
+        : true;
+
+      const matchLocation = filters.location
+        ? item.location?.includes(filters.location)
+        : true;
+
+      return (
+        matchSearch &&
+        matchCategory &&
+        matchGender &&
+        matchSpecies &&
+        matchLocation
+      );
+    });
+  }, [sourceItems, filters]);
 
   const totalFilteredPages = Math.ceil(filteredItems.length / perPage);
   const startIndex = (currentPage - 1) * perPage;

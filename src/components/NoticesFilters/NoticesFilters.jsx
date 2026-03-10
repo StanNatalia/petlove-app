@@ -4,7 +4,7 @@ import { CategorySelectStyles } from "./CategorySelectStyles";
 import { GenderSelectStyles } from "./GenderSelectStyles";
 import { TypeSelectStyles } from "./TypeSelectStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   fetchCategories,
   fetchSex,
@@ -26,23 +26,28 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
     dispatch(fetchSpecies());
   }, [dispatch]);
 
-  const categoriesOptions =
-    categoriesList?.map((category) => ({
+  const categoriesOptions = [
+    { value: "", label: "Show all" },
+    ...(categoriesList?.map((category) => ({
       value: category,
       label: category,
-    })) || [];
-
-  const sexOptions =
-    sexList?.map((sex) => ({
+    })) || []),
+  ];
+  const sexOptions = [
+    { value: "", label: "Show all" },
+    ...(sexList?.map((sex) => ({
       value: sex,
       label: sex,
-    })) || [];
+    })) || []),
+  ];
 
-  const speciesOptions =
-    speciesList?.map((species) => ({
+  const speciesOptions = [
+    { value: "", label: "Show all" },
+    ...(speciesList?.map((species) => ({
       value: species,
       label: species,
-    })) || [];
+    })) || []),
+  ];
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +92,16 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
             onChange={handleFilterChange}
             className={css.searchInput}
           />
+          {filters.search && (
+            <svg
+              width="18"
+              height="18"
+              className={css.clearInputIcon}
+              onClick={() => setFilters((prev) => ({ ...prev, search: "" }))}
+            >
+              <use href="/sprite.svg#icon-cross-small" />
+            </svg>
+          )}
           <svg width="18" height="18" className={css.searchIcon}>
             <use href="/sprite.svg#icon-search" />
           </svg>
@@ -96,9 +111,11 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={CategorySelectStyles}
           options={categoriesOptions}
           placeholder="Category"
-          menuPosition="fixed"
-          isClearable
-          value={categoriesOptions.find((e) => e.value === filters.category)}
+          value={
+            filters.category
+              ? categoriesOptions.find((e) => e.value === filters.category)
+              : null
+          }
           onChange={(option) =>
             setFilters((prev) => ({ ...prev, category: option?.value || "" }))
           }
@@ -108,8 +125,11 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={GenderSelectStyles}
           options={sexOptions}
           placeholder="By gender"
-          menuPosition="fixed"
-          value={sexOptions.find((e) => e.value === filters.gender)}
+          value={
+            filters.gender
+              ? sexOptions.find((e) => e.value === filters.gender)
+              : null
+          }
           onChange={(option) =>
             setFilters((prev) => ({ ...prev, gender: option?.value || "" }))
           }
@@ -119,8 +139,11 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={TypeSelectStyles}
           options={speciesOptions}
           placeholder="By type"
-          menuPosition="fixed"
-          value={speciesOptions.find((e) => e.value === filters.species)}
+          value={
+            filters.species
+              ? speciesOptions.find((e) => e.value === filters.species)
+              : ""
+          }
           onChange={(option) =>
             setFilters((prev) => ({ ...prev, species: option?.value || "" }))
           }
@@ -135,11 +158,21 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
             onChange={handleFilterChange}
             className={css.locationInput}
           />
+          {filters.location && (
+            <svg
+              width="18"
+              height="18"
+              onClick={() => setFilters((prev) => ({ ...prev, location: "" }))}
+              className={css.clearInputIcon}
+            >
+              <use href="/sprite.svg#icon-cross-small" />
+            </svg>
+          )}
           <svg
             width="18"
             height="18"
             className={css.searchIcon}
-            onClick={() => clearSort}
+            onClick={() => clearSort()}
           >
             <use href="/sprite.svg#icon-search" />
           </svg>
@@ -162,7 +195,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
                 clearSort();
               }}
             >
-              <use href="/public/sprite.svg#icon-cross-small" />
+              <use href="/sprite.svg#icon-cross-small" />
             </svg>
           )}
         </button>
@@ -182,7 +215,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
                 clearSort();
               }}
             >
-              <use href="/public/sprite.svg#icon-cross-small" />
+              <use href="/sprite.svg#icon-cross-small" />
             </svg>
           )}
         </button>
@@ -202,7 +235,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
                 clearSort();
               }}
             >
-              <use href="/public/sprite.svg#icon-cross-small" />
+              <use href="/sprite.svg#icon-cross-small" />
             </svg>
           )}
         </button>
@@ -222,7 +255,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
                 clearSort();
               }}
             >
-              <use href="/public/sprite.svg#icon-cross-small" />
+              <use href="/sprite.svg#icon-cross-small" />
             </svg>
           )}
         </button>
@@ -232,4 +265,4 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
   );
 };
 
-export default NoticesFilters;
+export default React.memo(NoticesFilters);

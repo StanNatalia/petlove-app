@@ -7,7 +7,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("/public/images/Loading.jpg");
+  background-image: url("/images/Loading.jpg");
   background-size: cover;
   background-position: center;
   z-index: 1000;
