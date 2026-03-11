@@ -26,18 +26,20 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
     dispatch(fetchSpecies());
   }, [dispatch]);
 
+  const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
   const categoriesOptions = [
     { value: "", label: "Show all" },
     ...(categoriesList?.map((category) => ({
       value: category,
-      label: category,
+      label: capitalize(category),
     })) || []),
   ];
   const sexOptions = [
     { value: "", label: "Show all" },
     ...(sexList?.map((sex) => ({
       value: sex,
-      label: sex,
+      label: capitalize(sex),
     })) || []),
   ];
 
@@ -45,7 +47,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
     { value: "", label: "Show all" },
     ...(speciesList?.map((species) => ({
       value: species,
-      label: species,
+      label: capitalize(species),
     })) || []),
   ];
 
@@ -91,6 +93,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
             value={filters.search}
             onChange={handleFilterChange}
             className={css.searchInput}
+            autoComplete="off"
           />
           {filters.search && (
             <svg
@@ -111,6 +114,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={CategorySelectStyles}
           options={categoriesOptions}
           placeholder="Category"
+          menuIsOpen={true}
           value={
             filters.category
               ? categoriesOptions.find((e) => e.value === filters.category)
@@ -125,6 +129,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={GenderSelectStyles}
           options={sexOptions}
           placeholder="By gender"
+          menuIsOpen={true}
           value={
             filters.gender
               ? sexOptions.find((e) => e.value === filters.gender)
@@ -139,6 +144,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           styles={TypeSelectStyles}
           options={speciesOptions}
           placeholder="By type"
+          menuIsOpen={true}
           value={
             filters.species
               ? speciesOptions.find((e) => e.value === filters.species)
@@ -157,6 +163,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
             value={filters.location}
             onChange={handleFilterChange}
             className={css.locationInput}
+            autoComplete="off"
           />
           {filters.location && (
             <svg
