@@ -1,8 +1,4 @@
-import Select from "react-select";
 import css from "./NoticesFilters.module.css";
-import { CategorySelectStyles } from "./CategorySelectStyles";
-import { GenderSelectStyles } from "./GenderSelectStyles";
-import { TypeSelectStyles } from "./TypeSelectStyles";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import {
@@ -10,7 +6,10 @@ import {
   fetchSex,
   fetchSpecies,
 } from "../../redux/Notices/options";
-
+import SpeciesSelect from "../SpeciesSelect/SpeciesSelect";
+import CitySelect from "../CitySelect/CitySelect";
+import CategorySelect from "../CategorySelect/CategorySelect";
+import GenderSelect from "../GenderSelect/GenderSelect";
 const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
   const [activeSort, setActiveSort] = useState(null);
 
@@ -110,52 +109,27 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           </svg>
         </div>
 
-        <Select
-          styles={CategorySelectStyles}
-          options={categoriesOptions}
-          placeholder="Category"
-          menuIsOpen={true}
-          value={
-            filters.category
-              ? categoriesOptions.find((e) => e.value === filters.category)
-              : null
-          }
-          onChange={(option) =>
-            setFilters((prev) => ({ ...prev, category: option?.value || "" }))
-          }
+        <CategorySelect
+          categoriesOptions={categoriesOptions}
+          filters={filters}
+          setFilters={setFilters}
         />
 
-        <Select
-          styles={GenderSelectStyles}
-          options={sexOptions}
-          placeholder="By gender"
-          menuIsOpen={true}
-          value={
-            filters.gender
-              ? sexOptions.find((e) => e.value === filters.gender)
-              : null
-          }
-          onChange={(option) =>
-            setFilters((prev) => ({ ...prev, gender: option?.value || "" }))
-          }
+        <GenderSelect
+          sexOptions={sexOptions}
+          filters={filters}
+          setFilters={setFilters}
         />
 
-        <Select
-          styles={TypeSelectStyles}
-          options={speciesOptions}
-          placeholder="By type"
-          menuIsOpen={true}
-          value={
-            filters.species
-              ? speciesOptions.find((e) => e.value === filters.species)
-              : ""
-          }
-          onChange={(option) =>
-            setFilters((prev) => ({ ...prev, species: option?.value || "" }))
-          }
+        <SpeciesSelect
+          speciesOptions={speciesOptions}
+          filters={filters}
+          setFilters={setFilters}
         />
 
-        <div className={css.locationWrapper}>
+        <CitySelect setFilters={setFilters} />
+
+        {/* <div className={css.locationWrapper}>
           <input
             type="text"
             name="location"
@@ -183,7 +157,7 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
           >
             <use href="/sprite.svg#icon-search" />
           </svg>
-        </div>
+        </div> */}
       </div>
 
       <div className={css.sortBtn}>

@@ -38,7 +38,7 @@ export const GenderSelectStyles = {
     fontSize: "16px",
     lineHeight: 1.25,
     fontWeight: "500",
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Manrope, sans-serif",
     "&:hover": {
       backgroundColor: "transparent",
       color: "#191a15",
@@ -63,6 +63,7 @@ export const GenderSelectStyles = {
     ...provided,
     display: "flex",
     flexDirection: "column",
+    padding: "0",
     gap: "8px",
     maxHeight: "200px",
     overflowY: "auto",
@@ -79,7 +80,7 @@ export const GenderSelectStyles = {
     paddingLeft: 0,
     paddingRight: 0,
     margin: 0,
-    fontFamily: "Inter, sans-serif",
+    fontFamily: "Manrope, sans-serif",
   }),
   indicatorSeparator: () => ({
     display: "none",

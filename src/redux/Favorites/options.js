@@ -33,7 +33,7 @@ export const fetchNoticesById = createAsyncThunk(
       const { data } = await api.get("/notices/${id}");
       return data;
     } catch (error) {
-      return thuncAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   },
 );
