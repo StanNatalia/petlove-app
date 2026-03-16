@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import css from "./PhotoUploading.module.css";
 
-const PhotoUploading = ({ name = "avatar" }) => {
+const PhotoUploading = ({ name = "avatar", icon = "#icon-dog_foot" }) => {
   const {
     setValue,
     setError,
@@ -78,7 +78,7 @@ const PhotoUploading = ({ name = "avatar" }) => {
             </>
           ) : (
             <svg width="44" height="44">
-              <use href="/sprite.svg#icon-dog_foot" />
+              <use href={`/sprite.svg${icon}`} />
             </svg>
           )}
         </div>

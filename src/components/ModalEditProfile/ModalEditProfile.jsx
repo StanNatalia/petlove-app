@@ -85,7 +85,7 @@ const ModalEditProfile = ({ user, onClose }) => {
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input type="hidden" {...register("avatar")} />
-            <PhotoUploading />
+            <PhotoUploading icon="#icon-user" />
             <div className={css.fieldWrapper}>
               <div>
                 <input

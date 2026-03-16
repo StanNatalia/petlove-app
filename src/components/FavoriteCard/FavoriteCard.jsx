@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import css from "./FavoriteCard.module.css";
-import { removeFromFavorites } from "../../redux/Favorites/options";
+import { removePet } from "../../redux/Auth/options";
+import { toast } from "react-toastify";
 
 const FavoriteCard = ({ pet }) => {
   const dispatch = useDispatch();
@@ -36,7 +37,10 @@ const FavoriteCard = ({ pet }) => {
       </div>
       <div
         className={css.deleteBtn}
-        onClick={() => dispatch(removeFromFavorites(pet._id))}
+        onClick={() => {
+          dispatch(removePet(pet._id));
+          toast.success("You have successfully deleted your pet card");
+        }}
       >
         <svg width="16" height="16">
           <use href="/sprite.svg#icon-trash" />

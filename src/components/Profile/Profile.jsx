@@ -2,7 +2,7 @@ import { useState } from "react";
 import css from "./Profile.module.css";
 import ModalEditProfile from "../ModalEditProfile/ModalEditProfile";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutThunk } from "../../redux/Auth/options";
+import { logoutThunk, removePet } from "../../redux/Auth/options";
 import { NavLink, useNavigate } from "react-router";
 import PetCard from "../PetCard/PetCard";
 import ProfileForm from "../ProfileForm/ProfileForm";
@@ -20,7 +20,6 @@ const Profile = ({ onClose }) => {
   const user = useSelector((state) => state.auth.user);
 
   const favorites = useSelector((state) => state.favorites.items || []);
-
 
   const pets = user.pets || [];
 
@@ -62,9 +61,12 @@ const Profile = ({ onClose }) => {
           LOG OUT
         </button>
       </div>
-      <div className={`${css.content} ${css.secondaryContent}`}>
+      <div>
         <div className={css.btnWrapper}>
-          <button className={css.btn} onClick={() => setViewMode("favorites")}>
+          <button
+            className={css.btnFavorite}
+            onClick={() => setViewMode("favorites")}
+          >
             My favorites pets
           </button>
           <button
@@ -77,7 +79,13 @@ const Profile = ({ onClose }) => {
         <div className={css.petsList}>
           {viewMode === "favorites" && favorites.length > 0 ? (
             favorites.map((item) => (
-              <PetCard key={item._id} item={item} showFavoritesButton={false} />
+              <PetCard
+                key={item._id}
+                item={item}
+                showFavoritesButton={false}
+                showDeleteButton={true}
+                handleDeleteClick={(item) => dispatch(removePet(item._id))}
+              />
             ))
           ) : viewMode === "viewed" && viewed.length > 0 ? (
             viewed.map((item) => (

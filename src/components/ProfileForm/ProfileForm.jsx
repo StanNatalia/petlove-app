@@ -21,8 +21,8 @@ const ProfileForm = ({ setIsEditModal, user }) => {
           {user.avatar ? (
             <img src={user.avatar} alt="avatar" className={css.avatarImg} />
           ) : (
-            <svg width="40" height="40">
-              <use href="/sprite.svg#icon-user" />
+            <svg width="50" height="50">
+              <use href="/sprite.svg#icon-user-white" />
             </svg>
           )}
         </div>

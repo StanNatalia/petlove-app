@@ -1,19 +1,18 @@
 .petCard {
+  position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 25px;
   background-color: var(--main-white);
-  justify-content: space-between;
   border: 1px solid rgba(38, 38, 38, 0.1);
   border-radius: 20px;
   padding: 20px;
-  width: 363px;
-  height: auto;
+  border: 1px solid rgba(38, 38, 38, 0.1);
+  width: 440px;
 }
 
 .description {
   display: flex;
-  gap: 10px;
+  gap: 27px;
 }
 
 .wrapper {
@@ -22,9 +21,16 @@
   gap: 4px;
 }
 
+.title {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.29;
+  color: var(--main-black);
+}
+
 .info {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 10px;
   line-height: 1.4;
   letter-spacing: -0.02em;
   color: rgba(38, 38, 38, 0.5);
@@ -32,37 +38,41 @@
 
 .value {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 12px;
   line-height: 1.17;
   letter-spacing: -0.02em;
-  color: #262626;
+  color: var(--main-black);
 }
 
 .imgWrapper {
-  width: 315px;
-  height: 178px;
-  border-radius: 16px;
+  width: 90px;
+  height: 90px;
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .petInfo {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  justify-content: center;
+  gap: 12px;
 }
 
 .deleteBtn {
-  align-self: flex-end;
+  position: absolute;
+  top: 20px;
+  right: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 30px;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   background-color: var(--main-light-orange);
   transition: all 0.3s ease;
 }

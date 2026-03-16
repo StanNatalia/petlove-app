@@ -1,18 +1,18 @@
 .container {
   display: flex;
-  flex-direction: column;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
+  width: 1300px;
+  gap: 32px;
 }
 
 .content {
   max-width: 1440px;
   margin: 0 auto;
+  border-radius: 60px;
+  background-color: var(--main-white);
+  width: 520px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
-  padding: 0 20px;
+  padding: 40px;
   align-items: center;
   box-sizing: border-box;
 }
@@ -23,12 +23,12 @@
 
 .btn {
   border-radius: 30px;
-  padding: 14px 20px;
+  padding: 10px 20px;
   background-color: var(--main-orange);
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.29;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
   color: var(--main-white);
   display: flex;
   gap: 4px;
@@ -58,10 +58,9 @@
 .text {
   align-self: flex-start;
   font-weight: 700;
-  font-size: 30px;
-
-  line-height: 1.25;
-  color: #2b2b2a;
+  font-size: 18px;
+  line-height: 1.33;
+  color: var(--main-black);
 }
 
 .field {
@@ -101,9 +100,20 @@
 .petsList {
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 14px;
   flex-wrap: wrap;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
+}
+
+.btnFavorite {
+  border-radius: 30px;
+  padding: 14px;
+  background-color: var(--main-orange);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--main-white);
 }
 
 .title {
@@ -116,12 +126,12 @@
 .logoutBtn {
   font-weight: 700;
   font-size: 16px;
-  line-height: 1.29;
+  line-height: 1.25;
   letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--main-orange);
   border-radius: 30px;
-  padding: 14px 28px;
+  padding: 15px 35px;
   background-color: var(--main-light-orange);
   align-self: flex-start;
   transition: all 0.3s ease;
@@ -136,17 +146,17 @@
 .btnWrapper {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 80px;
+  gap: 8px;
+  margin-bottom: 32px;
 }
 
 .btnViewed {
   border-radius: 30px;
-  padding: 14px 20px;
+  padding: 14px 45px;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.29;
-  letter-spacing: -0.02em;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
   background-color: var(--main-white);
   color: var(--main-black);
   transition: all 0.3s ease;
@@ -170,4 +180,13 @@
 .span {
   font-weight: 700;
   color: var(--main-orange);
+}
+
+.noPets {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--main-black);
 }

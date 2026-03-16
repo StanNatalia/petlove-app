@@ -9,6 +9,8 @@ const PetCard = ({
   handleHeartClick,
   handleLearnMoreClick,
   showFavoritesButton = true,
+  showDeleteButton = false,
+  handleDeleteClick,
 }) => {
   return (
     <li
@@ -60,7 +62,7 @@ const PetCard = ({
           <NavLink
             to="/"
             onClick={(e) => handleLearnMoreClick(item, e)}
-            className={`${css.btn} ${!showFavoritesButton ? css.fullWidthBtn : ""}`}
+            className={`${css.btn} ${!showFavoritesButton && !showDeleteButton ? css.fullWidthBtn : ""}`}
           >
             Learn more
           </NavLink>
@@ -71,6 +73,19 @@ const PetCard = ({
             >
               <svg width="18" height="18">
                 <use href="/sprite.svg#icon-heart" />
+              </svg>
+            </div>
+          )}
+          {showDeleteButton && (
+            <div
+              className={css.circle}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDeleteClick(item, e);
+              }}
+            >
+              <svg width="18" height="18">
+                <use href="/sprite.svg#icon-trash" />
               </svg>
             </div>
           )}

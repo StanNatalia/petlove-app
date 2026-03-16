@@ -65,7 +65,7 @@ const userSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(removePet.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user.pets = action.payload.pets;
       });
   },
 });
