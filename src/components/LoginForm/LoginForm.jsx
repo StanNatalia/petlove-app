@@ -23,7 +23,7 @@ const LoginForm = ({ onClose }) => {
   const onSubmit = async ({ email, password }) => {
     try {
       const res = await dispatch(loginThunk({ email, password })).unwrap();
-      toast.success(`Hello, ${res?.name || "User"}! Login successful`);
+      toast.success(`Hello, ${res?.user.name || "User"}! Login successful`);
       reset();
       navigate("/", { replace: true });
     } catch {

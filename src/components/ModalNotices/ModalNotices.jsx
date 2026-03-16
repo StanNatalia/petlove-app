@@ -3,8 +3,9 @@ import css from "./ModalNotices.module.css";
 import { NavLink } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
+import { toast } from "react-toastify";
 
-const ModalNotices = ({ item, onClose }) => {
+const ModalNotices = ({ item, onClose, handleHeartClick }) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -18,10 +19,9 @@ const ModalNotices = ({ item, onClose }) => {
     };
   }, [onClose]);
 
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const favorites = useSelector((state) => state.favorites.items) || [];
 
-  const favorites = useSelector((state) => state.favorites.items || []);
+  const isFavorites = favorites.some((fav) => fav._id === item._id);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
@@ -68,7 +68,7 @@ const ModalNotices = ({ item, onClose }) => {
             </div>
             <div className={css.infoThumb}>
               <p className={css.infoTitle}>Birthday</p>
-              <p className={css.info}>{item.birthday}</p>
+              <p className={css.info}>{item.birthday || "-"}</p>
             </div>
             <div className={css.infoThumb}>
               <p className={css.infoTitle}>Sex</p>
@@ -85,12 +85,18 @@ const ModalNotices = ({ item, onClose }) => {
         <div className={css.btnPriceWrapper}>
           <p className={css.price}>${item.price}</p>
           <div className={css.btnWrapper}>
-            <NavLink to="/" className={css.link}>
-              <span>Add to</span>
+            <button
+              className={css.link}
+              onClick={(e) => {
+                handleHeartClick(item, e);
+                onClose();
+              }}
+            >
+              <span>{isFavorites ? "Remove from" : "Add to"}</span>
               <svg width="18" height="18" className={css.heartIcon}>
                 <use href="/sprite.svg#icon-heart" />
               </svg>
-            </NavLink>
+            </button>
 
             <NavLink to="/" className={css.link}>
               Contact

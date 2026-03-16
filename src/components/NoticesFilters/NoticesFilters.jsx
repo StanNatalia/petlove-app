@@ -128,36 +128,6 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
         />
 
         <CitySelect setFilters={setFilters} />
-
-        {/* <div className={css.locationWrapper}>
-          <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={filters.location}
-            onChange={handleFilterChange}
-            className={css.locationInput}
-            autoComplete="off"
-          />
-          {filters.location && (
-            <svg
-              width="18"
-              height="18"
-              onClick={() => setFilters((prev) => ({ ...prev, location: "" }))}
-              className={css.clearInputIcon}
-            >
-              <use href="/sprite.svg#icon-cross-small" />
-            </svg>
-          )}
-          <svg
-            width="18"
-            height="18"
-            className={css.searchIcon}
-            onClick={() => clearSort()}
-          >
-            <use href="/sprite.svg#icon-search" />
-          </svg>
-        </div> */}
       </div>
 
       <div className={css.sortBtn}>

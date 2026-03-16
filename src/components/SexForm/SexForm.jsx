@@ -23,7 +23,7 @@ const SexForm = () => {
       <div className={css.sexWrapper}>
         <div
           className={`${css.sexIcon} ${css.female} ${
-            selectedSex === "female" ? css.active : ""
+            selectedSex === "female" ? css.activeFemale : ""
           }`}
           onClick={() => handleSelect("female")}
         >
@@ -33,7 +33,7 @@ const SexForm = () => {
         </div>
 
         <div
-          className={`${css.sexIcon} ${css.male} ${selectedSex === "male" ? css.active : ""}`}
+          className={`${css.sexIcon} ${css.male} ${selectedSex === "male" ? css.activeMale : ""}`}
           onClick={() => handleSelect("male")}
         >
           <svg width="24" height="24">
@@ -43,7 +43,7 @@ const SexForm = () => {
 
         <div
           className={`${css.sexIcon} ${css.multiple} ${
-            selectedSex === "multiple" ? css.active : ""
+            selectedSex === "multiple" ? css.activeMultiple : ""
           }`}
           onClick={() => handleSelect("multiple")}
         >

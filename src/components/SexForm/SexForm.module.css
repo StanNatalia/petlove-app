@@ -24,8 +24,9 @@
   transform: scale(1.05);
 }
 
-.active {
-  border: 1px solid #f6b83d;
+.iconFemale {
+  fill: black;
+  stroke: black;
 }
 
 .female {
@@ -33,15 +34,16 @@
   background-color: rgba(244, 63, 94, 0.1);
 }
 
-.female:hover,
-.female:focus {
+.activeFemale {
   background-color: #f43f5e;
-  color: var(--main-white);
+  color: white;
 }
 
-.iconFemale {
-  fill: black;
-  stroke: black;
+.female:hover:not(.activeFemale),
+.female:focus:not(.activeFemale),
+.female:active:not(.activeFemale) {
+  background-color: #f43f5e;
+  color: white;
 }
 
 .male {
@@ -49,10 +51,16 @@
   background-color: rgba(84, 173, 255, 0.1);
 }
 
-.male:hover,
-.male:focus {
+.activeMale {
   background-color: #54adff;
-  color: var(--main-white);
+  color: white;
+}
+
+.male:hover:not(.activeMale),
+.male:focus:not(.activeMale),
+.male:active:not(.activeMale) {
+  background-color: #54adff;
+  color: white;
 }
 
 .multiple {
@@ -60,10 +68,16 @@
   color: var(--main-orange);
 }
 
-.multiple:hover,
-.multiple:focus {
+.activeMultiple {
   background-color: var(--main-orange);
-  color: var(--main-white);
+  color: white;
+}
+
+.multiple:hover:not(.activeMultiple),
+.multiple:focus:not(.activeMultiple),
+.multiple:active:not(.activeMultiple) {
+  background-color: var(--main-orange);
+  color: white;
 }
 
 .error {

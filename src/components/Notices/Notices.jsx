@@ -15,7 +15,6 @@ import {
 } from "../../redux/Favorites/options";
 import PetCard from "../PetCard/PetCard";
 import Pagination from "../Pagination/Pagination";
-import debounce from "lodash.debounce";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -30,80 +29,21 @@ const Notices = () => {
     location: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [allItems, setAllItems] = useState([]);
   const perPage = 6;
 
-  const { items, isLoading, error, totalPages } = useSelector(selectNotices);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [filters, sortedItems]);
+
+  const { items, isLoading, error } = useSelector(selectNotices);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchNotices({ page: currentPage, limit: perPage }));
-  }, [dispatch, currentPage]);
+    dispatch(fetchNotices({ page: 1, limit: 2000 }));
+  }, [dispatch]);
 
-  const hasFilters =
-    filters.search ||
-    filters.category ||
-    filters.gender ||
-    filters.species ||
-    filters.location;
-
-  const debouncedFetch = useMemo(
-    () =>
-      debounce((filters) => {
-        dispatch(
-          fetchNotices({
-            page: 1,
-            limit: 2000,
-            search: filters.search,
-            category: filters.category,
-            gender: filters.gender,
-            species: filters.species,
-            location: filters.location,
-          }),
-        ).then((res) => {
-          if (res.payload?.results) {
-            setAllItems(res.payload.results);
-          } else {
-            setAllItems([]);
-          }
-        });
-      }, 500),
-    [dispatch],
-  );
-
-  useEffect(() => {
-    const hasFilters =
-      filters.search ||
-      filters.category ||
-      filters.gender ||
-      filters.species ||
-      filters.location;
-
-    if (hasFilters) {
-      debouncedFetch(filters);
-    } else {
-      setAllItems([]);
-    }
-  }, [filters, debouncedFetch]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-    setSortedItems([]);
-  }, [filters]);
-
-  useEffect(() => {
-    return () => {
-      debouncedFetch.cancel();
-    };
-  }, [debouncedFetch]);
-
-  const sourceItems =
-    sortedItems.length > 0
-      ? sortedItems
-      : allItems.length > 0
-        ? allItems
-        : items;
+  const sourceItems = sortedItems.length ? sortedItems : items;
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
@@ -145,9 +85,7 @@ const Notices = () => {
         }
       }
     },
-    isLoggedIn,
-    favorites,
-    dispatch,
+    [isLoggedIn, favorites, dispatch],
   );
 
   const filteredItems = useMemo(() => {
@@ -169,7 +107,7 @@ const Notices = () => {
         : true;
 
       const matchLocation = filters.location
-        ? item.location?.includes(filters.location)
+        ? item.location === filters.location
         : true;
 
       return (
@@ -198,23 +136,21 @@ const Notices = () => {
       {isLoading && <Loading />}
       {error && <p>{error}</p>}
       <ul className={css.list}>
-        {(hasFilters || sortedItems.length > 0 ? paginatedItems : items).map(
-          (item) => (
-            <PetCard
-              key={item._id}
-              item={item}
-              isFavorite={isFavorite(item._id)}
-              handleLearnMoreClick={handleLearnMoreClick}
-              handleHeartClick={handleHeartClick}
-            />
-          ),
-        )}
+        {paginatedItems.map((item) => (
+          <PetCard
+            key={item._id}
+            item={item}
+            isFavorite={isFavorite(item._id)}
+            handleLearnMoreClick={handleLearnMoreClick}
+            handleHeartClick={handleHeartClick}
+          />
+        ))}
       </ul>
 
       <Pagination
         currentPage={currentPage}
-        totalPages={hasFilters ? Math.max(totalFilteredPages, 1) : totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
+        totalPages={Math.max(totalFilteredPages, 1)}
+        onPageChange={setCurrentPage}
       />
 
       {isModalAttentionOpen && (
@@ -224,6 +160,7 @@ const Notices = () => {
         <ModalNotices
           item={selectedItem}
           onClose={() => setIsModalNoticeOpen(false)}
+          handleHeartClick={handleHeartClick}
         />
       )}
     </div>

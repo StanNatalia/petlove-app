@@ -88,9 +88,12 @@ const Header = () => {
 
       {isLoggedIn && (
         <div className={css.userView}>
-          <button onClick={() => setLogoutModal(true)} className={css.logout}>
-            Log out
-          </button>
+          {location.pathname !== "/" && (
+            <button onClick={() => setLogoutModal(true)} className={css.logout}>
+              Log out
+            </button>
+          )}
+
           <NavLink
             to="/profile"
             className={css.userInfoWrapper}

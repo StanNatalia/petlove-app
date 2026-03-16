@@ -3,9 +3,15 @@ import { api } from "../../services/api";
 
 export const fetchNotices = createAsyncThunk(
   "pets/fetchAll",
-  async ({ page = 1, limit = 6 }, thunkAPI) => {
+  async ({ page = 1, limit = 2000, ...params } = {}, thunkAPI) => {
     try {
-      const { data } = await api.get(`/notices?page=${page}&limit=${limit}`);
+      const query = new URLSearchParams({
+        page,
+        limit,
+        ...params,
+      }).toString();
+
+      const { data } = await api.get(`/notices?${query}`);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

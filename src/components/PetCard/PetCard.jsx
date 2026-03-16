@@ -11,7 +11,14 @@ const PetCard = ({
   showFavoritesButton = true,
 }) => {
   return (
-    <li className={css.item}>
+    <li
+      className={css.item}
+      onClick={(e) => {
+        if (e.target.closest(`.${css.btnWrapper}`)) return;
+
+        handleLearnMoreClick(item, e);
+      }}
+    >
       <div>
         <img src={item.imgURL} alt={item.species} className={css.img} />
         <div className={css.titleWrapper}>

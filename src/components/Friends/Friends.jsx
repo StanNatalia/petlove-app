@@ -36,7 +36,7 @@ const Friends = () => {
       {error && <p>{error}</p>}
       <ul className={css.list}>
         {items.map((item) => (
-          <li key={item.id} className={css.item}>
+          <li key={item._id} className={css.item}>
             <div className={css.workTime}>
               {!item.workDays || item.workDays.length === 0 ? (
                 <p className={css.time}>Day and night</p>

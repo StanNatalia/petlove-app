@@ -1,15 +1,19 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import PhotoUploading from "../PhotoUploading/PhotoUploading";
 import SexForm from "../SexForm/SexForm";
 import TypeSelect from "../TypeSelect/TypeSelect";
 
 import css from "./AddForm.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPet } from "../../redux/Auth/options";
+import { toast } from "react-toastify";
+import { useState } from "react";
+import ModalCongrats from "../ModalCongrats/ModalCongrats";
+import { selectUser, selectUserPets } from "../../redux/Auth/selectors";
 
 const schema = yup.object({
   sex: yup.string().required("Sex is required"),
@@ -21,6 +25,14 @@ const schema = yup.object({
 });
 
 const AddForm = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const pets = useSelector(selectUserPets);
+  const isFirstPet = pets.length === 0;
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   const methods = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -48,7 +60,17 @@ const AddForm = () => {
       imgURL: data.avatar,
       sex: data.sex,
     };
-    dispatch(addPet(formattedData));
+
+    try {
+      dispatch(addPet(formattedData));
+      if (isFirstPet) {
+        openModal();
+      } else {
+        toast.success("Pet added successfully");
+      }
+    } catch (error) {
+      toast.error("Failed to add pet");
+    }
   };
 
   return (
@@ -104,6 +126,7 @@ const AddForm = () => {
             </button>
           </div>
         </form>
+        {isModalOpen && <ModalCongrats onClose={closeModal} />}
       </div>
     </FormProvider>
   );

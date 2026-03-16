@@ -63,7 +63,7 @@ const CitySelect = ({ setFilters }) => {
       onChange={(option) =>
         setFilters((prev) => ({
           ...prev,
-          location: option?.label || "",
+          location: option?.value || "",
         }))
       }
     />

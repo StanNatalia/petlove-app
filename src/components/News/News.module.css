@@ -42,7 +42,7 @@
 }
 
 .iconCross {
-  stroke: red;
+  stroke: var(--main-black);
   position: absolute;
   top: 15px;
   right: 14px;
