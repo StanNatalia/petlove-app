@@ -1,12 +1,11 @@
 .container {
   display: flex;
-  width: 1300px;
+  justify-content: center;
   gap: 32px;
+  align-items: flex-start;
 }
 
 .content {
-  max-width: 1440px;
-  margin: 0 auto;
   border-radius: 60px;
   background-color: var(--main-white);
   width: 520px;
@@ -17,8 +16,10 @@
   box-sizing: border-box;
 }
 
-.secondaryContent {
+.secondContent {
+  margin-top: 40px;
   background-color: transparent;
+  width: 760px;
 }
 
 .btn {
@@ -105,15 +106,31 @@
   margin-bottom: 40px;
 }
 
-.btnFavorite {
-  border-radius: 30px;
-  padding: 14px;
-  background-color: var(--main-orange);
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.25;
-  letter-spacing: -0.03em;
-  color: var(--main-white);
+.petsListFavorites {
+  height: 970px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+.petsListFavorites::-webkit-scrollbar {
+  width: 8px;
+}
+
+.petsListFavorites::-webkit-scrollbar-thumb {
+  background-color: rgba(38, 38, 38, 0.08);
+  border-radius: 10px;
+}
+
+.petsListFavorites::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.petsListFavorites::-webkit-scrollbar-button {
+  display: none;
 }
 
 .title {
@@ -150,6 +167,23 @@
   margin-bottom: 32px;
 }
 
+.btnFavorite {
+  border-radius: 30px;
+  padding: 14px;
+  background-color: var(--main-orange);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: var(--main-white);
+  transition: all 0.3s ease;
+}
+
+.btnFavorite:hover,
+.btnFavorite:focus {
+  background-color: #f9b020;
+}
+
 .btnViewed {
   border-radius: 30px;
   padding: 14px 45px;
@@ -170,11 +204,14 @@
 
 .notification {
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.29;
+  margin: 0 auto;
+  margin-top: 180px;
+  width: 458px;
+  font-size: 16px;
+  line-height: 1.25;
   letter-spacing: -0.02em;
   text-align: center;
-  color: #262626;
+  color: var(--main-black);
 }
 
 .span {

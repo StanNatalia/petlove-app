@@ -1,11 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import css from "./ModalNotices.module.css";
 import { NavLink } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn } from "../../redux/Auth/selectors";
 import { toast } from "react-toastify";
+import ModalContact from "../ModalContact/ModalContact";
 
-const ModalNotices = ({ item, onClose, handleHeartClick }) => {
+const ModalNotices = ({
+  item,
+  onClose,
+  handleHeartClick,
+  handleRemoveFavorite,
+}) => {
+  const [isContactOpen, setIsContactOpen] = useState(false);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -83,12 +91,16 @@ const ModalNotices = ({ item, onClose, handleHeartClick }) => {
         </div>
 
         <div className={css.btnPriceWrapper}>
-          <p className={css.price}>${item.price}</p>
+          <p className={css.price}>{item.price ? `$${item.price}` : "Free"}</p>
           <div className={css.btnWrapper}>
             <button
-              className={css.link}
+              className={css.btnFavorite}
               onClick={(e) => {
-                handleHeartClick(item, e);
+                if (handleHeartClick) {
+                  handleHeartClick(item, e);
+                } else if (handleRemoveFavorite) {
+                  handleRemoveFavorite(item._id);
+                }
                 onClose();
               }}
             >
@@ -98,12 +110,18 @@ const ModalNotices = ({ item, onClose, handleHeartClick }) => {
               </svg>
             </button>
 
-            <NavLink to="/" className={css.link}>
+            <button
+              className={css.btnContact}
+              onClick={() => setIsContactOpen(true)}
+            >
               Contact
-            </NavLink>
+            </button>
           </div>
         </div>
       </div>
+      {isContactOpen && (
+        <ModalContact onClose={() => setIsContactOpen(false)} />
+      )}
     </div>
   );
 };

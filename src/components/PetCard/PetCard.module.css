@@ -118,7 +118,7 @@
 
 .circle:hover,
 .circle:focus {
-  scale: 1.1;
+  background-color: #fbe7c1;
 }
 
 .activeHeart {

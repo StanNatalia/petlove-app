@@ -18,7 +18,9 @@ const PetCard = ({
       onClick={(e) => {
         if (e.target.closest(`.${css.btnWrapper}`)) return;
 
-        handleLearnMoreClick(item, e);
+        if (handleLearnMoreClick) {
+          handleLearnMoreClick(item, e);
+        }
       }}
     >
       <div>
@@ -61,7 +63,7 @@ const PetCard = ({
         <div className={css.btnWrapper}>
           <NavLink
             to="/"
-            onClick={(e) => handleLearnMoreClick(item, e)}
+            onClick={(e) => handleLearnMoreClick?.(item, e)}
             className={`${css.btn} ${!showFavoritesButton && !showDeleteButton ? css.fullWidthBtn : ""}`}
           >
             Learn more

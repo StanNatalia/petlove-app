@@ -129,7 +129,7 @@
   gap: 10px;
 }
 
-.link {
+.btnFavorite {
   border-radius: 30px;
   width: 160px;
   height: 48px;
@@ -137,24 +137,47 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  font-size: 16px;
   line-height: 1.25;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--main-light-orange);
   background-color: var(--main-orange);
   transition: all 0.3s ease;
 }
 
-.link:hover,
-.link:focus {
+.btnFavorite:hover,
+.btnFavorite:focus {
   background: var(--main-light-orange);
-  color: var(--main-orange);
+  color: #f9b020;
 }
 
 .heartIcon {
   --color1: var(--main-light-orange);
 }
 
-.link:hover .heartIcon,
-.link:focus .heartIcon {
+.btnFavorite:hover .heartIcon,
+.btnFavorite:focus .heartIcon {
   --color1: var(--main-orange);
+}
+
+.btnContact {
+  border-radius: 30px;
+  width: 160px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--main-orange);
+  background-color: #fff4df;
+  transition: all 0.3s ease;
+}
+
+.btnContact:hover,
+.btnContact:focus {
+  background-color: var(--main-orange);
+  color: #fff4df;
 }
