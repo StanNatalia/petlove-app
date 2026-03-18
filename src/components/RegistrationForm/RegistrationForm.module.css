@@ -1,7 +1,8 @@
 .formWrapper {
   padding: 69px 84px;
   border-radius: 60px;
-  width: 592px;
+  width: 100%;
+  max-width: 592px;
   height: 654px;
   background-color: var(--main-white);
 }

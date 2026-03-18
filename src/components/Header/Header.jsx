@@ -15,6 +15,7 @@ const buildLinkUser = ({ isActive }) =>
 const Header = () => {
   const [isProfile, setIsProfile] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -75,55 +76,152 @@ const Header = () => {
         </nav>
       </div>
 
-      {!isLoggedIn && (
-        <nav className={css.guestView}>
-          <NavLink to="/login" className={buildLinkUser}>
-            Log in
-          </NavLink>
-          <NavLink to="/registration" className={buildLinkUser}>
-            Registration
-          </NavLink>
-        </nav>
-      )}
-
-      {isLoggedIn && (
-        <div className={css.userView}>
-          {location.pathname !== "/" && (
-            <button onClick={() => setLogoutModal(true)} className={css.logout}>
-              Log out
-            </button>
-          )}
-
-          <NavLink
-            to="/profile"
-            className={css.userInfoWrapper}
-            onClick={() => setIsProfile(true)}
-            style={{ cursor: "pointer" }}
-          >
-            <div className={css.circle}>
-              {user.avatar ? (
-                <img src={user.avatar} />
-              ) : (
-                <svg height="24" width="24">
-                  <use href="/sprite.svg#icon-user" />
-                </svg>
-              )}
-            </div>
-            {user?.name && (
-              <h3 className={isHomePage ? css.name : css.homeName}>
-                {user.name}
-              </h3>
+      <div className={css.manageWrapper}>
+        {isLoggedIn && (
+          <div className={css.userView}>
+            {location.pathname !== "/" && (
+              <button
+                onClick={() => setLogoutModal(true)}
+                className={css.logout}
+              >
+                Log out
+              </button>
             )}
-          </NavLink>
-        </div>
-      )}
 
-      {logoutModal && (
-        <ModalLogout
-          onClose={() => setLogoutModal(false)}
-          handleLogout={handleLogout}
-        />
-      )}
+            <NavLink
+              to="/profile"
+              className={css.userInfoWrapper}
+              onClick={() => setIsProfile(true)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className={css.circle}>
+                {user.avatar ? (
+                  <img src={user.avatar} />
+                ) : (
+                  <svg height="24" width="24">
+                    <use href="/sprite.svg#icon-user" />
+                  </svg>
+                )}
+              </div>
+              {user?.name && (
+                <h3 className={isHomePage ? css.name : css.homeName}>
+                  {user.name}
+                </h3>
+              )}
+            </NavLink>
+          </div>
+        )}
+
+        <div className={css.rightSide}>
+          {!isLoggedIn && (
+            <nav className={css.guestView}>
+              <NavLink to="/login" className={buildLinkUser}>
+                Log in
+              </NavLink>
+              <NavLink to="/registration" className={buildLinkUser}>
+                Registration
+              </NavLink>
+            </nav>
+          )}
+          <button
+            className={clsx(css.burger, !isHomePage && css.burgerBlack)}
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <svg className={css.burgerIcon}>
+              <use href="/public/sprite.svg#icon-burger" />
+            </svg>
+          </button>
+        </div>
+
+        {logoutModal && (
+          <ModalLogout
+            onClose={() => setLogoutModal(false)}
+            handleLogout={handleLogout}
+          />
+        )}
+        {isMobileMenuOpen && (
+          <div
+            className={css.mobileBackdrop}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            <div
+              className={clsx(
+                css.mobileMenu,
+                !isHomePage && css.mobileMenuOrange,
+              )}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className={clsx(
+                  css.closeBtn,
+                  !isHomePage && css.closeBtnOrange,
+                )}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <svg width="30" height="30">
+                  <use href="/public/sprite.svg#icon-cross-small" />
+                </svg>
+              </button>
+              <div className={css.wrapperNav}>
+                <nav className={css.mobileNav}>
+                  <NavLink
+                    to="/news"
+                    className={clsx(
+                      css.mobileLink,
+                      !isHomePage && css.mobileLinkOrange,
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    News
+                  </NavLink>
+                  <NavLink
+                    to="/notices"
+                    className={clsx(
+                      css.mobileLink,
+                      !isHomePage && css.mobileLinkOrange,
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Find pet
+                  </NavLink>
+                  <NavLink
+                    to="/friends"
+                    className={clsx(
+                      css.mobileLink,
+                      !isHomePage && css.mobileLinkOrange,
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Our friends
+                  </NavLink>
+                </nav>
+                <nav className={css.mobileGuestView}>
+                  <NavLink
+                    to="/login"
+                    className={clsx(
+                      css.loginBtn,
+                      !isHomePage && css.loginBtnOrange,
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Log in
+                  </NavLink>
+                  <NavLink
+                    to="/registration"
+                    className={clsx(
+                      css.registerBtn,
+                      !isHomePage && css.registerBtnOrange,
+                    )}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Registration
+                  </NavLink>
+                </nav>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
