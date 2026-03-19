@@ -9,7 +9,7 @@ const Login = () => {
         <img src="/images/Shape.png" className={css.shape} />
         <div className={css.infoWrapper}>
           <div className={css.circle}>
-            <img src="/images/🐈.png" />
+            <img src="/images/🐶.png" />
           </div>
           <div className={css.info}>
             <div className={css.nameWrapper}>

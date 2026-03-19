@@ -7,8 +7,9 @@
 .petBlock {
   display: flex;
   border-radius: 60px;
-  min-width: 592px;
-  height: 654px;
+  width: 100%;
+  max-width: 592px;
+  aspect-ratio: 592 / 654;
   background-color: var(--main-orange);
   position: relative;
   overflow: hidden;
@@ -16,27 +17,30 @@
 
 .shape {
   position: absolute;
-  top: 6%;
-  left: 6%;
+  top: 9%;
+  left: 5%;
 }
 
 .img {
   position: absolute;
-  left: 36px;
-  z-index: 5;
   top: 0;
+  left: 6%;
+  z-index: 5;
+  top: 4%;
+  width: 90%;
+  height: auto;
   object-fit: cover;
 }
 
 .infoWrapper {
   position: absolute;
   z-index: 10;
-  top: 436px;
-  left: 61px;
-  padding: 16px 16px 18px 16px;
-  border-radius: 20px;
+  top: 66.7%;
+  left: 10.3%;
   width: 294px;
   height: 121px;
+  padding: 16px 16px 18px 16px;
+  border-radius: 20px;
   background-color: var(--main-white);
   display: flex;
   gap: 8px;
@@ -87,4 +91,116 @@
   line-height: 1.17;
   letter-spacing: -0.02em;
   color: rgba(38, 38, 38, 0.8);
+}
+
+@media (max-width: 1200px) {
+  .registrationWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .petBlock {
+    width: 100%;
+    max-width: 704px;
+    aspect-ratio: 704 / 302;
+  }
+
+  .shape {
+    position: absolute;
+    width: 75%;
+    top: 17%;
+    left: 18%;
+  }
+  .img {
+    width: 43%;
+    top: -10%;
+    left: 40%;
+  }
+
+  .infoWrapper {
+    position: absolute;
+    z-index: 10;
+    top: 52%;
+    left: 4%;
+    width: 294px;
+    height: 121px;
+    padding: 16px 16px 18px 16px;
+    border-radius: 20px;
+    background-color: var(--main-white);
+    display: flex;
+    gap: 8px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nameWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .name {
+    font-weight: 700;
+    color: var(--main-orange);
+  }
+
+  .birthday {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+  }
+
+  .span {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.5);
+  }
+
+  .about {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.8);
+  }
+}
+
+@media (max-width: 730px) {
+  .registrationWrapper {
+    gap: 10px;
+  }
+
+  .infoWrapper {
+    display: none;
+  }
+
+  .img {
+    width: 50%;
+    top: -15%;
+    left: 25%;
+  }
+}
+
+@media (max-width: 400px) {
+  .petBlock {
+    max-width: 335px;
+    aspect-ratio: 335 / 280;
+    border-radius: 30px;
+  }
+
+  .shape {
+    width: 93%;
+    top: 15%;
+    left: 7%;
+  }
+
+  .img {
+    width: 85%;
+    top: -10%;
+    left: 8%;
+  }
 }

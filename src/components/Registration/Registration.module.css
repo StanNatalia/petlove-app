@@ -37,8 +37,8 @@
   z-index: 10;
   top: 66.7%;
   left: 10.3%;
-  width: 49.7%;
-  height: 18.5%;
+  width: 294px;
+  height: 121px;
   padding: 16px 16px 18px 16px;
   border-radius: 20px;
   background-color: var(--main-white);
@@ -101,17 +101,106 @@
 
   .petBlock {
     width: 100%;
-    max-width: 592px;
+    max-width: 704px;
     aspect-ratio: 704 / 302;
   }
 
   .shape {
     position: absolute;
     width: 75%;
-    top: 20%;
-    left: 16%;
+    top: 17%;
+    left: 18%;
   }
   .img {
-    /* width: 90%; */
+    width: 45%;
+    top: 0%;
+    left: 45%;
+  }
+
+  .infoWrapper {
+    position: absolute;
+    z-index: 10;
+    top: 52%;
+    left: 4%;
+    width: 294px;
+    height: 121px;
+    padding: 16px 16px 18px 16px;
+    border-radius: 20px;
+    background-color: var(--main-white);
+    display: flex;
+    gap: 8px;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .nameWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .name {
+    font-weight: 700;
+    color: var(--main-orange);
+  }
+
+  .birthday {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+  }
+
+  .span {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.5);
+  }
+
+  .about {
+    font-size: 12px;
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    color: rgba(38, 38, 38, 0.8);
+  }
+}
+
+@media (max-width: 730px) {
+  .infoWrapper {
+    display: none;
+  }
+
+  .img {
+    width: 60%;
+    top: 0%;
+    left: 20%;
+  }
+}
+
+@media (max-width: 400px) {
+  .petBlock {
+    max-width: 335px;
+    aspect-ratio: 335 / 280;
+    border-radius: 30px;
+  }
+
+  .shape {
+    width: 93%;
+    top: 15%;
+    left: 7%;
+  }
+
+  .img {
+    width: 100%;
+    top: 0%;
+    left: 0%;
+  }
+
+  .registrationWrapper {
+    gap: 10px;
   }
 }
