@@ -366,6 +366,19 @@
     width: 32px;
     height: 32px;
   }
+
+  .mobileMenu {
+    width: 60%;
+    padding: 40px 20px;
+  }
+
+  .registerBtn {
+    font-weight: 14px;
+  }
+
+  .loginBtn {
+    font-weight: 14px;
+  }
 }
 
 @media (max-width: 450px) {

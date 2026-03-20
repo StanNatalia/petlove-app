@@ -128,7 +128,7 @@ const Header = () => {
             onClick={() => setIsMobileMenuOpen(true)}
           >
             <svg className={css.burgerIcon}>
-              <use href="/public/sprite.svg#icon-burger" />
+              <use href="/sprite.svg#icon-burger" />
             </svg>
           </button>
         </div>
@@ -159,7 +159,7 @@ const Header = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <svg width="30" height="30">
-                  <use href="/public/sprite.svg#icon-cross-small" />
+                  <use href="/sprite.svg#icon-cross-small" />
                 </svg>
               </button>
               <div className={css.wrapperNav}>

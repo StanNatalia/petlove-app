@@ -2,6 +2,7 @@
   display: flex;
   gap: 32px;
   justify-content: center;
+  width: 100%;
 }
 
 .petBlock {
@@ -170,6 +171,9 @@
 }
 
 @media (max-width: 730px) {
+  .registrationWrapper {
+    gap: 15px;
+  }
   .infoWrapper {
     display: none;
   }
@@ -183,7 +187,7 @@
 
 @media (max-width: 400px) {
   .petBlock {
-    max-width: 335px;
+    width: 100%;
     aspect-ratio: 335 / 280;
     border-radius: 30px;
   }

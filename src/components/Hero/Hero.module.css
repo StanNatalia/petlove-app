@@ -1,19 +1,28 @@
 .wrapper {
-  min-height: 100vh;
+  height: 100vh;
+  position: relative;
+  margin-top: -114px;
+  padding-top: 16px;
   padding-bottom: 16px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .heroWrapper {
-  position: relative;
-  z-index: 1;
-  margin-top: -98px;
+  flex: 1 1 0;
   border-radius: 60px;
-  width: 100%;
   background-color: var(--main-orange);
-  padding: 178px 64px 32px 64px;
+  display: flex;
+  width: 100%;
+}
+
+.heroContent {
+  padding: 64px 32px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  width: 100%;
 }
 
 .title {
@@ -41,4 +50,11 @@
   flex: 1;
   object-fit: cover;
   width: 100%;
+  height: 100%;
+  border-radius: 60px;
+}
+
+.heroWrapper,
+.heroImg {
+  flex: 1 1 0;
 }

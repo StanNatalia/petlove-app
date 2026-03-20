@@ -8,11 +8,11 @@ const ModalCongrats = ({ onClose }) => {
       <div className={css.modal}>
         <button className={css.closeIcon} onClick={onClose}>
           <svg width="24" height="24">
-            <use href="/public/sprite.svg#icon-cross-small" />
+            <use href="/sprite.svg#icon-cross-small" />
           </svg>
         </button>
         <div className={css.circle}>
-          <img src="/public/images/🐈.png" className={css.img} />
+          <img src="/images/🐈.png" className={css.img} />
         </div>
         <div className={css.wrapper}>
           <div className={css.textWrapper}>
