@@ -15,6 +15,7 @@
   background-color: var(--main-orange);
   display: flex;
   width: 100%;
+  height: 100%;
 }
 
 .heroContent {
@@ -23,6 +24,7 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+  height: 100%;
 }
 
 .title {
@@ -30,6 +32,7 @@
   font-size: 90px;
   line-height: 97%;
   color: var(--main-white);
+  letter-spacing: -0.03em;
   width: 760px;
 }
 
@@ -39,9 +42,9 @@
 
 .heroInfo {
   width: 255px;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 18px;
-  line-height: 122%;
+  line-height: 1.22;
   letter-spacing: -0.02em;
   color: var(--main-white);
 }
@@ -57,4 +60,49 @@
 .heroWrapper,
 .heroImg {
   flex: 1 1 0;
+  min-height: 0;
+}
+
+@media (max-width: 930px) {
+  .heroContent {
+    display: block;
+    padding: 44px 32px;
+    position: relative;
+  }
+  .title {
+    font-size: 70px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    padding: 0 32px;
+  }
+
+  .heroInfo {
+    position: absolute;
+    bottom: 44px;
+    right: 32px;
+  }
+}
+
+@media (max-width: 500px) {
+  .heroWrapper {
+    border-radius: 30px;
+  }
+  .heroContent {
+    padding: 50px 20px;
+  }
+
+  .heroImg {
+    border-radius: 30px;
+  }
+  .title {
+    font-size: 50px;
+    padding: 0 20px;
+  }
+  .heroInfo {
+    font-size: 14px;
+    line-height: 1.29;
+  }
 }

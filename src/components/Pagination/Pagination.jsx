@@ -1,13 +1,27 @@
+import { useEffect, useState } from "react";
 import css from "./Pagination.module.css";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 410);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 410);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   if (totalPages <= 1) return null;
 
-  let startPage = Math.max(1, currentPage - 1);
-  let endPage = Math.min(totalPages, startPage + 2);
+  const maxVisiblePages = isMobile ? 2 : 3;
 
-  if (endPage - startPage < 2) {
-    startPage = Math.max(1, endPage - 2);
+  let startPage = Math.max(1, currentPage - 1);
+  let endPage = Math.min(totalPages, startPage + (maxVisiblePages - 1));
+
+  if (endPage - startPage < maxVisiblePages - 1) {
+    startPage = Math.max(1, endPage - (maxVisiblePages - 1));
   }
 
   const pages = [];

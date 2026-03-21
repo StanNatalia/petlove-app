@@ -326,9 +326,6 @@
   .pageNav {
     display: none;
   }
-}
-
-@media (max-width: 1020px) {
   .burger {
     display: block;
   }

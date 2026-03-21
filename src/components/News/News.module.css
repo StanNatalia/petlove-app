@@ -1,19 +1,23 @@
 .wrapper {
-  padding: 62px 30px 80px 30px;
+  padding-top: 64px;
+  padding-bottom: 80px;
+  max-width: 1153px;
+  margin: 0 auto;
 }
 
 .topWrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   font-family: var(--font-family);
+  margin-bottom: 60px;
 }
 
 .title {
   font-weight: 700;
   font-size: 54px;
   line-height: 1;
-  margin-bottom: 60px;
 }
 
 .inputWrapper {
@@ -60,8 +64,8 @@
 .list {
   margin: 0 auto;
   display: flex;
-  max-width: 1153px;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   column-gap: 35px;
   row-gap: 37px;
@@ -127,4 +131,72 @@
 .readMore:focus {
   color: #f9b020;
   scale: 1.05;
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    max-width: 768px;
+    padding-top: 53px;
+  }
+
+  .topWrapper {
+    margin-bottom: 44px;
+  }
+
+  .list {
+    column-gap: 24px;
+    row-gap: 32px;
+  }
+
+  .item {
+    width: 340px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    padding-top: 26px;
+  }
+
+  .topWrapper {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  .title {
+    align-self: flex-start;
+  }
+
+  .inputWrapper {
+    width: 100%;
+  }
+  .searchInput {
+    width: 100%;
+  }
+
+  .item {
+    width: 335px;
+    height: 359px;
+  }
+
+  .img {
+    height: 190px;
+    margin-bottom: 28px;
+  }
+
+  .name {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .text {
+    display: -webkit-box;
+    font-size: 14px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .readMoreWrapper {
+    margin-bottom: 0;
+  }
 }

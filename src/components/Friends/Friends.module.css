@@ -1,5 +1,7 @@
 .wrapper {
-  padding: 62px 30px 80px 30px;
+  padding-top: 64px;
+  max-width: 1153px;
+  margin: 0 auto;
 }
 
 .title {
@@ -10,7 +12,6 @@
 }
 
 .list {
-  width: 1153px;
   display: flex;
   margin: 0 auto;
   justify-content: center;
@@ -30,6 +31,11 @@
   display: flex;
   gap: 20px;
   align-items: center;
+}
+
+.infoWrapper {
+  flex: 1;
+  min-width: 0;
 }
 
 .workTime {
@@ -71,6 +77,9 @@
   font-size: 14px;
   line-height: 1.29;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .info:not(:last-child) {
@@ -82,4 +91,37 @@
   line-height: 1.29;
   letter-spacing: -0.02em;
   color: rgba(38, 38, 38, 0.5);
+}
+
+@media (max-width: 850px) {
+  .wrapper {
+    padding-top: 26px;
+  }
+  .item {
+    width: 342px;
+    padding: 40px 20px;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    padding-top: 26px;
+  }
+
+  .item {
+    width: 335px;
+  }
+
+  .title {
+    margin-bottom: 40px;
+  }
+
+  .img {
+    width: 80px;
+    height: 80px;
+  }
 }
