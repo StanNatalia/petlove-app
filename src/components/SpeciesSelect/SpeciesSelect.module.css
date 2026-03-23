@@ -144,3 +144,9 @@ div.dropdownIndicator {
 div.dropdownIndicator.rotated {
   transform: rotate(180deg);
 }
+
+@media (max-width: 590px) {
+  .speciesSelectContainer {
+    width: 100%;
+  }
+}

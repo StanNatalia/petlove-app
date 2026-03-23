@@ -19,7 +19,7 @@
 }
 
 .heroContent {
-  padding: 64px 32px;
+  padding: 32px 64px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

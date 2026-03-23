@@ -4,8 +4,12 @@
   z-index: 10;
   display: flex;
   justify-content: space-between;
-  padding: 32px 64px;
+  padding: 32px;
   align-items: center;
+}
+
+.headerHome {
+  padding: 32px 64px;
 }
 
 .headerWrapper {
@@ -332,6 +336,9 @@
 }
 
 @media (max-width: 800px) {
+  .header {
+    padding: 39px 64px;
+  }
   .wrapperNav {
     width: 100%;
   }

@@ -1,5 +1,5 @@
 .citySelectContainer {
-  min-width: 227px;
+  width: 227px;
 }
 
 /* === Control === */
@@ -144,4 +144,10 @@ div.dropdownIndicator {
 
 div.dropdownIndicator.rotated {
   transform: rotate(180deg);
+}
+
+@media (max-width: 590px) {
+  .citySelectContainer {
+    width: 100%;
+  }
 }

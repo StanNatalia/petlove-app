@@ -130,47 +130,9 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
         <CitySelect setFilters={setFilters} />
       </div>
 
+      <div className={css.line}></div>
+
       <div className={css.sortBtn}>
-        <button
-          className={activeSort === "expensive" ? css.active : ""}
-          onClick={() => handleSort("expensive")}
-        >
-          Expensive
-          {activeSort === "expensive" && (
-            <svg
-              width="18"
-              height="18"
-              className={css.clearIcon}
-              onClick={(e) => {
-                e.stopPropagation();
-                clearSort();
-              }}
-            >
-              <use href="/sprite.svg#icon-cross-small" />
-            </svg>
-          )}
-        </button>
-
-        <button
-          className={activeSort === "cheap" ? css.active : ""}
-          onClick={() => handleSort("cheap")}
-        >
-          Cheap
-          {activeSort === "cheap" && (
-            <svg
-              width="18"
-              height="18"
-              className={css.clearIcon}
-              onClick={(e) => {
-                e.stopPropagation();
-                clearSort();
-              }}
-            >
-              <use href="/sprite.svg#icon-cross-small" />
-            </svg>
-          )}
-        </button>
-
         <button
           className={activeSort === "popular" ? css.active : ""}
           onClick={() => handleSort("popular")}
@@ -210,8 +172,47 @@ const NoticesFilters = ({ filters, setFilters, items, setSortedItems }) => {
             </svg>
           )}
         </button>
+
+        <button
+          className={activeSort === "cheap" ? css.active : ""}
+          onClick={() => handleSort("cheap")}
+        >
+          Cheap
+          {activeSort === "cheap" && (
+            <svg
+              width="18"
+              height="18"
+              className={css.clearIcon}
+              onClick={(e) => {
+                e.stopPropagation();
+                clearSort();
+              }}
+            >
+              <use href="/sprite.svg#icon-cross-small" />
+            </svg>
+          )}
+        </button>
+
+        <button
+          className={activeSort === "expensive" ? css.active : ""}
+          onClick={() => handleSort("expensive")}
+        >
+          Expensive
+          {activeSort === "expensive" && (
+            <svg
+              width="18"
+              height="18"
+              className={css.clearIcon}
+              onClick={(e) => {
+                e.stopPropagation();
+                clearSort();
+              }}
+            >
+              <use href="/sprite.svg#icon-cross-small" />
+            </svg>
+          )}
+        </button>
       </div>
-      <div className={css.line}></div>
     </div>
   );
 };

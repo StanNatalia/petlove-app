@@ -1,5 +1,6 @@
 .categorySelectContainer {
-  min-width: 200px;
+  width: 170px;
+  min-width: 135px;
 }
 
 /* === Control === */
@@ -129,4 +130,10 @@ div.dropdownIndicator {
 
 div.dropdownIndicator.rotated {
   transform: rotate(180deg);
+}
+
+@media (max-width: 590px) {
+  .categorySelectContainer {
+    max-width: 100%;
+  }
 }

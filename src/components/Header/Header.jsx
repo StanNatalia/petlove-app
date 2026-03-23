@@ -41,7 +41,7 @@ const Header = () => {
     );
 
   return (
-    <header className={css.header}>
+    <header className={clsx(css.header, isHomePage && css.headerHome)}>
       <div className={css.headerWrapper}>
         <NavLink to="/">
           <button

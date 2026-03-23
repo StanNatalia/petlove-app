@@ -1,5 +1,6 @@
 .genderSelectController {
-  min-width: 190px;
+  width: 190px;
+  min-width: 135px;
 }
 
 /* === Control === */
@@ -129,4 +130,10 @@ div.dropdownIndicator {
 
 div.dropdownIndicator.rotated {
   transform: rotate(180deg);
+}
+
+@media (max-width: 590px) {
+  .genderSelectContainer {
+    width: 100%;
+  }
 }

@@ -37,11 +37,15 @@ const PetCard = ({
         <div className={css.infoWrapper}>
           <div className={css.infoThumb}>
             <p className={css.infoTitle}>Name</p>
-            <p className={css.info}>{item.name}</p>
+            <p className={css.info}>
+              {item.name.length > 6 ? item.name.slice(0, 6) : item.name}
+            </p>
           </div>
           <div className={css.infoThumb}>
             <p className={css.infoTitle}>Birthday</p>
-            {item.birthday ? formatDate(item.birthday) : "-"}
+            <p className={css.info}>
+              {item.birthday ? formatDate(item.birthday) : "-"}
+            </p>
           </div>
           <div className={css.infoThumb}>
             <p className={css.infoTitle}>Sex</p>
