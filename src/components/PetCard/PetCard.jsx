@@ -11,10 +11,11 @@ const PetCard = ({
   showFavoritesButton = true,
   showDeleteButton = false,
   handleDeleteClick,
+  variant = "default",
 }) => {
   return (
     <li
-      className={css.item}
+      className={`${css.item} ${css[variant]}`}
       onClick={(e) => {
         if (e.target.closest(`.${css.btnWrapper}`)) return;
 

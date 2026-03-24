@@ -31,8 +31,8 @@ function App() {
 
   return (
     <>
+      <Header />
       <div className="container">
-        <Header />
         <Suspense fallback={<Loading />}>
           <Routes>
             <Route path="/" element={<HomePage />} />

@@ -51,17 +51,15 @@ const Profile = ({ onClose }) => {
       <div className={css.content}>
         <ProfileForm setIsEditModal={setIsEditModal} user={user} />
         <div className={css.petsWrapper}>
-          <div className={css.userWrapper}>
-            <h4 className={css.text}>My pets</h4>
-            <NavLink to="/add-pet">
-              <button className={css.btn}>
-                Add pet
-                <svg width="18" height="18">
-                  <use href="/sprite.svg#icon-plus" />
-                </svg>
-              </button>
-            </NavLink>
-          </div>
+          <h4 className={css.text}>My pets</h4>
+          <NavLink to="/add-pet" className={css.link}>
+            <button className={css.btn}>
+              Add pet
+              <svg width="18" height="18">
+                <use href="/sprite.svg#icon-plus" />
+              </svg>
+            </button>
+          </NavLink>
         </div>
 
         <div className={css.petsList}>
@@ -95,6 +93,7 @@ const Profile = ({ onClose }) => {
           {viewMode === "favorites" && favorites.length > 0 ? (
             favorites.map((item) => (
               <PetCard
+                variant="small"
                 key={item._id}
                 item={item}
                 showFavoritesButton={false}

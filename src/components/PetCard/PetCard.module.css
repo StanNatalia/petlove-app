@@ -1,13 +1,42 @@
 .item {
-  padding: 24px;
-  border-radius: 16px;
-  padding: 24px;
-  width: 363px;
-  height: 472px;
   background-color: var(--main-white);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.default {
+  width: 363px;
+  height: 472px;
+}
+
+.small {
+  width: 320px;
+  height: 422px;
+  padding: 14px 14px 24px 14px;
+}
+
+.small .img {
+  width: 292px;
+  height: 162px;
+  margin-bottom: 14px;
+}
+
+.small .infoWrapper {
+  margin-bottom: 14px;
+}
+
+.small .comment {
+  margin-bottom: 16px;
+}
+
+.small .price {
+  margin-bottom: 12px;
+}
+
+.small .btn {
+  height: 44px;
 }
 
 .img {
@@ -129,7 +158,32 @@
 
 @media (max-width: 800px) {
   .item {
+    gap: 0;
     width: 342px;
+  }
+  .small {
+    width: 342px;
+    height: 422px;
+  }
+
+  .small .img {
+    width: 314px;
+  }
+
+  .small .titleWrapper {
+    margin-bottom: 8px;
+  }
+
+  .small .comment {
+    margin-bottom: 16px;
+  }
+
+  .small .price {
+    margin-bottom: 12px;
+  }
+
+  .small .btn {
+    height: 44px;
   }
 }
 

@@ -81,3 +81,27 @@
 .deleteBtn.focus {
   background-color: #fbe7c1;
 }
+
+@media (max-width: 1000px) {
+  .petCard {
+    width: 305px;
+    height: 145px;
+    gap: 14px;
+    padding: 22px 16px;
+  }
+  .imgWrapper {
+    width: 75px;
+    height: 75px;
+  }
+
+  .deleteBtn {
+    width: 32px;
+    height: 32px;
+    right: 12px;
+    top: 12px;
+  }
+  .description {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
