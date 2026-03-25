@@ -337,7 +337,7 @@
 
 @media (max-width: 800px) {
   .header {
-    padding: 39px 64px;
+    padding: 32px 32px;
   }
 
   .wrapperNav {
@@ -347,14 +347,22 @@
     flex-direction: column;
     width: 100%;
   }
+  .headerHome {
+    padding: 32px 64px;
+  }
 }
 
 @media (max-width: 780px) {
-  .header {
-    padding: 32px 32px;
-  }
-
   .guestView {
+    display: none;
+  }
+}
+
+@media (max-width: 670px) {
+  .logout {
+    display: none;
+  }
+  .homeName {
     display: none;
   }
 }
@@ -362,9 +370,6 @@
 @media (max-width: 610px) {
   .name {
     display: none;
-  }
-  .header {
-    padding: 28px 20px 20px 20px;
   }
 
   .burgerIcon {
@@ -386,13 +391,27 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .header {
     padding: 28px 20px;
   }
 
+  .headerHome {
+    padding: 18px 40px;
+  }
+}
+
+@media (max-width: 450px) {
   .burgerIcon {
     width: 32px;
     height: 32px;
+  }
+
+  .headerHome {
+    padding: 18px 40px;
+  }
+
+  .headerLogo {
+    margin: 0;
   }
 }

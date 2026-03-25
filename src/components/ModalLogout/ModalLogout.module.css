@@ -17,7 +17,7 @@
   padding: 80px;
   border-radius: 30px;
   width: 448px;
-  min-height: 364px;
+  height: 364px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +40,7 @@
 .circle {
   width: 80px;
   height: 80px;
+  flex-shrink: 0;
   border-radius: 100%;
   background-color: var(--main-light-orange);
   display: flex;
@@ -89,4 +90,27 @@
 .btnCancel:focus {
   background-color: var(--main-orange);
   color: var(--main-white);
+}
+
+@media (max-width: 700px) {
+  .closeIcon {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 550px) {
+  .modal {
+    width: 335px;
+    height: 270px;
+    padding: 40px 28px;
+  }
+  .text {
+    font-size: 20px;
+  }
+
+  .btn {
+    width: 137px;
+    height: 42px;
+  }
 }
