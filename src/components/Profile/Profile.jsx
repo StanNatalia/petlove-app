@@ -70,7 +70,11 @@ const Profile = ({ onClose }) => {
           )}
         </div>
 
-        <button onClick={handleLogout} className={css.logoutBtn}>
+        <button
+          onClick={() => setIsLogoutModal(true)}
+          style={{ cursor: "pointer" }}
+          className={css.logoutBtn}
+        >
           LOG OUT
         </button>
       </div>

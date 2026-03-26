@@ -48,3 +48,14 @@
   color: red;
   font-size: 14px;
 }
+
+@media (max-width: 500px) {
+  .datepickerInput {
+    height: 42px;
+  }
+
+  .iconWrapper {
+    right: 17px;
+    top: 40%;
+  }
+}

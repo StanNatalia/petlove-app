@@ -1,6 +1,7 @@
 import Select from "react-select";
 import css from "./TypeSelect.module.css";
 import { useFormContext } from "react-hook-form";
+import { useEffect, useState } from "react";
 
 const options = [
   { value: "dog", label: "Dog" },
@@ -19,6 +20,17 @@ const options = [
 ];
 
 const TypeSelect = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 400);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const {
     setValue,
     watch,
@@ -36,8 +48,8 @@ const TypeSelect = () => {
       borderRadius: "30px",
       padding: "0 16px",
       width: "210px",
-      height: "52px",
-      minHeight: "52px",
+      height: isMobile ? "42px" : "52px",
+      minHeight: isMobile ? "42px" : "52px",
       boxShadow: "none",
       cursor: "pointer",
       "&:hover": {

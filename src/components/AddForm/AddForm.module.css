@@ -92,6 +92,9 @@
 }
 
 .buttonBack {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 30px;
   padding: 14px 67px;
   width: 170px;
@@ -110,6 +113,9 @@
 }
 
 .buttonSubmit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 30px;
   padding: 14px 58px;
   width: 170px;
@@ -131,4 +137,59 @@
 .error {
   color: red;
   font-size: 14px;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    width: 100%;
+    max-width: 704px;
+  }
+}
+
+@media (max-width: 800px) {
+  .wrapper {
+    padding: 40px 136px;
+  }
+}
+
+@media (max-width: 650px) {
+  .wrapper {
+    padding: 40px 60px;
+  }
+}
+
+@media (max-width: 500px) {
+  .wrapper {
+    padding: 28px 20px 20px 20px;
+    border-radius: 30px;
+  }
+
+  .fieldWrapper {
+    margin-bottom: 31px;
+    gap: 10px;
+  }
+
+  .dataWrapper {
+    gap: 8px;
+  }
+
+  .field {
+    height: 42px;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .span {
+    font-size: 14px;
+  }
+
+  .buttonBack {
+    width: 100px;
+  }
+  .buttonSubmit {
+    width: 100px;
+  }
 }

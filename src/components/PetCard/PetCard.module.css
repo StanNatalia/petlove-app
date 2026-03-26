@@ -124,6 +124,7 @@
   background-color: var(--main-orange);
   color: var(--main-white);
   transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .btn:hover,
