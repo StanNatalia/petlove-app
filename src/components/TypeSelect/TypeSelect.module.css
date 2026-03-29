@@ -1,3 +1,12 @@
+.select {
+  width: 100%;
+}
+
+:global(.type-select__control) {
+  height: 52px;
+  min-height: 52px;
+}
+
 :global(.type-select__menu-list::-webkit-scrollbar) {
   width: 8px;
 }
@@ -23,4 +32,11 @@
 .error {
   color: red;
   font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  :global(.type-select__control) {
+    height: 42px;
+    min-height: 42px;
+  }
 }

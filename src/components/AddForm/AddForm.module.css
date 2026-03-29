@@ -83,6 +83,12 @@
 .dataWrapper {
   display: flex;
   gap: 12px;
+  width: 100%;
+}
+
+.dataWrapper > * {
+  flex: 1 1 calc(50% - 6px);
+  min-width: 0;
 }
 
 .buttonWrapper {
@@ -175,6 +181,8 @@
 
   .field {
     height: 42px;
+    padding: 12px;
+    font-size: 14px;
   }
 
   .title {
@@ -186,10 +194,10 @@
     font-size: 14px;
   }
 
-  .buttonBack {
-    width: 100px;
-  }
+  .buttonBack,
   .buttonSubmit {
     width: 100px;
+    height: 42px;
+    padding: 0;
   }
 }

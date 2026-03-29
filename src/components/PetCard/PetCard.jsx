@@ -63,7 +63,7 @@ const PetCard = ({
         </div>
         <p className={css.comment}>{item.comment}</p>
       </div>
-      <div>
+      <div className={css.priceWrapper}>
         <p className={css.price}>{item.price ? `$${item.price}` : "Free"}</p>
         <div className={css.btnWrapper}>
           <NavLink

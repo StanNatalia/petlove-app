@@ -20,12 +20,16 @@ const options = [
 ];
 
 const TypeSelect = () => {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
+  const getIsMobile = () => window.innerWidth <= 500;
+
+  const [isMobile, setIsMobile] = useState(getIsMobile);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 400);
+      setIsMobile(getIsMobile());
     };
+
+    handleResize();
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -46,10 +50,8 @@ const TypeSelect = () => {
         ? "1px solid #f6b83d"
         : "1px solid rgba(38, 38, 38, 0.15)",
       borderRadius: "30px",
-      padding: "0 16px",
-      width: "210px",
-      height: isMobile ? "42px" : "52px",
-      minHeight: isMobile ? "42px" : "52px",
+      padding: isMobile ? "0 12px" : "0 16px",
+      width: "100%",
       boxShadow: "none",
       cursor: "pointer",
       "&:hover": {
@@ -65,7 +67,7 @@ const TypeSelect = () => {
     placeholder: (base) => ({
       ...base,
       fontWeight: 500,
-      fontSize: "16px",
+      fontSize: isMobile ? "14px" : "16px",
       fontFamily: '"Manrope", sans-serif',
       lineHeight: "125%",
       letterSpacing: "-0.03em",
@@ -75,7 +77,7 @@ const TypeSelect = () => {
     singleValue: (base) => ({
       ...base,
       fontWeight: 500,
-      fontSize: "16px",
+      fontSize: isMobile ? "14px" : "16px",
       fontFamily: '"Manrope", sans-serif',
       lineHeight: "125%",
       letterSpacing: "-0.03em",
@@ -124,6 +126,7 @@ const TypeSelect = () => {
   return (
     <div className={css.wrapper}>
       <Select
+        className={css.select}
         name="category"
         options={options}
         classNamePrefix="type-select"
