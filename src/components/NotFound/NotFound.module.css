@@ -41,10 +41,42 @@
 }
 
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 30px;
-  padding: 14px 30px;
   width: 162px;
   height: 48px;
   background-color: var(--main-light-orange);
   color: var(--main-orange);
+}
+
+@media (max-width: 750px) {
+  .title {
+    font-size: 240px;
+  }
+  .circle {
+    width: 210px;
+    height: 210px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 120px;
+  }
+  .circle {
+    width: 109px;
+    height: 109px;
+  }
+  .catWrapper {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    width: 150px;
+    height: 42px;
+    font-size: 14px;
+  }
 }

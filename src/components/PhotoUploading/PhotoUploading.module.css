@@ -113,4 +113,36 @@
   .btn {
     height: 36px;
   }
+
+  .wrapper.modalEdit .previewImage {
+    width: 80px;
+    height: 80px;
+  }
+
+  .wrapper.modalEdit .fieldPhoto {
+    height: 42px;
+  }
+
+  .wrapper.modalEdit .btn {
+    height: 42px;
+  }
+
+  .iconFoot {
+    width: 68px;
+    height: 68px;
+  }
+
+  .photoWrapper {
+    margin-top: -2px;
+  }
+
+  .btn {
+    width: 117px;
+    font-size: 12px;
+  }
+
+  .fieldPhoto,
+  .fieldPhoto::placeholder {
+    font-size: 12px;
+  }
 }

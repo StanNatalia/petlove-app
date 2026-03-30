@@ -15,6 +15,7 @@ import {
 } from "../../redux/Favorites/options";
 import PetCard from "../PetCard/PetCard";
 import Pagination from "../Pagination/Pagination";
+import ModalContact from "../ModalContact/ModalContact";
 
 const Notices = () => {
   const [isModalAttentionOpen, setIsModalAttentionOpen] = useState(false);
@@ -29,6 +30,7 @@ const Notices = () => {
     location: "",
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const perPage = 6;
 
   useEffect(() => {
@@ -161,7 +163,15 @@ const Notices = () => {
           item={selectedItem}
           onClose={() => setIsModalNoticeOpen(false)}
           handleHeartClick={handleHeartClick}
+          openContact={() => {
+            setIsModalNoticeOpen(false);
+            setIsContactOpen(true);
+          }}
         />
+      )}
+
+      {isContactOpen && (
+        <ModalContact onClose={() => setIsContactOpen(false)} />
       )}
     </div>
   );

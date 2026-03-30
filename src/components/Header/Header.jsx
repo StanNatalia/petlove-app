@@ -195,28 +195,43 @@ const Header = () => {
                     Our friends
                   </NavLink>
                 </nav>
-                <nav className={css.mobileGuestView}>
-                  <NavLink
-                    to="/login"
+                {isLoggedIn ? (
+                  <button
                     className={clsx(
                       css.loginBtn,
                       !isHomePage && css.loginBtnOrange,
                     )}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setIsMobileMenuOpen(false);
+                      setLogoutModal(true);
+                    }}
                   >
-                    Log in
-                  </NavLink>
-                  <NavLink
-                    to="/registration"
-                    className={clsx(
-                      css.registerBtn,
-                      !isHomePage && css.registerBtnOrange,
-                    )}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Registration
-                  </NavLink>
-                </nav>
+                    Log out
+                  </button>
+                ) : (
+                  <nav className={css.mobileGuestView}>
+                    <NavLink
+                      to="/login"
+                      className={clsx(
+                        css.loginBtn,
+                        !isHomePage && css.loginBtnOrange,
+                      )}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Log in
+                    </NavLink>
+                    <NavLink
+                      to="/registration"
+                      className={clsx(
+                        css.registerBtn,
+                        !isHomePage && css.registerBtnOrange,
+                      )}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Registration
+                    </NavLink>
+                  </nav>
+                )}
               </div>
             </div>
           </div>

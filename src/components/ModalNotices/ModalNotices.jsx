@@ -11,9 +11,8 @@ const ModalNotices = ({
   onClose,
   handleHeartClick,
   handleRemoveFavorite,
+  openContact,
 }) => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
-
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -110,18 +109,12 @@ const ModalNotices = ({
               </svg>
             </button>
 
-            <button
-              className={css.btnContact}
-              onClick={() => setIsContactOpen(true)}
-            >
+            <button className={css.btnContact} onClick={openContact}>
               Contact
             </button>
           </div>
         </div>
       </div>
-      {isContactOpen && (
-        <ModalContact onClose={() => setIsContactOpen(false)} />
-      )}
     </div>
   );
 };

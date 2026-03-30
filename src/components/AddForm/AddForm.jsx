@@ -11,9 +11,10 @@ import css from "./AddForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addPet } from "../../redux/Auth/options";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalCongrats from "../ModalCongrats/ModalCongrats";
 import { selectUser, selectUserPets } from "../../redux/Auth/selectors";
+import { fetchSpecies } from "../../redux/Notices/options";
 
 const schema = yup.object({
   sex: yup.string().required("Sex is required"),
@@ -26,6 +27,19 @@ const schema = yup.object({
 
 const AddForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const types = useSelector((state) => state.notices.species);
+
+  useEffect(() => {
+    dispatch(fetchSpecies());
+  }, [dispatch]);
+
+  const formattedTypes =
+    types?.map((t) => ({
+      value: t,
+      label: t.charAt(0).toUpperCase() + t.slice(1),
+    })) || [];
 
   const pets = useSelector(selectUserPets);
   const isFirstPet = pets.length === 0;
@@ -48,8 +62,6 @@ const AddForm = () => {
   const {
     formState: { errors },
   } = methods;
-
-  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     const formattedData = {
@@ -110,7 +122,7 @@ const AddForm = () => {
 
             <div className={css.dataWrapper}>
               <CustomDatePicker />
-              <TypeSelect />
+              <TypeSelect types={formattedTypes} />
             </div>
           </div>
 

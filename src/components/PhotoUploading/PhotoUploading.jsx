@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import css from "./PhotoUploading.module.css";
+import clsx from "clsx";
 
-const PhotoUploading = ({ name = "avatar", icon = "#icon-dog_foot" }) => {
+const PhotoUploading = ({
+  name = "avatar",
+  icon = "#icon-dog_foot",
+  variant = "default",
+}) => {
   const {
     setValue,
     setError,
@@ -57,7 +62,7 @@ const PhotoUploading = ({ name = "avatar", icon = "#icon-dog_foot" }) => {
   };
 
   return (
-    <div className={css.wrapper}>
+    <div className={clsx(css.wrapper, css[variant])}>
       <div className={css.photoWrapper}>
         <div className={css.iconFoot}>
           {previewUrl ? (

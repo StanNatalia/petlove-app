@@ -1,42 +1,168 @@
-.select {
-  width: 100%;
+.speciesSelectContainer {
+  min-width: 100%;
 }
 
-:global(.type-select__control) {
+/* === Control === */
+
+div.control {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  font-size: 14px;
+  border-radius: 30px;
   height: 52px;
-  min-height: 52px;
+  background-color: var(--main-white);
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  box-shadow: none;
 }
 
-:global(.type-select__menu-list::-webkit-scrollbar) {
-  width: 8px;
+div.control:hover {
+  border-color: transparent;
+  cursor: pointer;
 }
 
-:global(.type-select__menu-list::-webkit-scrollbar-track) {
+/* === Option === */
+
+div.option {
+  background-color: var(--main-white);
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  color: rgba(38, 38, 38, 0.6);
+}
+
+div.option.focused,
+div.option.selected {
+  color: var(--main-orange);
+}
+
+div.option:active {
+  background-color: var(--main-orange);
+}
+
+div.option:hover {
+  cursor: pointer;
+  background-color: var(--white);
+  box-shadow: none;
+}
+
+/* === SingleValue === */
+
+div.singleValue {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  color: var(--black);
+}
+
+/* Placeholder: */
+
+div.placeholder {
+  color: rgba(38, 38, 38, 0.5);
+}
+
+/* Menu */
+
+div.menu {
+  border-radius: 15px;
+  border: none;
+  padding: 14px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  box-sizing: border-box;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+/* === MenuList === */
+div.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 188px;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
+}
+
+/* Кастомный скроллбар для Webkit */
+div.menuList::-webkit-scrollbar {
+  width: 12px;
+}
+
+div.menuList::-webkit-scrollbar-track {
   background: transparent;
 }
 
-:global(.type-select__menu-list::-webkit-scrollbar-thumb) {
-  background-color: #f6b83d;
-  border-radius: 10px;
+div.menuList::-webkit-scrollbar-thumb {
+  background-color: rgba(38, 38, 38, 0.08);
+  border-radius: 13px;
 }
 
-:global(.type-select__menu-list::-webkit-scrollbar-thumb:hover) {
-  background-color: #f9b020;
+div.menuList::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(38, 38, 38, 0.08);
 }
 
-:global(.type-select__menu-list) {
-  scrollbar-width: thin;
-  scrollbar-color: #f6b83d transparent;
+div.menuList::-webkit-scrollbar-button {
+  display: none;
+}
+/* IndicatorsContainer */
+
+div.indicatorsContainer {
+  padding-right: 14px;
 }
 
-.error {
-  color: red;
-  font-size: 14px;
+/* ValueContainer */
+
+div.valueContainer {
+  padding-left: 14px;
+}
+
+/* IndicatorSeparator */
+
+span.indicatorSeparator {
+  display: none;
+}
+
+/* ClearIndicator */
+
+div.clearIndicator {
+  padding-right: 0;
+}
+
+/* DropdownIndicator */
+
+div.dropdownIndicator {
+  color: var(--main-black);
+  transition: transform 0.3s ease;
+  padding: 0;
+}
+
+div.dropdownIndicator.rotated {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 590px) {
+  .speciesSelectContainer {
+    width: 100%;
+  }
+
+  div.indicatorsContainer {
+    padding-right: 12px;
+  }
+
+  div.valueContainer {
+    padding-right: 0;
+    padding-left: 12px;
+  }
 }
 
 @media (max-width: 500px) {
-  :global(.type-select__control) {
+  div.control {
     height: 42px;
-    min-height: 42px;
   }
 }

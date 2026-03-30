@@ -156,6 +156,13 @@
   .wrapper {
     padding: 40px 136px;
   }
+
+  .buttonBack,
+  .buttonSubmit {
+    width: 100px;
+    height: 42px;
+    padding: 0;
+  }
 }
 
 @media (max-width: 650px) {
@@ -192,12 +199,5 @@
 
   .span {
     font-size: 14px;
-  }
-
-  .buttonBack,
-  .buttonSubmit {
-    width: 100px;
-    height: 42px;
-    padding: 0;
   }
 }

@@ -181,3 +181,45 @@
   background-color: var(--main-orange);
   color: #fff4df;
 }
+
+@media (max-width: 800px) {
+  .modal {
+    padding: 40px 72px;
+  }
+}
+
+@media (max-width: 500px) {
+  .modal {
+    box-sizing: border-box;
+    min-width: 335px;
+    min-height: unset;
+    max-height: 476px;
+    aspect-ratio: 335 / 476;
+    padding: 40px 28px;
+    margin: 0 20px;
+  }
+
+  .img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+  }
+
+  .name {
+    font-size: 16px;
+  }
+
+  .popularityWrapper {
+    margin-bottom: 26px;
+  }
+
+  .price {
+    font-size: 16px;
+  }
+
+  .btnContact,
+  .btnFavorite {
+    height: 44px;
+    width: 150px;
+  }
+}

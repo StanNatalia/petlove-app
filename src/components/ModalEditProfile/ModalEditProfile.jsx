@@ -81,51 +81,53 @@ const ModalEditProfile = ({ user, onClose }) => {
             <use href="/sprite.svg#icon-cross-small" />
           </svg>
         </button>
-        <h3 className={css.text}>Edit information</h3>
-        <FormProvider {...methods}>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input type="hidden" {...register("avatar")} />
-            <PhotoUploading icon="#icon-user" />
-            <div className={css.fieldWrapper}>
-              <div>
-                <input
-                  className={css.field}
-                  type="text"
-                  {...register("name")}
-                />
-                {errors.name && (
-                  <p className={css.error}>{errors.name.message}</p>
-                )}
-              </div>
+        <div className={css.content}>
+          <h3 className={css.text}>Edit information</h3>
+          <FormProvider {...methods}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input type="hidden" {...register("avatar")} />
+              <PhotoUploading icon="#icon-user" variant="modalEdit" />
+              <div className={css.fieldWrapper}>
+                <div>
+                  <input
+                    className={css.field}
+                    type="text"
+                    {...register("name")}
+                  />
+                  {errors.name && (
+                    <p className={css.error}>{errors.name.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <input
-                  className={css.field}
-                  type="email"
-                  {...register("email")}
-                />
-                {errors.email && (
-                  <p className={css.error}>{errors.email.message}</p>
-                )}
-              </div>
+                <div>
+                  <input
+                    className={css.field}
+                    type="email"
+                    {...register("email")}
+                  />
+                  {errors.email && (
+                    <p className={css.error}>{errors.email.message}</p>
+                  )}
+                </div>
 
-              <div>
-                <input
-                  className={css.field}
-                  type="text"
-                  {...register("phone")}
-                  placeholder="Enter your phone number"
-                />
-                {errors.phone && (
-                  <p className={css.error}>{errors.phone.message}</p>
-                )}
+                <div>
+                  <input
+                    className={css.field}
+                    type="text"
+                    {...register("phone")}
+                    placeholder="Enter your phone number"
+                  />
+                  {errors.phone && (
+                    <p className={css.error}>{errors.phone.message}</p>
+                  )}
+                </div>
               </div>
-            </div>
-            <button type="submit" className={css.btn}>
-              Go to profile
-            </button>
-          </form>
-        </FormProvider>
+              <button type="submit" className={css.btn}>
+                Go to profile
+              </button>
+            </form>
+          </FormProvider>
+        </div>
       </div>
     </div>
   );

@@ -40,10 +40,10 @@ const ModalAttention = ({ onClose }) => {
           register to access these features.
         </p>
         <div className={css.btnWrapper}>
-          <NavLink to="/login" className={css.link}>
+          <NavLink to="/login" className={css.login}>
             Log In
           </NavLink>
-          <NavLink to="/registration" className={css.link}>
+          <NavLink to="/registration" className={css.register}>
             Registration
           </NavLink>
         </div>

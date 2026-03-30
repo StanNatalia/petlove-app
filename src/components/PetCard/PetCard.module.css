@@ -107,6 +107,14 @@
   justify-content: space-around;
 }
 
+.price {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.33;
+  color: var(--main-black);
+  margin-bottom: 12px;
+}
+
 .btnWrapper {
   display: flex;
   justify-content: space-between;
