@@ -121,3 +121,11 @@
     height: 42px;
   }
 }
+
+@media (max-width: 450px) {
+  .login,
+  .register {
+    width: 120px;
+    height: 42px;
+  }
+}

@@ -30,8 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 86px;
-  height: 86px;
+  min-width: 86px;
+  min-height: 86px;
   border-radius: 100px;
   background-color: var(--main-light-orange);
 }
@@ -143,6 +143,6 @@
 
   .fieldPhoto,
   .fieldPhoto::placeholder {
-    font-size: 12px;
+    font-size: 14px;
   }
 }

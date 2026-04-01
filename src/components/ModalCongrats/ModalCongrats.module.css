@@ -16,7 +16,6 @@
   padding: 55px;
   border-radius: 30px;
   width: 410px;
-  min-height: 364px;
   gap: 20px;
   display: flex;
   flex-direction: column;
@@ -100,4 +99,23 @@
   line-height: 1.25;
   letter-spacing: -0.03em;
   color: var(--main-white);
+}
+
+@media (max-width: 480px) {
+  .modal {
+    padding: 40px 25px;
+    margin: 0 20px;
+  }
+
+  .btn {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .textWrapper {
+    gap: 20px;
+  }
+  .title {
+    font-size: 20;
+  }
 }

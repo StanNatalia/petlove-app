@@ -2,6 +2,7 @@ import React from "react";
 import { formatDate } from "../../utils/formatDate";
 import css from "./PetCard.module.css";
 import { NavLink } from "react-router";
+import { toast } from "react-toastify";
 
 const PetCard = ({
   item,
@@ -89,6 +90,7 @@ const PetCard = ({
               onClick={(e) => {
                 e.stopPropagation();
                 handleDeleteClick(item, e);
+                toast.success("You have successfully deleted the card!");
               }}
             >
               <svg width="18" height="18">

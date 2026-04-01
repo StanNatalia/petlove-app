@@ -191,7 +191,7 @@
 @media (max-width: 500px) {
   .modal {
     box-sizing: border-box;
-    min-width: 335px;
+    max-width: 335px;
     min-height: unset;
     max-height: 476px;
     aspect-ratio: 335 / 476;
@@ -221,5 +221,25 @@
   .btnFavorite {
     height: 44px;
     width: 150px;
+  }
+}
+
+@media (max-width: 380px) {
+  .modal {
+    padding: 30px 15px;
+    width: 100%;
+  }
+
+  .btnContact,
+  .btnFavorite {
+    height: 44px;
+    width: 130px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  .btnContact {
+    width: 100px;
   }
 }

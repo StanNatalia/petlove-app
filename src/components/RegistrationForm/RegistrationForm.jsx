@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import css from "./RegistrationForm.module.css";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "../../redux/Auth/options";
 import { toast } from "react-toastify";
@@ -11,21 +11,31 @@ const RegistrationForm = ({ onClose }) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
+    getFieldState,
   } = useForm({
+    mode: "onChange",
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const onSubmit = async ({ name, email, password }) => {
     try {
-      await dispatch(registerThunk({ name, email, password })).unwrap();
+      const data = await dispatch(
+        registerThunk({ name, email, password }),
+      ).unwrap();
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+      }
       toast.success("Registration successful");
       reset();
+      navigate("/profile");
     } catch (error) {
-      toast.error(error || "something went wrong");
+      toast.error(error?.message || error || "something went wrong");
     }
   };
 
@@ -33,6 +43,11 @@ const RegistrationForm = ({ onClose }) => {
   const emailValue = watch("email");
   const passwordValue = watch("password");
   const confirmPasswordValue = watch("confirmPassword");
+
+  const nameState = getFieldState("name");
+  const emailState = getFieldState("email");
+  const passwordState = getFieldState("password");
+  const confirmState = getFieldState("confirmPassword");
 
   const isNameValid =
     nameValue &&
@@ -97,10 +112,10 @@ const RegistrationForm = ({ onClose }) => {
                 })}
                 type="text"
                 className={`${css.field} ${
-                  nameValue
-                    ? isNameValid
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  nameState.isTouched || nameState.isDirty
+                    ? nameState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Name"
@@ -136,10 +151,10 @@ const RegistrationForm = ({ onClose }) => {
                 type="email"
                 name="email"
                 className={`${css.field} ${
-                  emailValue
-                    ? isEmailValid
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  emailState.isDirty
+                    ? emailState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Email"
@@ -179,10 +194,10 @@ const RegistrationForm = ({ onClose }) => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 className={`${css.field} ${
-                  passwordValue
-                    ? isPasswordSecure
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  passwordState.isDirty
+                    ? passwordState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Password"
@@ -238,10 +253,10 @@ const RegistrationForm = ({ onClose }) => {
                 type={showConfirmPassword ? "text" : "password"}
                 name="confirmPassword"
                 className={`${css.field} ${
-                  confirmPasswordValue
-                    ? isConfirmPasswordValid
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  confirmState.isDirty
+                    ? confirmState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Confirm password"

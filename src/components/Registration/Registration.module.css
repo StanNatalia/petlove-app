@@ -24,10 +24,10 @@
 
 .img {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 6%;
   z-index: 5;
-  top: 4%;
+
   width: 90%;
   height: auto;
   object-fit: cover;

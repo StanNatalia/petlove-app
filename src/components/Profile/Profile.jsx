@@ -10,6 +10,7 @@ import FavoriteCard from "../FavoriteCard/FavoriteCard";
 import ModalLogout from "../ModalLogout/ModalLogout";
 import { removeFromFavorites } from "../../redux/Favorites/options";
 import ModalNotices from "../ModalNotices/ModalNotices";
+import ModalContact from "../ModalContact/ModalContact";
 
 const Profile = ({ onClose }) => {
   const [isEditModal, setIsEditModal] = useState(false);
@@ -17,6 +18,7 @@ const Profile = ({ onClose }) => {
   const [isLogoutModal, setIsLogoutModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalNoticeOpen, setIsModalNoticeOpen] = useState(false);
+  const [isContactModal, setIsContactModal] = useState(false);
 
   const handleLearnMoreClick = (item, e) => {
     e.preventDefault();
@@ -44,6 +46,10 @@ const Profile = ({ onClose }) => {
     await dispatch(logoutThunk());
     localStorage.removeItem("token");
     navigate("/login");
+  };
+
+  const openContact = () => {
+    setIsContactModal(true);
   };
 
   return (
@@ -141,6 +147,7 @@ const Profile = ({ onClose }) => {
           item={selectedItem}
           onClose={() => setIsModalNoticeOpen(false)}
           handleRemoveFavorite={handleRemoveFavorite}
+          openContact={openContact}
         />
       )}
 
@@ -153,6 +160,10 @@ const Profile = ({ onClose }) => {
           onClose={() => setIsLogoutModal(false)}
           handleLogout={handleLogout}
         />
+      )}
+
+      {isContactModal && (
+        <ModalContact onClose={() => setIsContactModal(false)} />
       )}
     </div>
   );

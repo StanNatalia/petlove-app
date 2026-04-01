@@ -1,8 +1,14 @@
 import css from "./ModalContact.module.css";
 
 const ModalContact = ({ onClose }) => {
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={css.backdrop}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
         <button onClick={onClose}>
           <svg width="24" height="24" className={css.closeIcon}>

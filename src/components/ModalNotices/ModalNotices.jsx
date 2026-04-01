@@ -109,7 +109,13 @@ const ModalNotices = ({
               </svg>
             </button>
 
-            <button className={css.btnContact} onClick={openContact}>
+            <button
+              className={css.btnContact}
+              onClick={() => {
+                openContact();
+                onClose();
+              }}
+            >
               Contact
             </button>
           </div>

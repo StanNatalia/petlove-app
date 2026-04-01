@@ -1,7 +1,7 @@
 .wrapper {
   padding-top: 64px;
   max-width: 1153px;
-  margin: 0 auto;
+  margin: 0 auto 80px auto;
 }
 
 .title {
@@ -9,6 +9,18 @@
   font-size: 54px;
   line-height: 1;
   margin-bottom: 60px;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.link:hover,
+.link:focus {
+  color: var(--main-orange);
+  text-decoration: underline;
 }
 
 .list {

@@ -282,3 +282,14 @@
     border-radius: 30px;
   }
 }
+
+@media (max-width: 350px) {
+  .btnWrapper {
+    gap: 10px;
+  }
+  .btnFavorite,
+  .btnViewed {
+    font-size: 14px;
+    padding: 12px;
+  }
+}

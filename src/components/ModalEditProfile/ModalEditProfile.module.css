@@ -112,6 +112,10 @@
     margin: 0 20px;
   }
 
+  .fieldWrapper {
+    margin-bottom: 21px;
+  }
+
   .text {
     font-size: 20px;
   }

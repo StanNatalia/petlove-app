@@ -65,17 +65,41 @@ const Friends = () => {
               <h4 className={css.name}>{item.title}</h4>
               <p className={css.info}>
                 <span className={css.span}>Email:</span>
-                {item.email
-                  ? item.email
-                  : `${item.title.toLowerCase()}@gmail.com`}
+                {item.email ? (
+                  <a href={`mailto:${item.email}`} className={css.link}>
+                    {item.email}
+                  </a>
+                ) : (
+                  <span>{`${item.title.toLowerCase()}@gmail.com`}</span>
+                )}
               </p>
               <p className={css.info}>
                 <span className={css.span}>Address:</span>
-                {item.address ? item.address : "only website"}
+                {item.address ? (
+                  <a
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                      item.address,
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={css.link}
+                  >
+                    {item.address}
+                  </a>
+                ) : (
+                  <span>only website</span>
+                )}
               </p>
+
               <p className={css.info}>
                 <span className={css.span}>Phone:</span>
-                {item.phone ? formatPhone(item.phone) : "only website"}
+                {item.phone ? (
+                  <a href={`tel:${item.phone}`} className={css.link}>
+                    {formatPhone(item.phone)}
+                  </a>
+                ) : (
+                  <span>only website</span>
+                )}
               </p>
             </div>
           </li>
