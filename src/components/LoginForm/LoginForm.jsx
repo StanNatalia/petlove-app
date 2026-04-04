@@ -13,7 +13,9 @@ const LoginForm = ({ onClose }) => {
     watch,
     formState: { errors },
     reset,
+    getFieldState,
   } = useForm({
+    mode: "onChange",
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
 
@@ -33,6 +35,9 @@ const LoginForm = ({ onClose }) => {
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
+
+  const emailState = getFieldState("email");
+  const passwordState = getFieldState("password");
 
   const isEmailValid = emailValue
     ? /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(emailValue)
@@ -80,10 +85,10 @@ const LoginForm = ({ onClose }) => {
                 type="email"
                 name="email"
                 className={`${css.field} ${
-                  emailValue
-                    ? isEmailValid
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  emailState.isTouched || emailState.isDirty
+                    ? emailState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Email"
@@ -119,14 +124,19 @@ const LoginForm = ({ onClose }) => {
                     value: 20,
                     message: "password must be maximum 20 characters",
                   },
+                  validate: (value) =>
+                    (/[A-Z]/.test(value) &&
+                      /[a-z]/.test(value) &&
+                      /\d/.test(value)) ||
+                    "Password must include upper, lower case letters and a number",
                 })}
                 type={showPassword ? "text" : "password"}
                 name="password"
                 className={`${css.field} ${
-                  passwordValue
-                    ? isPasswordSecure
-                      ? css.fieldSuccess
-                      : css.fieldError
+                  passwordState.isTouched || passwordState.isDirty
+                    ? passwordState.invalid
+                      ? css.fieldError
+                      : css.fieldSuccess
                     : ""
                 }`}
                 placeholder="Password"

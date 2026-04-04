@@ -11,7 +11,7 @@ const RegistrationForm = ({ onClose }) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
     getFieldState,
   } = useForm({
@@ -190,6 +190,11 @@ const RegistrationForm = ({ onClose }) => {
                     value: 20,
                     message: "password must be maximum 20 characters",
                   },
+                  validate: (value) =>
+                    (/[A-Z]/.test(value) &&
+                      /[a-z]/.test(value) &&
+                      /\d/.test(value)) ||
+                    "Password must include upper, lower case letters and a number",
                 })}
                 type={showPassword ? "text" : "password"}
                 name="password"
