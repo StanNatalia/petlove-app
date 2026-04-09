@@ -30,8 +30,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 86px;
-  min-height: 86px;
+  width: 86px;
+  height: 86px;
   border-radius: 100px;
   background-color: var(--main-light-orange);
 }
@@ -54,6 +54,14 @@
 .fieldPhoto:hover,
 .fieldPhoto:focus {
   border: 1px solid #f6b83d;
+}
+
+.fieldPhoto.error {
+  border: 1px solid #e74c3c;
+}
+
+.fieldPhoto.success {
+  border: 1px solid #2ecc71;
 }
 
 .removePhotoButton {
@@ -144,5 +152,9 @@
   .fieldPhoto,
   .fieldPhoto::placeholder {
     font-size: 14px;
+  }
+
+  .error {
+    font-size: 10px;
   }
 }

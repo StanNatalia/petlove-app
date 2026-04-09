@@ -13,7 +13,7 @@ import { addPet } from "../../redux/Auth/options";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import ModalCongrats from "../ModalCongrats/ModalCongrats";
-import { selectUser, selectUserPets } from "../../redux/Auth/selectors";
+import { selectUserPets } from "../../redux/Auth/selectors";
 import { fetchSpecies } from "../../redux/Notices/options";
 
 const schema = yup.object({
@@ -49,6 +49,7 @@ const AddForm = () => {
 
   const methods = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
     defaultValues: {
       sex: "",
       avatar: "",
@@ -60,8 +61,19 @@ const AddForm = () => {
   });
 
   const {
-    formState: { errors },
+    formState: { errors, touchedFields, dirtyFields },
   } = methods;
+
+  const getFieldClass = (name) => {
+    const hasError = !!errors[name];
+    const isDirty = !!dirtyFields[name] || !!touchedFields[name];
+
+    if (!isDirty) return css.field;
+
+    if (hasError) return `${css.field} ${css.errorField}`;
+
+    return `${css.field} ${css.successField}`;
+  };
 
   const onSubmit = (data) => {
     const formattedData = {
@@ -101,7 +113,7 @@ const AddForm = () => {
             <div>
               <input
                 {...methods.register("title")}
-                className={css.field}
+                className={getFieldClass("title")}
                 placeholder="Title"
               />
               {errors.title && (
@@ -112,7 +124,7 @@ const AddForm = () => {
             <div>
               <input
                 {...methods.register("name")}
-                className={css.field}
+                className={getFieldClass("name")}
                 placeholder="Pets name"
               />
               {errors.name && (

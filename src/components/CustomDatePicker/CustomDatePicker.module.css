@@ -56,6 +56,14 @@
   background: transparent;
 }
 
+.errorField {
+  border: 1px solid #e74c3c !important;
+}
+
+.successField {
+  border: 1px solid #2ecc71 !important;
+}
+
 .iconWrapper {
   stroke: black;
   fill: white;
@@ -93,6 +101,10 @@
   .icon {
     width: 18px;
     height: 18px;
+  }
+
+  .error {
+    font-size: 10px;
   }
 }
 

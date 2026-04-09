@@ -19,6 +19,10 @@
   transition: 0.2s;
   cursor: pointer;
 }
+.sexIcon svg {
+  width: 24px;
+  height: 24px;
+}
 
 .sexIcon:hover {
   transform: scale(1.05);
@@ -83,4 +87,18 @@
 .error {
   color: red;
   font-size: 14px;
+}
+
+@media (max-width: 500px) {
+  .sexIcon {
+    width: 32px;
+    height: 32px;
+  }
+  .sexIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+  .error {
+    font-size: 10px;
+  }
 }

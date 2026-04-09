@@ -27,7 +27,7 @@ const SexForm = () => {
           }`}
           onClick={() => handleSelect("female")}
         >
-          <svg width="24" height="24" className={css.iconFemale}>
+          <svg className={css.iconFemale}>
             <use href="/sprite.svg#icon-female" />
           </svg>
         </div>
@@ -36,7 +36,7 @@ const SexForm = () => {
           className={`${css.sexIcon} ${css.male} ${selectedSex === "male" ? css.activeMale : ""}`}
           onClick={() => handleSelect("male")}
         >
-          <svg width="24" height="24">
+          <svg>
             <use href="/sprite.svg#icon-male" />
           </svg>
         </div>
@@ -47,7 +47,7 @@ const SexForm = () => {
           }`}
           onClick={() => handleSelect("multiple")}
         >
-          <svg width="24" height="24">
+          <svg>
             <use href="/sprite.svg#icon-male_female" />
           </svg>
         </div>

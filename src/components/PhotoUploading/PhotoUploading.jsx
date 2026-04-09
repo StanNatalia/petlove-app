@@ -61,6 +61,18 @@ const PhotoUploading = ({
     });
   };
 
+  // ✅ BORDER STATE (как в Select)
+  const getBorderState = () => {
+    const hasError = !!errors[name];
+    const hasValue = !!avatarFromForm;
+
+    if (hasError) return "error";
+    if (hasValue) return "success";
+    return "default";
+  };
+
+  const borderState = getBorderState();
+
   return (
     <div className={clsx(css.wrapper, css[variant])}>
       <div className={css.photoWrapper}>
@@ -92,7 +104,7 @@ const PhotoUploading = ({
           <input
             type="text"
             placeholder="Enter image URL"
-            className={css.fieldPhoto}
+            className={clsx(css.fieldPhoto, css[borderState])}
             value={inputUrl}
             onChange={handleInputChange}
           />
@@ -105,6 +117,7 @@ const PhotoUploading = ({
           </button>
         </div>
       </div>
+
       {errors[name] && <p className={css.error}>{errors[name].message}</p>}
     </div>
   );

@@ -5,7 +5,6 @@ import { useEffect, useRef, useState } from "react";
 import { fetchNews } from "../../redux/News/options";
 import Pagination from "../Pagination/Pagination";
 import Loading from "../Loading/Loading";
-import { current } from "@reduxjs/toolkit";
 
 const News = () => {
   const dispatch = useDispatch();

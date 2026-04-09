@@ -58,3 +58,9 @@ button:disabled {
     height: 40px;
   }
 }
+
+@media (max-width: 350px) {
+  .wrapper {
+    gap: 8px;
+  }
+}

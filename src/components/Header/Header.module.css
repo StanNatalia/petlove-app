@@ -397,6 +397,15 @@
     padding: 28px 20px;
   }
 
+  .circle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .manageWrapper {
+    gap: 12px;
+  }
+
   .headerHome {
     padding: 18px 40px;
   }

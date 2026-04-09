@@ -146,6 +146,23 @@ div.dropdownIndicator.rotated {
   transform: rotate(180deg);
 }
 
+.errorControl {
+  border: 1px solid #e74c3c !important;
+}
+
+.successControl {
+  border: 1px solid #2ecc71 !important;
+}
+
+.focusedControl {
+  border-color: #f6b83d !important;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+}
+
 @media (max-width: 590px) {
   .speciesSelectContainer {
     width: 100%;
@@ -166,10 +183,22 @@ div.dropdownIndicator.rotated {
     height: 42px;
     font-size: 14px;
   }
+
+  .error {
+    font-size: 10px;
+  }
+
+  div.option {
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 400px) {
   div.control {
+    font-size: 12px;
+  }
+
+  div.option {
     font-size: 12px;
   }
 }

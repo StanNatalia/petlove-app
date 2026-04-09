@@ -1,7 +1,7 @@
 .wrapper {
   height: 100vh;
   position: relative;
-  margin-top: -114px;
+  margin-top: -116px;
   padding-top: 16px;
   padding-bottom: 16px;
   z-index: 1;
@@ -86,7 +86,17 @@
   }
 }
 
+@media (max-width: 615px) {
+  .title {
+    font-size: 60px;
+    top: 40%;
+  }
+}
+
 @media (max-width: 500px) {
+  .wrapper {
+    margin-top: -84px;
+  }
   .heroWrapper {
     border-radius: 30px;
   }
@@ -102,6 +112,20 @@
     padding: 0 20px;
   }
   .heroInfo {
+    font-size: 14px;
+    line-height: 1.29;
+  }
+}
+
+@media (max-width: 400px) {
+  .heroContent {
+    padding: 30px 20px;
+  }
+  .title {
+    font-size: 45px;
+  }
+  .heroInfo {
+    width: 150px;
     font-size: 14px;
     line-height: 1.29;
   }
